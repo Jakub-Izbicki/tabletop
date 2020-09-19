@@ -25,6 +25,9 @@ module.exports = {
       cursor: {
         grab: 'grab',
         grabbing: 'grabbing'
+      },
+      fontSize: {
+        '2xs': '.60rem'
       }
     },
   },

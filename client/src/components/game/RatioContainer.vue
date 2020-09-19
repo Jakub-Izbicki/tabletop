@@ -48,6 +48,7 @@
     private observer!: MutationObserver;
 
     created() {
+      // temporary code to spawn test items
       setTimeout(() => {
         [...Array(2).keys()]
         .forEach(i => {
@@ -56,10 +57,14 @@
               this.gameInstanceId));
         });
 
-        this.store.addItem(new HandCard(uuid4(),
-            {x: 0, y: 0, unit: TranslateUnit.EM},
-            'hand-1',
-            this.gameInstanceId))
+        [...Array(3).keys()]
+        .forEach(() => {
+          this.store.addItem(new HandCard(uuid4(),
+              {x: 0, y: 0, unit: TranslateUnit.EM},
+              'hand-1',
+              this.gameInstanceId));
+        });
+
       }, 100);
     }
 
