@@ -29,7 +29,11 @@ export default class HandCard extends Item {
   public handCardOffset(): number {
     const handCards = EntityStore.getInstance(this.gameInstanceId).getHandCards();
     const position = handCards.findIndex(handCard => handCard.getId() === this.getId());
-    return position * HandCard.HAND_CARDS_SPACING;
+    const offsetFromHandCenter = position * HandCard.HAND_CARDS_SPACING;
+
+    const maxPosition = handCards.length * HandCard.HAND_CARDS_SPACING;
+
+    return offsetFromHandCenter - maxPosition / 2;
   }
 
   public compareTo(other: Item): number {
