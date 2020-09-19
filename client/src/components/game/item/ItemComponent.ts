@@ -1,7 +1,7 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import Moveable from "vue-moveable";
 import EntityStore from "@/domain/game/item/EntityStore";
-import {TransformConsts} from "@/domain/game/GameTypes";
+import {TransformConsts, Translate} from "@/domain/game/GameTypes";
 import MoveableDimensions from "@/domain/game/item/MoveableDimensions";
 import Item from "@/domain/game/item/Item";
 import Hoverable from "@/domain/game/hoverable/Hoverable";
@@ -41,19 +41,20 @@ export default class ItemComponent<T extends Item> extends Vue {
     return item as T;
   }
 
+  get translate(): Translate | undefined {
+    return this.item?.getTranslate();
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   get transformStyle(): any {
-    if (!this.item) {
-      return {};
-    }
-
-    const t = this.item.getTranslate();
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const transformStyle: any = {};
-    transformStyle[TransformConsts.TRANSFORM_X] = `${t.x}${t.unit}`;
-    transformStyle[TransformConsts.TRANSFORM_Y] = `${t.y}${t.unit}`;
 
+    const t = this.translate;
+    if (t) {
+      transformStyle[TransformConsts.TRANSFORM_X] = `${t.x}${t.unit}`;
+      transformStyle[TransformConsts.TRANSFORM_Y] = `${t.y}${t.unit}`;
+    }
     return transformStyle;
   }
 

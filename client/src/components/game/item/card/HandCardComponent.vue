@@ -35,9 +35,29 @@
   import HandCard from "@/domain/game/item/HandCard";
   import Hoverable from "@/domain/game/hoverable/Hoverable";
   import Hand from "@/domain/game/hoverable/Hand";
+  import {Translate} from "@/domain/game/GameTypes";
 
   @Component
   export default class HandCardComponent extends ItemComponent<HandCard> {
+
+    get handCardOffset(): number | undefined {
+      return this.item?.handCardOffset();
+    }
+
+    get translate(): Translate {
+      const translate = this.item?.getTranslate();
+      const offset = this.handCardOffset;
+
+      if (translate && offset) {
+        return {
+          x: translate.x + offset,
+          y: translate.y,
+          unit: translate.unit
+        };
+      } else {
+        return translate;
+      }
+    }
 
     protected onDrop(target: Hoverable): void {
       switch (target.constructor) {

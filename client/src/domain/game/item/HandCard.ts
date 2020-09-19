@@ -1,7 +1,10 @@
 import Item from "@/domain/game/item/Item";
 import {ItemType, Translate} from "@/domain/game/GameTypes";
+import EntityStore from "@/domain/game/item/EntityStore";
 
 export default class HandCard extends Item {
+
+  private static HAND_CARDS_SPACING = 1;
 
   constructor(protected id: string,
               protected translate: Translate,
@@ -20,6 +23,19 @@ export default class HandCard extends Item {
 
   public moveToHand(): void {
     this.moveItemTo(this.handId);
+  }
+
+  public handCardOffset(): number {
+    const handCards = EntityStore.getInstance(this.gameInstanceId).getHandCards();
+    const position = handCards.findIndex(handCard => handCard.getId() === this.getId());
+    return position * HandCard.HAND_CARDS_SPACING;
+  }
+
+  public compareTo(other: HandCard): number {
+    const x = this.getTranslate().x + this.handCardOffset();
+    const otherX = other.getTranslate().x + other.handCardOffset();
+
+    return x === otherX ? 0 : x < otherX ? -1 : 1;
   }
 
   /*eslint-disable */
