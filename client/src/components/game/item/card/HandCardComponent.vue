@@ -34,7 +34,6 @@
   import ItemComponent from "@/components/game/item/ItemComponent";
   import HandCard from "@/domain/game/item/HandCard";
   import Hoverable from "@/domain/game/hoverable/Hoverable";
-  import Card from "@/domain/game/item/Card";
   import Hand from "@/domain/game/hoverable/Hand";
 
   @Component
