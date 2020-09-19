@@ -76,15 +76,7 @@ export default abstract class Item extends Hoverable {
         this.getTranslate().y < other.getTranslate().y ? -1 : 1;
   }
 
-  private setNonePointerEvents(isNone: boolean): void {
-    this.setState(EntityStates.IS_NONE_POINTER_EVENTS, isNone);
-  }
-
-  private setIsMovingAnimate(isMoving: boolean): void {
-    this.setState(EntityStates.IS_MOVING_ANIMATE, isMoving);
-  }
-
-  private setTranslate(translate: Translate): void {
+  public setTranslate(translate: Translate): void {
     if (translate.unit === TranslateUnit.PX) {
       this.translate = {
         x: RelativeFontSize.getEm(translate.x, this.gameInstanceId),
@@ -97,5 +89,13 @@ export default abstract class Item extends Hoverable {
     } else {
       throw `Attempt to set translate with invalid unit: [${translate}]`;
     }
+  }
+
+  private setNonePointerEvents(isNone: boolean): void {
+    this.setState(EntityStates.IS_NONE_POINTER_EVENTS, isNone);
+  }
+
+  private setIsMovingAnimate(isMoving: boolean): void {
+    this.setState(EntityStates.IS_MOVING_ANIMATE, isMoving);
   }
 }
