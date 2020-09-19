@@ -1,0 +1,106 @@
+import Item from "@/domain/game/item/Item";
+import Hoverable from "@/domain/game/hoverable/Hoverable";
+import Entity from "@/domain/game/Entity";
+import Card from "@/domain/game/item/Card";
+import HandCard from "@/domain/game/item/HandCard";
+import Hand from "@/domain/game/hoverable/Hand";
+
+export default class EntityStore {
+
+  private static instances: Map<string, EntityStore> = new Map<string, EntityStore>();
+
+  private entities = new Array<Entity>();
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  private constructor() {
+  }
+
+  public static getInstance(gameInstanceId: string): EntityStore {
+    if (!EntityStore.instances.get(gameInstanceId)) {
+      EntityStore.instances.set(gameInstanceId, new EntityStore());
+    }
+
+    return this.instances.get(gameInstanceId) as EntityStore;
+  }
+
+  public static removeInstance(gameInstanceId: string): void {
+    EntityStore.instances.delete(gameInstanceId);
+  }
+
+  public getEntities(): Entity[] {
+    return this.entities;
+  }
+
+  public getHoverables(): Hoverable[] {
+    return this.getEntities()
+    .filter(e => e instanceof Hoverable)
+    .map(e => e as Hoverable);
+  }
+
+  public getItems(): Item[] {
+    return this.getEntities()
+    .filter(e => e instanceof Item)
+    .map(e => e as Item);
+  }
+
+  public getCards(): Card[] {
+    return this.getEntities()
+    .filter(e => e instanceof Card)
+    .map(c => c as Card);
+  }
+
+  public getHandCards(): HandCard[] {
+    return this.getEntities()
+    .filter(e => e instanceof HandCard)
+    .map(c => c as HandCard);
+  }
+
+  public addHoverable(hoverable: Hoverable): void {
+    if (this.getEntities().some(e => e.getId() === hoverable.getId())) {
+      throw `Attempt to add hoverable to store while a hoverable with such id already exists: [${hoverable.getId()}]`;
+    }
+
+    this.addEntity(hoverable);
+  }
+
+  public addItem(item: Item): void {
+    if (this.getEntities().some(e => e.getId() === item.getId())) {
+      throw `Attempt to add item to store while a item with such id already exists: [${item.getId()}]`;
+    }
+
+    this.addEntity(item);
+  }
+
+  private addEntity(entity: Entity): void {
+    this.getEntities().push(entity);
+    this.sort();
+  }
+
+  // sort entities first by type, then by their position on screen
+  public sort(): void {
+    const classesOrder: Function[] = [Card, HandCard, Hand]; // all allowed instances of entities in store
+    const nonMovableEntities: Function[] = [Hand];
+
+    this.entities.sort((first: Entity, second: Entity) => {
+      // first sort by type
+      if (EntityStore.getClassOrder(first, classesOrder) > EntityStore.getClassOrder(second, classesOrder)) {
+        return 1;
+      }
+      if (EntityStore.getClassOrder(first, classesOrder) < EntityStore.getClassOrder(second, classesOrder)) {
+        return -1;
+      }
+
+      // if same types that are also not comparable by transform (never move), return equal
+      if (nonMovableEntities.includes(first.constructor)) {
+        return 0;
+      }
+
+      // second sort by position
+      return (first as Item).compareTo(second as Item);
+    });
+  }
+
+  private static getClassOrder(entity: Entity, constructors: Function[]): number {
+    return constructors.indexOf(entity.constructor);
+  }
+}
