@@ -83,7 +83,7 @@
             this.gameInstanceId,
             "https://c1.scryfall.com/file/scryfall-cards/large/front/5/8/589a324f-4466-4d4a-8cfb-806a041d7c1f.jpg?1599831830"));
 
-        this.store.getHandCards().forEach(handCard => handCard.moveBackToHand());
+        this.store.getHandCards().forEach(handCard => handCard.moveToHandPosition());
       }, 100);
     }
 

@@ -50,11 +50,11 @@
     }
 
     private moveToHand(): void {
-      this.item.moveBackToHand();
+      this.item.moveToHandPosition();
     }
 
     private onDropOnHand() {
-      this.item.moveBackToHand();
+      this.item.moveToHandPosition();
     }
   }
 </script>

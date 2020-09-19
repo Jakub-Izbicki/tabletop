@@ -67,7 +67,7 @@ export default class HandCard extends Item {
 
   /*eslint-enable */
 
-  public moveBackToHand(): void {
+  public moveToHandPosition(): void {
     this.setTranslate({x: 0, y: 0, unit: TranslateUnit.EM});
   }
 
