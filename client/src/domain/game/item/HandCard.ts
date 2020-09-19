@@ -4,7 +4,7 @@ import EntityStore from "@/domain/game/item/EntityStore";
 
 export default class HandCard extends Item {
 
-  private static HAND_CARDS_SPACING = 1;
+  private static HAND_CARDS_SPACING = 2;
 
   constructor(protected id: string,
               protected translate: Translate,
