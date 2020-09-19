@@ -1,6 +1,5 @@
 import {EntityStates, ItemType, Translate, TranslateUnit} from "@/domain/game/GameTypes";
 import RelativeFontSize from "@/domain/game/RelativeFontSize";
-import EntityStore from "@/domain/game/item/EntityStore";
 import AbsoluteDistance from "@/domain/game/AbsoluteDistance";
 import Hoverable from "@/domain/game/hoverable/Hoverable";
 import {Timeouts} from "@/domain/game/Timeouts";
@@ -97,13 +96,6 @@ export default abstract class Item extends Hoverable {
       this.translate = translate;
     } else {
       throw `Attempt to set translate with invalid unit: [${translate}]`;
-    }
-  }
-
-  protected assureUniqueId(id: string): void {
-    const isUnique = EntityStore.getInstance(this.gameInstanceId).getEntities().every(i => i.getId() !== id);
-    if (!isUnique) {
-      throw `Attempt to create CardItem with non-unique id: [${id}]!`;
     }
   }
 }

@@ -71,7 +71,19 @@ export default class EntityStore {
     this.addEntity(item);
   }
 
+  public replaceEntity(replacedId: string, newOne: Entity): void {
+    this.entities = this.getEntities().map(e => {
+      if (e.getId() === replacedId) {
+        return newOne;
+      } else {
+        return e;
+      }
+    });
+
+  }
+
   private addEntity(entity: Entity): void {
+    this.assureUnique(entity);
     this.getEntities().push(entity);
     this.sort();
   }
@@ -102,5 +114,13 @@ export default class EntityStore {
 
   private static getClassOrder(entity: Entity, constructors: Function[]): number {
     return constructors.indexOf(entity.constructor);
+  }
+
+  private assureUnique(entity: Entity): void {
+    const isUnique = this.getHoverables().every(i => i.getId() !== entity.getId());
+
+    if (!isUnique) {
+      throw `Attempt to add to store new entity with non-unique id: [${JSON.stringify(entity, null, 3)}]!`;
+    }
   }
 }

@@ -100,7 +100,8 @@ import {EntityStates} from "@/domain/game/GameTypes";
     }
 
     private onDropOnHand(hand: Hand): void {
-      this.item.moveItemTo(hand.getId());
+      const handCard = this.item.toHandCard(hand);
+      this.store.replaceEntity(this.item.getId(), handCard);
     }
   }
 </script>

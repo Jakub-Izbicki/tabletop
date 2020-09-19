@@ -1,6 +1,5 @@
 import Item from "@/domain/game/item/Item";
 import Entity from "@/domain/game/Entity";
-import EntityStore from "@/domain/game/item/EntityStore";
 import AbsoluteDistance from "@/domain/game/AbsoluteDistance";
 import Element from "@/domain/game/item/Element";
 import {EntityStates} from "@/domain/game/GameTypes";
@@ -29,16 +28,6 @@ export default abstract class Hoverable extends Entity {
 
   public setHover(isHover: boolean): void {
     this.setState(EntityStates.IS_HOVER, isHover);
-  }
-
-  protected assureUniqueId(id: string): void {
-    const isUnique = EntityStore.getInstance(this.gameInstanceId)
-    .getHoverables()
-    .every(i => i.getId() !== id);
-
-    if (!isUnique) {
-      throw `Attempt to create hoverable with non-unique id: [${id}]!`;
-    }
   }
 
   abstract accepts(item: Item): boolean;

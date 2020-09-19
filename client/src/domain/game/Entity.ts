@@ -6,11 +6,8 @@ export default abstract class Entity {
 
   protected constructor(protected id: string,
                         protected readonly gameInstanceId: string) {
-    this.assureUniqueId(id);
     // this.assureExistingContainerForGame(gameInstanceId);
   }
-
-  protected abstract assureUniqueId(id: string): void;
 
   // private assureExistingContainerForGame(containerId: string): void {
   //   if (!document.getElementById(containerId)) {
