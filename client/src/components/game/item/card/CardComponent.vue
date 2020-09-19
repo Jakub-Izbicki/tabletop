@@ -30,7 +30,7 @@ import {EntityStates} from "@/domain/game/GameTypes";
       </div>
       <img class="h-cardItem w-cardItem
                   rounded-cardItem"
-           src="https://img.scryfall.com/cards/large/front/8/a/8a299a1e-1ce9-4668-a5f5-c587081acf6b.jpg?1594737787">
+           :src="item.getImageUrl()">
       <div class="pointer-events-none
                   absolute
                   top-0

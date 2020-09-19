@@ -9,12 +9,17 @@ export default class HandCard extends Item {
   constructor(protected id: string,
               protected translate: Translate,
               protected  handId: string,
-              protected readonly gameInstanceId: string) {
+              protected readonly gameInstanceId: string,
+              protected readonly imageUrl: string) {
     super(id, translate, gameInstanceId);
   }
 
   public getItemType(): ItemType {
     return ItemType.HAND_CARD;
+  }
+
+  public getImageUrl() {
+    return this.imageUrl;
   }
 
   public getHandId(): string {
