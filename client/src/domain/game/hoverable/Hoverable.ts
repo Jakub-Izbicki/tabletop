@@ -28,11 +28,7 @@ export default abstract class Hoverable extends Entity {
   }
 
   public setHover(isHover: boolean): void {
-    if (isHover) {
-      this.states = [...this.states, EntityStates.IS_HOVER];
-    } else {
-      this.states = this.states.filter(s => s != EntityStates.IS_HOVER);
-    }
+    this.setState(EntityStates.IS_HOVER, isHover);
   }
 
   protected assureUniqueId(id: string): void {

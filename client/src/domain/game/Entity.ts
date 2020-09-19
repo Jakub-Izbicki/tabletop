@@ -26,8 +26,8 @@ export default abstract class Entity {
     return this.gameInstanceId;
   }
 
-  public setState(state: EntityStates, isSet: boolean): void {
-    if (isSet) {
+  public setState(state: EntityStates, doSet: boolean): void {
+    if (doSet) {
       this.states = [...this.states, state];
     } else {
       this.states = this.states.filter(s => s != state);
