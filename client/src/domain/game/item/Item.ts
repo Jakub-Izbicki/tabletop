@@ -6,7 +6,7 @@ import {Timeouts} from "@/domain/game/Timeouts";
 
 export default abstract class Item extends Hoverable {
 
-  constructor(protected id: string,
+  protected constructor(protected id: string,
               protected translate: Translate,
               protected readonly gameInstanceId: string) {
     super(id, gameInstanceId, id);
@@ -82,7 +82,6 @@ export default abstract class Item extends Hoverable {
         x: RelativeFontSize.getEm(translate.x, this.gameInstanceId),
         y: RelativeFontSize.getEm(translate.y, this.gameInstanceId),
         unit: TranslateUnit.EM
-
       };
     } else if (translate.unit === TranslateUnit.EM) {
       this.translate = translate;

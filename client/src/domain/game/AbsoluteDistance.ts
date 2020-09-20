@@ -18,4 +18,18 @@ export default class AbsoluteDistance {
       unit: TranslateUnit.PX
     }
   }
+
+  public static getPxFromRootOfGameContainer(elId: string, gameInstanceId: string): Translate {
+    const el = Element.from(elId).getRect();
+    const gameContainer = Element.from(gameInstanceId).getRect();
+
+    const elCenterX = el.x + (el.width / 2);
+    const elCenterY = el.y + (el.height / 2);
+
+    return {
+      x: elCenterX - gameContainer.x,
+      y: elCenterY - gameContainer.y,
+      unit: TranslateUnit.PX
+    }
+  }
 }

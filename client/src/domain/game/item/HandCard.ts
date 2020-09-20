@@ -2,17 +2,18 @@ import Item from "@/domain/game/item/Item";
 import {ItemType, Translate, TranslateUnit} from "@/domain/game/GameTypes";
 import EntityStore from "@/domain/game/item/EntityStore";
 import Card from "@/domain/game/item/Card";
+import AbsoluteDistance from "@/domain/game/AbsoluteDistance";
 
 export default class HandCard extends Item {
 
   private static HAND_CARDS_SPACING = 2;
 
   constructor(protected id: string,
-              protected translate: Translate,
-              protected  handId: string,
+              protected handCardTranslate: Translate,
+              protected handId: string,
               protected readonly gameInstanceId: string,
               protected readonly imageUrl: string) {
-    super(id, translate, gameInstanceId);
+    super(id, handCardTranslate, gameInstanceId);
   }
 
   public getItemType(): ItemType {
@@ -57,7 +58,8 @@ export default class HandCard extends Item {
   }
 
   public toCard(): Card {
-    return new Card(this.getId(), this.getTranslate(), this.getGameInstanceId(), this.getImageUrl());
+    const distanceToBoardRoot = AbsoluteDistance.getPxFromRootOfGameContainer(this.getId(), this.getGameInstanceId());
+    return new Card(this.getId(), distanceToBoardRoot, this.getGameInstanceId(), this.getImageUrl());
   }
 
   /*eslint-disable */

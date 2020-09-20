@@ -6,10 +6,10 @@ import HandCard from "@/domain/game/item/HandCard";
 export default class Card extends Item {
 
   constructor(protected id: string,
-              protected translate: Translate,
+              protected cardTranslate: Translate,
               protected readonly gameInstanceId: string,
               protected readonly imageUrl: string) {
-    super(id, translate, gameInstanceId);
+    super(id, cardTranslate, gameInstanceId);
   }
 
   public getItemType(): ItemType {
