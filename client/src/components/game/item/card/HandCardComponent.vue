@@ -4,6 +4,8 @@
                    top-0 left-0
                    h-0 w-0
                    transform"
+            :class="[{'cursor-grab': !isDragged},
+                     {'cursor-grabbing': isDragged}]"
             :style="transformStyle"
             v-bind="moveable"
             @drag="onItemDrag"

@@ -66,6 +66,18 @@ export default class ItemComponent<T extends Item> extends Vue {
     return this.store.getHoverables();
   }
 
+  get isMovingAnimate(): boolean {
+    return this.item.isMovingAnimate();
+  }
+
+  get isNonePointerEvents(): boolean {
+    return this.item.isNonePointerEvents();
+  }
+
+  get isDragged(): boolean {
+    return this.item.isDragged();
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected onDrop(target: Hoverable): void {
     // onDrop must be implemented in child element

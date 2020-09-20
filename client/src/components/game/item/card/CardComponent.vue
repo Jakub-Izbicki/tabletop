@@ -58,22 +58,6 @@ import {EntityStates} from "@/domain/game/GameTypes";
 
     private moveTime: number = Timeouts.SMALL_MS.valueOf();
 
-    get isHover(): boolean {
-      return this.item.isHover();
-    }
-
-    get isMovingAnimate(): boolean {
-      return this.item.isMovingAnimate();
-    }
-
-    get isNonePointerEvents(): boolean {
-      return this.item.isNonePointerEvents();
-    }
-
-    get isDragged(): boolean {
-      return this.item.isDragged();
-    }
-
     protected onDrop(target: Hoverable): void {
       switch (target.constructor) {
         case Card:

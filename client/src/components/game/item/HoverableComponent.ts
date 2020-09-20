@@ -24,6 +24,10 @@ export default class HoverableComponent<T extends Hoverable> extends Vue {
     return hoverable as T;
   }
 
+  get isHover(): boolean {
+    return this.hoverable.isHover();
+  }
+
   protected getHoverableToRegister(): T {
     throw "Must be implemented in ancestor!";
   }
