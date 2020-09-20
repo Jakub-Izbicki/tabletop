@@ -54,7 +54,7 @@
     }
 
     private onDropOnHand() {
-      this.item.moveToHandPosition();
+      this.moveToHand();
     }
   }
 </script>

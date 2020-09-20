@@ -26,7 +26,7 @@ export default class HandCard extends Item {
     return this.handId;
   }
 
-  public handCardOffset(): number {
+  public getHandCardOffset(): number {
     const handCards = EntityStore.getInstance(this.gameInstanceId).getHandCards();
     const index = handCards.findIndex(handCard => handCard.getId() === this.getId());
     const position = index * HandCard.HAND_CARDS_SPACING;
@@ -41,8 +41,8 @@ export default class HandCard extends Item {
       throw "Cannot compare HandCard with other type";
     }
 
-    const x = this.getTranslate().x + this.handCardOffset();
-    const otherX = (other as HandCard).getTranslate().x + (other as HandCard).handCardOffset();
+    const x = this.getTranslate().x + this.getHandCardOffset();
+    const otherX = (other as HandCard).getTranslate().x + (other as HandCard).getHandCardOffset();
 
     return x === otherX ? 0 : x < otherX ? -1 : 1;
   }
@@ -72,6 +72,6 @@ export default class HandCard extends Item {
   }
 
   public setTranslate(translate: Translate): void {
-    super.setTranslate({...translate, x: translate.x + this.handCardOffset()});
+    super.setTranslate({...translate, x: translate.x + this.getHandCardOffset()});
   }
 }
