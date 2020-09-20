@@ -58,16 +58,18 @@ import {EntityStates} from "@/domain/game/GameTypes";
 
     private moveTime: number = Timeouts.SMALL_MS.valueOf();
 
-    protected onDrop(target: Hoverable): void {
-      switch (target.constructor) {
-        case Card:
-          this.onDropOnCard(target as Card);
-          break;
-        case Hand:
-          this.onDropOnHand(target as Hand);
-          break;
-        default:
-          throw `Invalid CardComponent::onDrop invocation with target: ${JSON.stringify(target)}`;
+    protected onDrop(target: Hoverable | undefined): void {
+      if (target) {
+        switch (target.constructor) {
+          case Card:
+            this.onDropOnCard(target as Card);
+            break;
+          case Hand:
+            this.onDropOnHand(target as Hand);
+            break;
+        }
+      } else {
+        throw `Invalid CardComponent::onDrop invocation with target: ${JSON.stringify(target)}`;
       }
     }
 

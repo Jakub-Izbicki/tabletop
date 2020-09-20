@@ -1,6 +1,7 @@
 import Item from "@/domain/game/item/Item";
 import {ItemType, Translate, TranslateUnit} from "@/domain/game/GameTypes";
 import EntityStore from "@/domain/game/item/EntityStore";
+import Card from "@/domain/game/item/Card";
 
 export default class HandCard extends Item {
 
@@ -47,6 +48,18 @@ export default class HandCard extends Item {
     return x === otherX ? 0 : x < otherX ? -1 : 1;
   }
 
+  public moveToHandPosition(): void {
+    this.setTranslate({x: 0, y: 0, unit: TranslateUnit.EM});
+  }
+
+  public setTranslate(translate: Translate): void {
+    super.setTranslate({...translate, x: translate.x + this.getHandCardOffset()});
+  }
+
+  public toCard(): Card {
+    return new Card(this.getId(), this.getTranslate(), this.getGameInstanceId(), this.getImageUrl());
+  }
+
   /*eslint-disable */
   accepts(item: Item): boolean {
     return false;
@@ -66,12 +79,4 @@ export default class HandCard extends Item {
   }
 
   /*eslint-enable */
-
-  public moveToHandPosition(): void {
-    this.setTranslate({x: 0, y: 0, unit: TranslateUnit.EM});
-  }
-
-  public setTranslate(translate: Translate): void {
-    super.setTranslate({...translate, x: translate.x + this.getHandCardOffset()});
-  }
 }

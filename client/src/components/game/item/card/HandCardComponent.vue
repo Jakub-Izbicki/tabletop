@@ -41,22 +41,34 @@
   @Component
   export default class HandCardComponent extends ItemComponent<HandCard> {
 
-    protected onDrop(target: Hoverable): void {
-      switch (target.constructor) {
-        case Hand:
-          this.onDropOnHand();
-          break;
-        default:
-          throw `Invalid CardComponent.onDrop() invocation with target: ${JSON.stringify(target)}`;
+    protected triggerOnNoHoverable = true;
+
+    protected onDrop(target: Hoverable | undefined): void {
+      if (!target) {
+        this.moveOntoBoard();
+      } else {
+        switch (target.constructor) {
+          case Hand:
+            this.onDropOnHand();
+            break;
+          default:
+            throw `Invalid CardComponent.onDrop() invocation with target: ${JSON.stringify(target)}`;
+        }
       }
+    }
+
+    private onDropOnHand() {
+      this.moveToHand();
     }
 
     private moveToHand(): void {
       this.item.moveToHandPosition();
     }
 
-    private onDropOnHand() {
-      this.moveToHand();
+    private moveOntoBoard() {
+      const card = this.item.toCard();
+      this.store.replaceEntity(this.item.getId(), card);
+      this.store.getHandCards().forEach(handCard => handCard.moveToHandPosition());
     }
   }
 </script>

@@ -35,6 +35,8 @@ export default class ItemComponent<T extends Item> extends Vue {
     }
   }, 16);
 
+  protected triggerOnNoHoverable = false;
+
   get item(): T {
     const item = this.store.getEntities().find(i => i.getId() === this.id);
 
@@ -79,8 +81,12 @@ export default class ItemComponent<T extends Item> extends Vue {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected onDrop(target: Hoverable): void {
+  protected onDrop(target: Hoverable | undefined): void {
     // onDrop must be implemented in child element
+  }
+
+  protected onDropNoTarget(): void {
+    this.onDrop(undefined);
   }
 
   // eslint-disable-next-line
@@ -115,8 +121,11 @@ export default class ItemComponent<T extends Item> extends Vue {
 
   private onDragEnd() {
     this.item.setDragged(false);
+
     if (this.currentHoverable) {
       this.onDrop(this.currentHoverable);
+    } else if (this.triggerOnNoHoverable) {
+      this.onDropNoTarget();
     }
 
     this.store.sort();
