@@ -92,7 +92,13 @@ import {EntityStates} from "@/domain/game/GameTypes";
     private moveToHand(hand: Hand): void {
       const handCard = this.item.toHandCard(hand);
       this.store.replaceEntity(this.item.getId(), handCard);
-      this.store.getHandCards().forEach(handCard => handCard.animateMoveToHandPosition());
+      this.store.getHandCards().forEach(hc => {
+        if (hc.getId() === this.item.getId()) {
+          this.$nextTick(() => hc.animateMoveToHandPosition())
+        } else {
+          hc.animateMoveToHandPosition()
+        }
+      });
     }
   }
 </script>

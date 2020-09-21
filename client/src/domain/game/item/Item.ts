@@ -7,8 +7,8 @@ import {Timeouts} from "@/domain/game/Timeouts";
 export default abstract class Item extends Hoverable {
 
   protected constructor(protected id: string,
-              protected translate: Translate,
-              protected readonly gameInstanceId: string) {
+                        protected translate: Translate,
+                        protected readonly gameInstanceId: string) {
     super(id, gameInstanceId, id);
     this.setTranslate(translate);
   }

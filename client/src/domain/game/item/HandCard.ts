@@ -62,7 +62,7 @@ export default class HandCard extends Item {
   }
 
   public toCard(): Card {
-    const distanceToBoardRoot = AbsoluteDistance.getPxFromRootOfGameContainer(this.getId(), this.getGameInstanceId());
+    const distanceToBoardRoot = AbsoluteDistance.getPxFromRootOfContainer(this.getId(), this.getGameInstanceId());
     return new Card(this.getId(), distanceToBoardRoot, this.getGameInstanceId(), this.getImageUrl());
   }
 

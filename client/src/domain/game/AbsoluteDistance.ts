@@ -19,9 +19,9 @@ export default class AbsoluteDistance {
     }
   }
 
-  public static getPxFromRootOfGameContainer(elId: string, gameInstanceId: string): Translate {
+  public static getPxFromRootOfContainer(elId: string, containerId: string): Translate {
     const el = Element.from(elId).getRect();
-    const gameContainer = Element.from(gameInstanceId).getRect();
+    const gameContainer = Element.from(containerId).getRect();
 
     const elCenterX = el.x + (el.width / 2);
     const elCenterY = el.y + (el.height / 2);

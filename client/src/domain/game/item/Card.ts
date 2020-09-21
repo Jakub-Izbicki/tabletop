@@ -2,6 +2,7 @@ import Item from "@/domain/game/item/Item";
 import {ItemType, Translate, TranslateUnit} from "@/domain/game/GameTypes";
 import Hand from "@/domain/game/hoverable/Hand";
 import HandCard from "@/domain/game/item/HandCard";
+import AbsoluteDistance from "@/domain/game/AbsoluteDistance";
 
 export default class Card extends Item {
 
@@ -21,8 +22,9 @@ export default class Card extends Item {
   }
 
   public toHandCard(hand: Hand): HandCard {
+    const position = AbsoluteDistance.getPxFromRootOfContainer(this.getId(), hand.getId());
     return new HandCard(this.getId(),
-        {x: 0, y: 0, unit: TranslateUnit.EM},
+        position,
         hand.getId(),
         this.getGameInstanceId(),
         this.imageUrl);
