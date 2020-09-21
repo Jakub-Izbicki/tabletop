@@ -43,8 +43,8 @@ export default class HandCard extends Item {
       throw "Cannot compare HandCard with other type";
     }
 
-    const x = this.getTranslate().x + this.getHandCardOffset();
-    const otherX = (other as HandCard).getTranslate().x + (other as HandCard).getHandCardOffset();
+    const x = this.getTranslate().x;
+    const otherX = (other as HandCard).getTranslate().x;
 
     return x === otherX ? 0 : x < otherX ? -1 : 1;
   }
