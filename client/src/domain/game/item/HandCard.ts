@@ -53,6 +53,10 @@ export default class HandCard extends Item {
     this.setTranslate({x: 0, y: 0, unit: TranslateUnit.EM});
   }
 
+  public animateMoveToHandPosition(): void {
+    this.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM})
+  }
+
   public setTranslate(translate: Translate): void {
     super.setTranslate({...translate, x: translate.x + this.getHandCardOffset()});
   }

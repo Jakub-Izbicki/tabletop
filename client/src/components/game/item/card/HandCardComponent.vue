@@ -4,7 +4,10 @@
                    top-0 left-0
                    h-0 w-0
                    transform"
-            :class="[{'cursor-grab': !isDragged},
+            :class="[{'transition-transform': isMovingAnimate},
+                     {'duration-100' : isMovingAnimate},
+                     {'pointer-events-none': isNonePointerEvents},
+                     {'cursor-grab': !isDragged},
                      {'cursor-grabbing': isDragged}]"
             :style="transformStyle"
             v-bind="moveable"
@@ -62,13 +65,13 @@
     }
 
     private moveToHand(): void {
-      this.item.moveToHandPosition();
+      this.item.animateMoveToHandPosition();
     }
 
     private moveOntoBoard() {
       const card = this.item.toCard();
       this.store.replaceEntity(this.item.getId(), card);
-      this.store.getHandCards().forEach(handCard => handCard.moveToHandPosition());
+      this.store.getHandCards().forEach(handCard => handCard.animateMoveToHandPosition());
     }
   }
 </script>

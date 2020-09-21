@@ -57,12 +57,12 @@
                   {x: i + 1, y: i + 1, unit: TranslateUnit.EM},
                   this.gameInstanceId,
                   "https://img.scryfall.com/cards/large/front/8/a/8a299a1e-1ce9-4668-a5f5-c587081acf6b.jpg?1594737787"));
-          this.store.addItem(
-              new Card('Great Forge',
-                  {x: 2, y: 2, unit: TranslateUnit.EM},
-                  this.gameInstanceId,
-                  "https://c1.scryfall.com/file/scryfall-cards/large/front/b/f/bfddf910-babf-4d3c-b664-208041405460.jpg?1561957150"));
         });
+        this.store.addItem(
+            new Card('Great Forge',
+                {x: 2, y: 2, unit: TranslateUnit.EM},
+                this.gameInstanceId,
+                "https://c1.scryfall.com/file/scryfall-cards/large/front/b/f/bfddf910-babf-4d3c-b664-208041405460.jpg?1561957150"));
 
         [...Array(1).keys()]
         .forEach(() => {
