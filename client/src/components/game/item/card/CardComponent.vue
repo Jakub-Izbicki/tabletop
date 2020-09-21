@@ -92,13 +92,11 @@ import {EntityStates} from "@/domain/game/GameTypes";
     private moveToHand(hand: Hand): void {
       const handCard = this.item.toHandCard(hand);
       this.store.replaceEntity(this.item.getId(), handCard);
-      this.store.getHandCards().forEach(hc => {
-        if (hc.getId() === this.item.getId()) {
-          this.$nextTick(() => hc.animateMoveToHandPosition())
-        } else {
-          hc.animateMoveToHandPosition()
-        }
-      });
+
+      // give vue time to render new HandCardComponent,
+      // and only then start moving hand cards to position
+      this.$nextTick(() =>
+          this.store.getHandCards().forEach(hc => hc.animateMoveToHandPosition()));
     }
   }
 </script>
