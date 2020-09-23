@@ -20,6 +20,8 @@ export default class ItemComponent<T extends Item> extends Vue {
 
   protected store: EntityStore = EntityStore.getInstance(this.gameInstanceId);
 
+  protected item: T = this.store.getEntity(this.id) as T;
+
   private currentHoverable: Hoverable | undefined | null;
 
   private readonly moveable = {
@@ -36,12 +38,6 @@ export default class ItemComponent<T extends Item> extends Vue {
   }, 16);
 
   protected triggerOnNoHoverable = false;
-
-  get item(): T {
-    const item = this.store.getEntities().find(i => i.getId() === this.id);
-
-    return item as T;
-  }
 
   get translate(): Translate | undefined {
     return this.item?.getTranslate();

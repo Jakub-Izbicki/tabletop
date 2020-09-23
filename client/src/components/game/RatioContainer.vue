@@ -54,7 +54,7 @@
         .forEach(i => {
           this.store.addItem(
               new Card(`plains${i}`,
-                  {x: i + 1, y: i + 1, unit: TranslateUnit.EM},
+                  {x: 1, y: i + 1, unit: TranslateUnit.EM},
                   this.gameInstanceId,
                   "https://img.scryfall.com/cards/large/front/8/a/8a299a1e-1ce9-4668-a5f5-c587081acf6b.jpg?1594737787"));
         });

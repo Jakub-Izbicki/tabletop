@@ -31,6 +31,12 @@ export default class EntityStore {
     return this.entities;
   }
 
+  public getEntity(id: string): Entity | null {
+    const entity = this.entities.find(e => e.getId() === id);
+
+    return entity ? entity : null;
+  }
+
   public getHoverables(): Hoverable[] {
     return this.getEntities()
     .filter(e => e instanceof Hoverable)

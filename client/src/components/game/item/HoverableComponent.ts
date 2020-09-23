@@ -13,15 +13,10 @@ export default class HoverableComponent<T extends Hoverable> extends Vue {
 
   protected store: EntityStore = EntityStore.getInstance(this.gameInstanceId);
 
+  protected hoverable: T = this.store.getEntity(this.id) as T;
+
   mounted() {
     this.registerHoverableIfNotPresent()
-  }
-
-  get hoverable(): T {
-    const hoverable = this.store.getHoverables()
-    .find(h => h.getId() === this.id);
-
-    return hoverable as T;
   }
 
   get isHover(): boolean {
@@ -35,6 +30,7 @@ export default class HoverableComponent<T extends Hoverable> extends Vue {
   private registerHoverableIfNotPresent(): void {
     if (this.store.getEntities().every(e => e.getId() != this.id)) {
       this.store.addHoverable(this.getHoverableToRegister());
+      this.hoverable = this.store.getEntity(this.id) as T;
     }
   }
 }
