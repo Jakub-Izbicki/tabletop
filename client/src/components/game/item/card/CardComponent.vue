@@ -22,12 +22,6 @@ import {EntityStates} from "@/domain/game/GameTypes";
                 -translate-x-1/2
                 -translate-y-1/2"
          :class="{'shadow-hoverTarget': isHover}">
-      <div class="absolute
-                  transform -translate-y-1.5em">
-        <button @click="moveToRandomCard">
-          card
-        </button>
-      </div>
       <img class="h-cardItem w-cardItem
                   rounded-cardItem"
            :src="item.getImageUrl()">
@@ -71,14 +65,6 @@ import {EntityStates} from "@/domain/game/GameTypes";
       } else {
         throw `Invalid CardComponent::onDrop invocation with target: ${JSON.stringify(target)}`;
       }
-    }
-
-    private moveToRandomCard(): void {
-      const other = this.items
-      .find(i => i.getItemType() === ItemType.CARD &&
-          i.getId() !== this.id) as Card;
-
-      this.item.moveItem(other.getTranslate())
     }
 
     private onDropOnCard(card: Card): void {

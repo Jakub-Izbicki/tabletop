@@ -20,12 +20,6 @@
                 transform
                 -translate-x-1/2
                 -translate-y-1/2">
-      <div class="absolute
-                  transform -translate-y-1.5em">
-        <button @click="moveToHand">
-          handcard
-        </button>
-      </div>
       <img class="h-cardItem
                   w-cardItem
                   rounded-cardItem"
