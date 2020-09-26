@@ -29,5 +29,6 @@ export enum EntityStates {
   IS_DRAGGED,
   IS_NONE_POINTER_EVENTS,
   IS_MOVING_ANIMATE,
-  IS_FACE_UP
+  IS_FACE_UP,
+  IS_MOUSE_OVER
 }

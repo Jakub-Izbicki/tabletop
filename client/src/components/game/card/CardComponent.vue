@@ -21,7 +21,10 @@ import {EntityStates} from "@/domain/game/GameTypes";
                 transform
                 -translate-x-1/2
                 -translate-y-1/2"
-         :class="{'shadow-hoverTarget': isHover}">
+         :class="{'shadow-hoverTarget': isHover}"
+         @mouseover="onMouseOver"
+         @mouseout="onMouseOut"
+         v-hotkey="keymap">
       <img v-if="isFaceUp"
            class="h-cardItem w-cardItem
                   rounded-cardItem"
@@ -64,6 +67,14 @@ import {EntityStates} from "@/domain/game/GameTypes";
       return this.item.getIsFaceUp();
     }
 
+    get keymap() {
+      return {
+        'f': {
+          keyup: this.flipCard,
+        }
+      }
+    }
+
     protected onDrop(target: Hoverable | undefined): void {
       if (target) {
         switch (target.constructor) {
@@ -95,6 +106,12 @@ import {EntityStates} from "@/domain/game/GameTypes";
       // and only then start moving hand cards to position
       this.$nextTick(() =>
           this.store.getHandCards().forEach(hc => hc.animateMoveToHandPosition()));
+    }
+
+    private flipCard(): void {
+      if (this.isMouseOver()) {
+        this.item.setFaceUp(!this.isFaceUp);
+      }
     }
   }
 </script>

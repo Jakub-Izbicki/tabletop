@@ -1,7 +1,7 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import Moveable from "vue-moveable";
 import EntityStore from "@/domain/game/EntityStore";
-import {TransformConsts, Translate} from "@/domain/game/GameTypes";
+import {EntityStates, TransformConsts, Translate} from "@/domain/game/GameTypes";
 import MoveableDimensions from "@/domain/game/util/MoveableDimensions";
 import Item from "@/domain/game/interface/Item";
 import Hoverable from "@/domain/game/interface/Hoverable";
@@ -74,6 +74,18 @@ export default class ItemComponent<T extends Item> extends Vue {
 
   get isDragged(): boolean {
     return this.item.isDragged();
+  }
+
+  protected isMouseOver(): boolean {
+    return this.item.isMouseOver();
+  }
+
+  protected onMouseOver(): void {
+    this.item.setState(EntityStates.IS_MOUSE_OVER, true);
+  }
+
+  protected onMouseOut(): void {
+    this.item.setState(EntityStates.IS_MOUSE_OVER, false);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

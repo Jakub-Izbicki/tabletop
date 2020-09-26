@@ -19,7 +19,10 @@
                 rounded-cardItem
                 transform
                 -translate-x-1/2
-                -translate-y-1/2">
+                -translate-y-1/2"
+         @mouseover="onMouseOver"
+         @mouseout="onMouseOut"
+         v-hotkey="keymap">
       <img v-if="isFaceUp"
            class="h-cardItem
                   w-cardItem
@@ -53,6 +56,14 @@
       return this.item.getIsFaceUp();
     }
 
+    get keymap() {
+      return {
+        'f': {
+          keyup: this.flipCard,
+        }
+      }
+    }
+
     protected onDrop(target: Hoverable | undefined): void {
       if (!target) {
         this.moveOntoBoard();
@@ -79,6 +90,12 @@
       const card = this.item.toCard();
       this.store.replaceEntity(this.item.getId(), card);
       this.store.getHandCards().forEach(handCard => handCard.animateMoveToHandPosition());
+    }
+
+    private flipCard(): void {
+      if (this.isMouseOver()) {
+        this.item.setFaceUp(!this.isFaceUp);
+      }
     }
   }
 </script>
