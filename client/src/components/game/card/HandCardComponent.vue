@@ -20,10 +20,19 @@
                 transform
                 -translate-x-1/2
                 -translate-y-1/2">
-      <img class="h-cardItem
+      <img v-if="isFaceUp"
+           class="h-cardItem
                   w-cardItem
                   rounded-cardItem"
            :src="item.getImageUrl()">
+      <div v-if="!isFaceUp"
+           class="h-cardItem w-cardItem
+                  rounded-cardItem
+                  bg-purple-400
+                  flex justify-center items-center
+                  border-4 border-black">
+        <p class="text-3xl">Card Back</p>
+      </div>
     </div>
   </Moveable>
 </template>
@@ -39,6 +48,10 @@
   export default class HandCardComponent extends ItemComponent<HandCard> {
 
     protected triggerOnNoHoverable = true;
+
+    get isFaceUp(): boolean {
+      return this.item.getIsFaceUp();
+    }
 
     protected onDrop(target: Hoverable | undefined): void {
       if (!target) {

@@ -22,9 +22,18 @@ import {EntityStates} from "@/domain/game/GameTypes";
                 -translate-x-1/2
                 -translate-y-1/2"
          :class="{'shadow-hoverTarget': isHover}">
-      <img class="h-cardItem w-cardItem
+      <img v-if="isFaceUp"
+           class="h-cardItem w-cardItem
                   rounded-cardItem"
            :src="item.getImageUrl()">
+      <div v-if="!isFaceUp"
+           class="h-cardItem w-cardItem
+                  rounded-cardItem
+                  bg-purple-400
+                  flex justify-center items-center
+                  border-4 border-black">
+        <p class="text-3xl">Card Back</p>
+      </div>
       <div class="pointer-events-none
                   absolute
                   top-0
@@ -50,6 +59,10 @@ import {EntityStates} from "@/domain/game/GameTypes";
   export default class CardComponent extends mixins<ItemComponent<Card>, HoverableComponent<Card>>(ItemComponent, HoverableComponent) {
 
     private moveTime: number = Timeouts.SMALL_MS.valueOf();
+
+    get isFaceUp(): boolean {
+      return this.item.getIsFaceUp();
+    }
 
     protected onDrop(target: Hoverable | undefined): void {
       if (target) {

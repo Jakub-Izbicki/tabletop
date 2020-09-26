@@ -56,13 +56,15 @@
               new Card(`plains${i}`,
                   {x: 1, y: i + 1, unit: TranslateUnit.EM},
                   this.gameInstanceId,
-                  "https://img.scryfall.com/cards/large/front/8/a/8a299a1e-1ce9-4668-a5f5-c587081acf6b.jpg?1594737787"));
+                  "https://img.scryfall.com/cards/large/front/8/a/8a299a1e-1ce9-4668-a5f5-c587081acf6b.jpg?1594737787",
+                  true));
         });
         this.store.addItem(
             new Card('Great Forge',
                 {x: 2, y: 2, unit: TranslateUnit.EM},
                 this.gameInstanceId,
-                "https://c1.scryfall.com/file/scryfall-cards/large/front/b/f/bfddf910-babf-4d3c-b664-208041405460.jpg?1561957150"));
+                "https://c1.scryfall.com/file/scryfall-cards/large/front/b/f/bfddf910-babf-4d3c-b664-208041405460.jpg?1561957150",
+                true));
 
         [...Array(1).keys()]
         .forEach(() => {
@@ -70,18 +72,21 @@
               {x: 0, y: 0, unit: TranslateUnit.EM},
               'hand-1',
               this.gameInstanceId,
-              "https://c1.scryfall.com/file/scryfall-cards/large/front/3/5/358fde6f-9852-4c96-9ba5-e410fb591cbd.jpg?1562544014"));
+              "https://c1.scryfall.com/file/scryfall-cards/large/front/3/5/358fde6f-9852-4c96-9ba5-e410fb591cbd.jpg?1562544014",
+              true));
         });
         this.store.addItem(new HandCard("Forest",
             {x: 0, y: 0, unit: TranslateUnit.EM},
             'hand-1',
             this.gameInstanceId,
-            "https://c1.scryfall.com/file/scryfall-cards/large/front/2/b/2b90e88b-60a3-4d1d-bb8c-14633e5005a5.jpg?1599832083"));
+            "https://c1.scryfall.com/file/scryfall-cards/large/front/2/b/2b90e88b-60a3-4d1d-bb8c-14633e5005a5.jpg?1599832083",
+            true));
         this.store.addItem(new HandCard("Island",
             {x: 0, y: 0, unit: TranslateUnit.EM},
             'hand-1',
             this.gameInstanceId,
-            "https://c1.scryfall.com/file/scryfall-cards/large/front/5/8/589a324f-4466-4d4a-8cfb-806a041d7c1f.jpg?1599831830"));
+            "https://c1.scryfall.com/file/scryfall-cards/large/front/5/8/589a324f-4466-4d4a-8cfb-806a041d7c1f.jpg?1599831830",
+            true));
 
         this.store.getHandCards().forEach(handCard => handCard.moveToHandPosition());
       }, 100);

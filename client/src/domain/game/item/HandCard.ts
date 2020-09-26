@@ -1,5 +1,5 @@
 import Item from "@/domain/game/interface/Item";
-import {ItemType, Translate, TranslateUnit} from "@/domain/game/GameTypes";
+import {EntityStates, ItemType, Translate, TranslateUnit} from "@/domain/game/GameTypes";
 import EntityStore from "@/domain/game/EntityStore";
 import Card from "@/domain/game/item/Card";
 import AbsoluteDistance from "@/domain/game/util/AbsoluteDistance";
@@ -12,8 +12,10 @@ export default class HandCard extends Item {
               protected handCardTranslate: Translate,
               protected handId: string,
               protected readonly gameInstanceId: string,
-              protected readonly imageUrl: string) {
+              protected readonly imageUrl: string,
+              private readonly isFaceUp: boolean) {
     super(id, handCardTranslate, gameInstanceId);
+    this.setFaceUp(isFaceUp);
   }
 
   public getItemType(): ItemType {
@@ -26,6 +28,14 @@ export default class HandCard extends Item {
 
   public getHandId(): string {
     return this.handId;
+  }
+
+  public getIsFaceUp(): boolean {
+    return this.states.includes(EntityStates.IS_FACE_UP);
+  }
+
+  public setFaceUp(isFaceUp: boolean): void {
+    this.setState(EntityStates.IS_FACE_UP, isFaceUp);
   }
 
   public getHandCardOffset(): number {
@@ -62,8 +72,13 @@ export default class HandCard extends Item {
   }
 
   public toCard(): Card {
-    const distanceToBoardRoot = AbsoluteDistance.getPxFromRootOfContainer(this.getId(), this.getGameInstanceId());
-    return new Card(this.getId(), distanceToBoardRoot, this.getGameInstanceId(), this.getImageUrl());
+    const distanceToBoardRoot =
+        AbsoluteDistance.getPxFromRootOfContainer(this.getId(), this.getGameInstanceId());
+    return new Card(this.getId(),
+        distanceToBoardRoot,
+        this.getGameInstanceId(),
+        this.getImageUrl(),
+        this.getIsFaceUp());
   }
 
   /*eslint-disable */
