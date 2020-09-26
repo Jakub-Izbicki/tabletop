@@ -1,30 +1,28 @@
 import {ItemType} from "@/domain/game/GameTypes";
 <template>
-  <div class="h-full
-              flex
-              flex-col">
-    <div class="flex
-                h-full w-full">
-      <div class="h-full
-                  flex
-                  flex-col">
-        <div v-for="(item, i) in items"
-             :key="item.getId()"
-             class="w-64 text-2xs">
-          <p>{{`${i + 1}.`}} <b>{{item.constructor.name}}</b> {{JSON.stringify(item, null, 3)}}</p>
-          <p><br></p>
-        </div>
-      </div>
-      <div class="h-full
-                  flex-1
-                  flex
-                  flex-col">
-        <RatioContainer :game-instance-id="gameInstanceId"
-                        :ratio="containerRatio">
-          <div class="flex-1"></div>
-          <HandComponent :id="'hand-1'" :game-instance-id="gameInstanceId"></HandComponent>
-          <ItemSpawner :game-instance-id="gameInstanceId"></ItemSpawner>
-        </RatioContainer>
+  <div class="flex
+              h-full w-full">
+    <div class="h-full
+                flex-1
+                flex
+                flex-col">
+      <RatioContainer :game-instance-id="gameInstanceId"
+                      :ratio="containerRatio">
+        <div class="flex-1"></div>
+        <HandComponent :id="'hand-1'" :game-instance-id="gameInstanceId"></HandComponent>
+        <ItemSpawner :game-instance-id="gameInstanceId"></ItemSpawner>
+      </RatioContainer>
+    </div>
+
+    <div class="absolute
+                h-full
+                pointer-events-none">
+      <div v-for="(item, i) in items"
+           :key="item.getId()"
+           class="w-64
+                  text-2xs">
+        <p>{{`${i + 1}.`}} <b>{{item.constructor.name}}</b> {{JSON.stringify(item, null, 3)}}</p>
+        <p><br></p>
       </div>
     </div>
   </div>
@@ -45,7 +43,7 @@ import {ItemType} from "@/domain/game/GameTypes";
 
     private containerRatio = RatioConstants.RATIO_16_9;
 
-    private gameInstanceId = "game-instance-1";
+    private gameInstanceId = "game-instance-main";
 
     private store: EntityStore = EntityStore.getInstance(this.gameInstanceId);
 
