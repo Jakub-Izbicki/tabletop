@@ -1,8 +1,8 @@
-import Item from "@/domain/game/item/Item";
+import Item from "@/domain/game/interface/Item";
 import {ItemType, Translate} from "@/domain/game/GameTypes";
 import Hand from "@/domain/game/hoverable/Hand";
 import HandCard from "@/domain/game/item/HandCard";
-import AbsoluteDistance from "@/domain/game/AbsoluteDistance";
+import AbsoluteDistance from "@/domain/game/util/AbsoluteDistance";
 
 export default class Card extends Item {
 

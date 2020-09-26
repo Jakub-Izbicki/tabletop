@@ -1,10 +1,10 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import Moveable from "vue-moveable";
-import EntityStore from "@/domain/game/item/EntityStore";
+import EntityStore from "@/domain/game/EntityStore";
 import {TransformConsts, Translate} from "@/domain/game/GameTypes";
-import MoveableDimensions from "@/domain/game/item/MoveableDimensions";
-import Item from "@/domain/game/item/Item";
-import Hoverable from "@/domain/game/hoverable/Hoverable";
+import MoveableDimensions from "@/domain/game/util/MoveableDimensions";
+import Item from "@/domain/game/interface/Item";
+import Hoverable from "@/domain/game/interface/Hoverable";
 import throttle from "lodash.throttle";
 
 @Component({

@@ -1,5 +1,5 @@
-import Hoverable from "@/domain/game/hoverable/Hoverable";
-import Item from "@/domain/game/item/Item";
+import Hoverable from "@/domain/game/interface/Hoverable";
+import Item from "@/domain/game/interface/Item";
 import {ItemType} from "@/domain/game/GameTypes";
 
 export default class Hand extends Hoverable {

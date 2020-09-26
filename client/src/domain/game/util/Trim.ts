@@ -1,6 +1,6 @@
 import {Translate, TranslateUnit} from "@/domain/game/GameTypes";
-import Element from "@/domain/game/item/Element";
-import RelativeFontSize from "@/domain/game/RelativeFontSize";
+import Element from "@/domain/game/interface/Element";
+import RelativeFontSize from "@/domain/game/util/RelativeFontSize";
 
 export default class Trim {
 

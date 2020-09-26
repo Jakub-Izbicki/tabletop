@@ -1,7 +1,7 @@
-import Item from "@/domain/game/item/Item";
-import Entity from "@/domain/game/Entity";
-import AbsoluteDistance from "@/domain/game/AbsoluteDistance";
-import Element from "@/domain/game/item/Element";
+import Item from "@/domain/game/interface/Item";
+import Entity from "@/domain/game/interface/Entity";
+import AbsoluteDistance from "@/domain/game/util/AbsoluteDistance";
+import Element from "@/domain/game/interface/Element";
 import {EntityStates} from "@/domain/game/GameTypes";
 
 export default abstract class Hoverable extends Entity {

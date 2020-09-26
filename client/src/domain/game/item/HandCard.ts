@@ -1,8 +1,8 @@
-import Item from "@/domain/game/item/Item";
+import Item from "@/domain/game/interface/Item";
 import {ItemType, Translate, TranslateUnit} from "@/domain/game/GameTypes";
-import EntityStore from "@/domain/game/item/EntityStore";
+import EntityStore from "@/domain/game/EntityStore";
 import Card from "@/domain/game/item/Card";
-import AbsoluteDistance from "@/domain/game/AbsoluteDistance";
+import AbsoluteDistance from "@/domain/game/util/AbsoluteDistance";
 
 export default class HandCard extends Item {
 

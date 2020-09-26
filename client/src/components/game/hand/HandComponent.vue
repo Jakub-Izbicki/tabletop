@@ -21,8 +21,8 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
 
 <script lang="ts">
   import {Component} from 'vue-property-decorator';
-  import HandCardComponent from "@/components/game/item/card/HandCardComponent.vue";
-  import HoverableComponent from "@/components/game/item/HoverableComponent";
+  import HandCardComponent from "@/components/game/card/HandCardComponent.vue";
+  import HoverableComponent from "@/components/game/interface/HoverableComponent";
   import Hand from "@/domain/game/hoverable/Hand";
   import HandCard from "@/domain/game/item/HandCard";
 

@@ -30,11 +30,11 @@ import {ItemType} from "@/domain/game/GameTypes";
 
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator';
-  import ItemSpawner from "@/components/game/item/ItemSpawner.vue";
+  import ItemSpawner from "@/components/game/ItemSpawner.vue";
   import RatioContainer from "@/components/game/RatioContainer.vue";
-  import {RatioConstants} from '@/domain/game/item/Ratio';
-  import EntityStore from "@/domain/game/item/EntityStore";
-  import HandComponent from "@/components/game/item/hand/HandComponent.vue";
+  import {RatioConstants} from '@/domain/game/util/Ratio';
+  import EntityStore from "@/domain/game/EntityStore";
+  import HandComponent from "@/components/game/hand/HandComponent.vue";
 
   @Component({
     components: {HandComponent: HandComponent, RatioContainer, ItemSpawner}

@@ -30,9 +30,9 @@
 
 <script lang="ts">
   import {Component} from 'vue-property-decorator';
-  import ItemComponent from "@/components/game/item/ItemComponent";
+  import ItemComponent from "@/components/game/interface/ItemComponent";
   import HandCard from "@/domain/game/item/HandCard";
-  import Hoverable from "@/domain/game/hoverable/Hoverable";
+  import Hoverable from "@/domain/game/interface/Hoverable";
   import Hand from "@/domain/game/hoverable/Hand";
 
   @Component

@@ -38,14 +38,13 @@ import {EntityStates} from "@/domain/game/GameTypes";
 
 <script lang="ts">
   import {Component} from 'vue-property-decorator';
-  import {ItemType} from "@/domain/game/GameTypes";
   import Card from "@/domain/game/item/Card";
-  import ItemComponent from "@/components/game/item/ItemComponent";
+  import ItemComponent from "@/components/game/interface/ItemComponent";
   import {mixins} from "vue-class-component";
-  import HoverableComponent from "@/components/game/item/HoverableComponent";
-  import Hoverable from "@/domain/game/hoverable/Hoverable";
+  import HoverableComponent from "@/components/game/interface/HoverableComponent";
+  import Hoverable from "@/domain/game/interface/Hoverable";
   import Hand from "@/domain/game/hoverable/Hand";
-  import {Timeouts} from "@/domain/game/Timeouts";
+  import {Timeouts} from "@/domain/game/util/Timeouts";
 
   @Component
   export default class CardComponent extends mixins<ItemComponent<Card>, HoverableComponent<Card>>(ItemComponent, HoverableComponent) {

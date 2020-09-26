@@ -1,8 +1,8 @@
 import {EntityStates, ItemType, Translate, TranslateUnit} from "@/domain/game/GameTypes";
-import RelativeFontSize from "@/domain/game/RelativeFontSize";
-import AbsoluteDistance from "@/domain/game/AbsoluteDistance";
-import Hoverable from "@/domain/game/hoverable/Hoverable";
-import {Timeouts} from "@/domain/game/Timeouts";
+import RelativeFontSize from "@/domain/game/util/RelativeFontSize";
+import AbsoluteDistance from "@/domain/game/util/AbsoluteDistance";
+import Hoverable from "@/domain/game/interface/Hoverable";
+import {Timeouts} from "@/domain/game/util/Timeouts";
 
 export default abstract class Item extends Hoverable {
 

@@ -10,10 +10,10 @@
 
 <script lang="ts">
   import {Component, Prop, Vue} from 'vue-property-decorator';
-  import EntityStore from "@/domain/game/item/EntityStore";
+  import EntityStore from "@/domain/game/EntityStore";
   import Card from "@/domain/game/item/Card";
-  import CardComponent from "@/components/game/item/card/CardComponent.vue";
-  import HandCardComponent from "@/components/game/item/card/HandCardComponent.vue";
+  import CardComponent from "@/components/game/card/CardComponent.vue";
+  import HandCardComponent from "@/components/game/card/HandCardComponent.vue";
 
   @Component({
     components: {HandCard: HandCardComponent, CardComponent: CardComponent}

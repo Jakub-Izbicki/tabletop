@@ -1,6 +1,6 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import EntityStore from "@/domain/game/item/EntityStore";
-import Hoverable from "@/domain/game/hoverable/Hoverable";
+import EntityStore from "@/domain/game/EntityStore";
+import Hoverable from "@/domain/game/interface/Hoverable";
 
 @Component
 export default class HoverableComponent<T extends Hoverable> extends Vue {

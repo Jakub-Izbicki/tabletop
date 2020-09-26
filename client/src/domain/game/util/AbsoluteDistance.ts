@@ -1,5 +1,5 @@
 import {Translate, TranslateUnit} from "@/domain/game/GameTypes";
-import Element from "@/domain/game/item/Element";
+import Element from "@/domain/game/interface/Element";
 
 export default class AbsoluteDistance {
 
