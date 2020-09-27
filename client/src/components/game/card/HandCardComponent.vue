@@ -14,27 +14,34 @@
             @drag="onItemDrag"
             @dragEnd="onItemDragEnd">
     <div :id="id"
-         class="h-cardItem
+         class="relative
+                h-cardItem
                 w-cardItem
                 rounded-cardItem
                 transform
                 -translate-x-1/2
-                -translate-y-1/2"
+                -translate-y-1/2
+                card-flip-perspective"
          @mouseover="onMouseOver"
          @mouseout="onMouseOut"
          v-hotkey="keymap">
-      <img v-if="isFaceUp"
-           class="h-cardItem
-                  w-cardItem
-                  rounded-cardItem"
-           :src="item.getImageUrl()">
-      <div v-if="!isFaceUp"
-           class="h-cardItem w-cardItem
-                  rounded-cardItem
-                  bg-purple-400
-                  flex justify-center items-center
-                  border-4 border-black">
-        <p class="text-3xl">Card Back</p>
+      <div class="card-flip-container"
+           :class="{'card-face-down': !isFaceUp}">
+        <img class="absolute
+                    h-cardItem
+                    w-cardItem
+                    rounded-cardItem
+                    hidden-backface"
+             :src="item.getImageUrl()">
+        <div class="absolute
+                    h-cardItem w-cardItem
+                    rounded-cardItem
+                    bg-purple-400
+                    flex justify-center items-center
+                    border-4 border-black
+                    card-face-down hidden-backface">
+          <p class="text-3xl">Card Back</p>
+        </div>
       </div>
     </div>
   </Moveable>

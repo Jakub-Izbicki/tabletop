@@ -22,8 +22,7 @@
                 -translate-x-1/2
                 -translate-y-1/2
                 card-flip-perspective"
-         :class="[{'shadow-hoverTarget': isHover},
-                  ]"
+         :class="{'shadow-hoverTarget': isHover}"
          @mouseover="onMouseOver"
          @mouseout="onMouseOut"
          v-hotkey="keymap">
@@ -104,21 +103,4 @@
 </script>
 
 <style scoped>
-  .card-face-down {
-    transform: rotateY(180deg);
-  }
-
-  .hidden-backface {
-    -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden;
-  }
-
-  .card-flip-container {
-    transition: transform 0.2s;
-    transform-style: preserve-3d;
-  }
-
-  .card-flip-perspective {
-    perspective: 1000px;
-  }
 </style>

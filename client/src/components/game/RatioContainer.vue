@@ -147,4 +147,22 @@
     display: none;
     pointer-events: none;
   }
+
+  .card-face-down {
+    transform: rotateY(180deg);
+  }
+
+  .hidden-backface {
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+
+  .card-flip-container {
+    transition: transform 0.2s;
+    transform-style: preserve-3d;
+  }
+
+  .card-flip-perspective {
+    perspective: 1000px;
+  }
 </style>
