@@ -58,7 +58,7 @@ import {EntityStates} from "@/domain/game/GameTypes";
   import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
 
   @Component
-  export default class CardComponent extends mixins<HoverableComponent<Card>, BaseCardComponent<Card>>(HoverableComponent, BaseCardComponent) {
+  export default class CardComponent extends mixins<BaseCardComponent<Card>, HoverableComponent<Card>>(BaseCardComponent, HoverableComponent) {
 
     protected onDrop(target: Hoverable | undefined): void {
       if (target) {

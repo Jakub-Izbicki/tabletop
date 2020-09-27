@@ -12,15 +12,11 @@ export default class Card extends BaseCard {
               protected readonly gameInstanceId: string,
               protected readonly imageUrl: string,
               protected readonly isFaceUp: boolean) {
-    super(id, cardTranslate, gameInstanceId, isFaceUp);
+    super(id, cardTranslate, gameInstanceId, imageUrl, isFaceUp);
   }
 
   public getItemType(): ItemType {
     return ItemType.CARD;
-  }
-
-  public getImageUrl(): string {
-    return this.imageUrl;
   }
 
   public toHandCard(hand: Hand): HandCard {

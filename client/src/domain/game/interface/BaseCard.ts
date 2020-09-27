@@ -4,11 +4,16 @@ import {EntityStates, Translate} from "@/domain/game/GameTypes";
 export default abstract class BaseCard extends Item {
 
   protected constructor(protected id: string,
-              protected baseCardTranslate: Translate,
-              protected readonly gameInstanceId: string,
-              protected readonly isFaceUp: boolean) {
+                        protected baseCardTranslate: Translate,
+                        protected readonly gameInstanceId: string,
+                        protected readonly imageUrl: string,
+                        protected readonly isFaceUp: boolean) {
     super(id, baseCardTranslate, gameInstanceId);
     this.setFaceUp(isFaceUp);
+  }
+
+  public getImageUrl() {
+    return this.imageUrl;
   }
 
   public getIsFaceUp(): boolean {
