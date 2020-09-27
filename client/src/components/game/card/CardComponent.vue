@@ -1,4 +1,3 @@
-import {EntityStates} from "@/domain/game/GameTypes";
 <template>
   <Moveable class="moveable
                    absolute
@@ -15,35 +14,44 @@ import {EntityStates} from "@/domain/game/GameTypes";
             @drag="onItemDrag"
             @dragEnd="onItemDragEnd">
     <div :id="id"
-         class="h-cardItem
+         class="relative
+                h-cardItem
                 w-cardItem
                 rounded-cardItem
                 transform
                 -translate-x-1/2
-                -translate-y-1/2"
-         :class="{'shadow-hoverTarget': isHover}"
+                -translate-y-1/2
+                card-flip-perspective"
+         :class="[{'shadow-hoverTarget': isHover},
+                  ]"
          @mouseover="onMouseOver"
          @mouseout="onMouseOut"
          v-hotkey="keymap">
-      <img v-if="isFaceUp"
-           class="h-cardItem w-cardItem
-                  rounded-cardItem"
-           :src="item.getImageUrl()">
-      <div v-if="!isFaceUp"
-           class="h-cardItem w-cardItem
-                  rounded-cardItem
-                  bg-purple-400
-                  flex justify-center items-center
-                  border-4 border-black">
-        <p class="text-3xl">Card Back</p>
+      <div class="card-flip-container"
+           :class="{'card-face-down': !isFaceUp}">
+        <img class="absolute
+                    h-cardItem w-cardItem
+                    rounded-cardItem
+                    hidden-backface"
+             :src="item.getImageUrl()">
+        <div class="absolute
+                    h-cardItem w-cardItem
+                    rounded-cardItem
+                    bg-purple-400
+                    flex justify-center items-center
+                    border-4 border-black
+                    card-face-down hidden-backface">
+          <p class="text-3xl">Card Back</p>
+        </div>
+        <div class="pointer-events-none
+                    absolute
+                    top-0
+                    h-cardItem w-cardItem
+                    rounded-cardItem"
+             :class="[{'bg-green-100': isHover},
+                    {'bg-opacity-25': isHover}]">
+        </div>
       </div>
-      <div class="pointer-events-none
-                  absolute
-                  top-0
-                  h-cardItem w-cardItem
-                  rounded-cardItem"
-           :class="[{'bg-green-100': isHover},
-                    {'bg-opacity-25': isHover}]"></div>
     </div>
   </Moveable>
 </template>
@@ -96,5 +104,21 @@ import {EntityStates} from "@/domain/game/GameTypes";
 </script>
 
 <style scoped>
+  .card-face-down {
+    transform: rotateY(180deg);
+  }
 
+  .hidden-backface {
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+
+  .card-flip-container {
+    transition: transform 0.2s;
+    transform-style: preserve-3d;
+  }
+
+  .card-flip-perspective {
+    perspective: 1000px;
+  }
 </style>
