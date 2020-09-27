@@ -1,10 +1,11 @@
 import Item from "@/domain/game/interface/Item";
-import {EntityStates, ItemType, Translate, TranslateUnit} from "@/domain/game/GameTypes";
+import {ItemType, Translate, TranslateUnit} from "@/domain/game/GameTypes";
 import EntityStore from "@/domain/game/EntityStore";
 import Card from "@/domain/game/item/Card";
 import AbsoluteDistance from "@/domain/game/util/AbsoluteDistance";
+import BaseCard from "@/domain/game/interface/BaseCard";
 
-export default class HandCard extends Item {
+export default class HandCard extends BaseCard {
 
   private static HAND_CARDS_SPACING = 2;
 
@@ -13,9 +14,8 @@ export default class HandCard extends Item {
               protected handId: string,
               protected readonly gameInstanceId: string,
               protected readonly imageUrl: string,
-              private readonly isFaceUp: boolean) {
-    super(id, handCardTranslate, gameInstanceId);
-    this.setFaceUp(isFaceUp);
+              protected readonly isFaceUp: boolean) {
+    super(id, handCardTranslate, gameInstanceId, isFaceUp);
   }
 
   public getItemType(): ItemType {
@@ -28,14 +28,6 @@ export default class HandCard extends Item {
 
   public getHandId(): string {
     return this.handId;
-  }
-
-  public getIsFaceUp(): boolean {
-    return this.states.includes(EntityStates.IS_FACE_UP);
-  }
-
-  public setFaceUp(isFaceUp: boolean): void {
-    this.setState(EntityStates.IS_FACE_UP, isFaceUp);
   }
 
   public getHandCardOffset(): number {

@@ -42,27 +42,15 @@
 
 <script lang="ts">
   import {Component} from 'vue-property-decorator';
-  import ItemComponent from "@/components/game/interface/ItemComponent";
   import HandCard from "@/domain/game/item/HandCard";
   import Hoverable from "@/domain/game/interface/Hoverable";
   import Hand from "@/domain/game/hoverable/Hand";
+  import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
 
   @Component
-  export default class HandCardComponent extends ItemComponent<HandCard> {
+  export default class HandCardComponent extends BaseCardComponent<HandCard> {
 
     protected triggerOnNoHoverable = true;
-
-    get isFaceUp(): boolean {
-      return this.item.getIsFaceUp();
-    }
-
-    get keymap() {
-      return {
-        'f': {
-          keyup: this.flipCard,
-        }
-      }
-    }
 
     protected onDrop(target: Hoverable | undefined): void {
       if (!target) {
@@ -90,12 +78,6 @@
       const card = this.item.toCard();
       this.store.replaceEntity(this.item.getId(), card);
       this.store.getHandCards().forEach(handCard => handCard.animateMoveToHandPosition());
-    }
-
-    private flipCard(): void {
-      if (this.isMouseOver()) {
-        this.item.setFaceUp(!this.isFaceUp);
-      }
     }
   }
 </script>

@@ -51,29 +51,14 @@ import {EntityStates} from "@/domain/game/GameTypes";
 <script lang="ts">
   import {Component} from 'vue-property-decorator';
   import Card from "@/domain/game/item/Card";
-  import ItemComponent from "@/components/game/interface/ItemComponent";
   import {mixins} from "vue-class-component";
   import HoverableComponent from "@/components/game/interface/HoverableComponent";
   import Hoverable from "@/domain/game/interface/Hoverable";
   import Hand from "@/domain/game/hoverable/Hand";
-  import {Timeouts} from "@/domain/game/util/Timeouts";
+  import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
 
   @Component
-  export default class CardComponent extends mixins<ItemComponent<Card>, HoverableComponent<Card>>(ItemComponent, HoverableComponent) {
-
-    private moveTime: number = Timeouts.SMALL_MS.valueOf();
-
-    get isFaceUp(): boolean {
-      return this.item.getIsFaceUp();
-    }
-
-    get keymap() {
-      return {
-        'f': {
-          keyup: this.flipCard,
-        }
-      }
-    }
+  export default class CardComponent extends mixins<HoverableComponent<Card>, BaseCardComponent<Card>>(HoverableComponent, BaseCardComponent) {
 
     protected onDrop(target: Hoverable | undefined): void {
       if (target) {
@@ -106,12 +91,6 @@ import {EntityStates} from "@/domain/game/GameTypes";
       // and only then start moving hand cards to position
       this.$nextTick(() =>
           this.store.getHandCards().forEach(hc => hc.animateMoveToHandPosition()));
-    }
-
-    private flipCard(): void {
-      if (this.isMouseOver()) {
-        this.item.setFaceUp(!this.isFaceUp);
-      }
     }
   }
 </script>

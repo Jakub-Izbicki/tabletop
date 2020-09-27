@@ -1,18 +1,18 @@
 import Item from "@/domain/game/interface/Item";
-import {EntityStates, ItemType, Translate} from "@/domain/game/GameTypes";
+import {ItemType, Translate} from "@/domain/game/GameTypes";
 import Hand from "@/domain/game/hoverable/Hand";
 import HandCard from "@/domain/game/item/HandCard";
 import AbsoluteDistance from "@/domain/game/util/AbsoluteDistance";
+import BaseCard from "@/domain/game/interface/BaseCard";
 
-export default class Card extends Item {
+export default class Card extends BaseCard {
 
   constructor(protected id: string,
               protected cardTranslate: Translate,
               protected readonly gameInstanceId: string,
               protected readonly imageUrl: string,
-              private readonly isFaceUp: boolean) {
-    super(id, cardTranslate, gameInstanceId);
-    this.setFaceUp(isFaceUp);
+              protected readonly isFaceUp: boolean) {
+    super(id, cardTranslate, gameInstanceId, isFaceUp);
   }
 
   public getItemType(): ItemType {
@@ -21,14 +21,6 @@ export default class Card extends Item {
 
   public getImageUrl(): string {
     return this.imageUrl;
-  }
-
-  public getIsFaceUp(): boolean {
-    return this.states.includes(EntityStates.IS_FACE_UP);
-  }
-
-  public setFaceUp(isFaceUp: boolean): void {
-    this.setState(EntityStates.IS_FACE_UP, isFaceUp);
   }
 
   public toHandCard(hand: Hand): HandCard {
