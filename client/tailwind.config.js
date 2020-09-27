@@ -9,6 +9,10 @@ module.exports = {
       },
       borderRadius: {
         cardItem: '0.25em',
+
+      },
+      borderWidth: {
+        cardBack: '.1em',
       },
       rotate: {
         '0': '0deg',
@@ -27,7 +31,8 @@ module.exports = {
         grabbing: 'grabbing'
       },
       fontSize: {
-        '2xs': '.60rem'
+        '2xs': '.60rem',
+        cardBackLabel: '.5em'
       }
     },
   },

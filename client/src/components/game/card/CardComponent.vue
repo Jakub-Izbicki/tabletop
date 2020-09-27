@@ -38,9 +38,9 @@
                     rounded-cardItem
                     bg-purple-400
                     flex justify-center items-center
-                    border-4 border-black
+                    border-cardBack border-black
                     card-face-down hidden-backface">
-          <p class="text-3xl">Card Back</p>
+          <p class="text-cardBackLabel">Card Back</p>
         </div>
         <div class="pointer-events-none
                     absolute
