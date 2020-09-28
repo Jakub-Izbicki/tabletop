@@ -94,7 +94,7 @@ export default class ItemComponent<T extends Item> extends Vue {
   }
 
   // eslint-disable-next-line
-  private onItemDrag(movableEvent: any) {
+  protected onItemDrag(movableEvent: any) {
     if (!this.item.isDragged()) {
       this.item.setDragged(true);
     }
@@ -106,7 +106,7 @@ export default class ItemComponent<T extends Item> extends Vue {
   }
 
   // eslint-disable-next-line
-  private onItemDragEnd() {
+  protected onItemDragEnd() {
     this.onDragEnd();
   }
 

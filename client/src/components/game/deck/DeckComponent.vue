@@ -11,8 +11,8 @@
                      {'cursor-grabbing': isDragged}]"
             :style="transformStyle"
             v-bind="moveable"
-            @drag="onItemDrag"
-            @dragEnd="onItemDragEnd">
+            @drag="onDeckDrag"
+            @dragEnd="onDeckDragEnd">
     <div :id="id"
          class="h-cardItem
                 w-cardItem
@@ -22,9 +22,11 @@
                 -translate-y-1/2
                 flex items-center justify-center">
       <img v-if="secondCard"
+           :id="draggableId"
            class="h-cardItem w-cardItem
                   rounded-cardItem"
            :src="secondCard.getImageUrl()">
+
       <DeckCardComponent v-if="topCard"
                          :deck-card="topCard"
                          :id="topCard.getId()"
@@ -47,13 +49,28 @@
   })
   export default class DeckComponent extends ItemComponent<Deck> {
 
+    private draggableId = this.id + "-deck-draggable-img";
+
     get topCard(): DeckCard | null {
-      const topCard = this.item.getTopCard();
-      return topCard;
+      return this.item.getTopCard();
     }
 
     get secondCard(): DeckCard | null {
       return this.item.getSecondCard();
+    }
+
+    // eslint-disable-next-line
+    protected onDeckDrag(movableEvent: any) {
+      if (movableEvent.inputEvent.target.id === this.draggableId) {
+        this.onItemDrag(movableEvent);
+      }
+    }
+
+    // eslint-disable-next-line
+    protected onDeckDragEnd(movableEvent: any) {
+      if (movableEvent.inputEvent.target.id === this.draggableId) {
+        this.onItemDragEnd();
+      }
     }
   }
 
