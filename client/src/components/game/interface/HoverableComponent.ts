@@ -28,9 +28,13 @@ export default class HoverableComponent<T extends Hoverable> extends Vue {
   }
 
   private registerHoverableIfNotPresent(): void {
-    if (this.store.getEntities().every(e => e.getId() != this.id)) {
+    if (!this.isPresentInStore()) {
       this.store.addHoverable(this.getHoverableToRegister());
       this.hoverable = this.store.getEntity(this.id) as T;
     }
+  }
+
+  private isPresentInStore() {
+    return this.store.getEntity(this.id);
   }
 }

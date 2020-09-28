@@ -56,10 +56,6 @@ export default class ItemComponent<T extends Item> extends Vue {
     return transformStyle;
   }
 
-  get items(): Item[] {
-    return this.store.getItems();
-  }
-
   get hoverables(): Hoverable[] {
     return this.store.getHoverables();
   }

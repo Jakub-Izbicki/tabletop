@@ -4,6 +4,7 @@ import Entity from "@/domain/game/interface/Entity";
 import Card from "@/domain/game/item/Card";
 import HandCard from "@/domain/game/item/HandCard";
 import Hand from "@/domain/game/hoverable/Hand";
+import Deck from "@/domain/game/item/Deck";
 
 export default class EntityStore {
 
@@ -34,7 +35,7 @@ export default class EntityStore {
   public getEntity(id: string): Entity | null {
     const entity = this.entities.find(e => e.getId() === id);
 
-    return entity ? entity : null;
+    return entity ? entity : this.getDeepEntity(id);
   }
 
   public getHoverables(): Hoverable[] {
@@ -59,6 +60,19 @@ export default class EntityStore {
     return this.getEntities()
     .filter(e => e instanceof HandCard)
     .map(c => c as HandCard);
+  }
+
+  public getDecks(): Deck[] {
+    return this.getEntities()
+    .filter(e => e instanceof Deck)
+    .map(c => c as Deck);
+  }
+
+  private getDeepEntity(id: string): Entity | null {
+    const deckCard = this.getDecks().map(deck => deck.getTopCard())
+    .find(card => card && card.getId() === id);
+
+    return deckCard ? deckCard : null;
   }
 
   public addHoverable(hoverable: Hoverable): void {

@@ -5,6 +5,11 @@
                    :id="card.getId()"
                    :game-instance-id="gameInstanceId">
     </CardComponent>
+    <DeckComponent v-for="deck in decks"
+                   :key="deck.getId()"
+                   :id="deck.getId()"
+                   :game-instance-id="gameInstanceId">
+    </DeckComponent>
   </div>
 </template>
 
@@ -13,10 +18,11 @@
   import EntityStore from "@/domain/game/EntityStore";
   import Card from "@/domain/game/item/Card";
   import CardComponent from "@/components/game/card/CardComponent.vue";
-  import HandCardComponent from "@/components/game/card/HandCardComponent.vue";
+  import DeckComponent from "@/components/game/deck/DeckComponent.vue";
+  import Deck from "@/domain/game/item/Deck";
 
   @Component({
-    components: {HandCard: HandCardComponent, CardComponent: CardComponent}
+    components: {DeckComponent, CardComponent}
   })
   export default class ItemSpawner extends Vue {
 
@@ -27,6 +33,10 @@
 
     get cards(): Card[] {
       return this.store.getCards();
+    }
+
+    get decks(): Deck[] {
+      return this.store.getDecks();
     }
   }
 </script>

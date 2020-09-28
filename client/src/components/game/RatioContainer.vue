@@ -29,6 +29,8 @@
   // import {v4 as uuid4} from 'uuid';
   import RelativeFontSize from "@/domain/game/util/RelativeFontSize";
   import HandCard from "@/domain/game/item/HandCard";
+  import Deck from "@/domain/game/item/Deck";
+  import DeckCard from "@/domain/game/item/DeckCard";
 
   @Component
   export default class RatioContainer extends Vue {
@@ -66,6 +68,7 @@
                 "https://c1.scryfall.com/file/scryfall-cards/large/front/b/f/bfddf910-babf-4d3c-b664-208041405460.jpg?1561957150",
                 true));
 
+
         [...Array(1).keys()]
         .forEach(() => {
           this.store.addItem(new HandCard("Swamp",
@@ -89,6 +92,31 @@
             true));
 
         this.store.getHandCards().forEach(handCard => handCard.moveToHandPosition());
+
+
+        const deckId = "deck-1";
+        const deck = new Deck(
+            deckId, {x: 10, y: 10, unit: TranslateUnit.EM}, this.gameInstanceId, []);
+        deck.pushCard(new DeckCard("Forest2",
+            {x: 0, y: 0, unit: TranslateUnit.EM},
+            this.gameInstanceId,
+            "https://c1.scryfall.com/file/scryfall-cards/large/front/2/b/2b90e88b-60a3-4d1d-bb8c-14633e5005a5.jpg?1599832083",
+            true,
+            deckId));
+        deck.pushCard(new DeckCard("Island2",
+            {x: 0, y: 0, unit: TranslateUnit.EM},
+            this.gameInstanceId,
+            "https://c1.scryfall.com/file/scryfall-cards/large/front/5/8/589a324f-4466-4d4a-8cfb-806a041d7c1f.jpg?1599831830",
+            true,
+            deckId));
+        deck.pushCard(new DeckCard("Swamp2",
+            {x: 0, y: 0, unit: TranslateUnit.EM},
+            this.gameInstanceId,
+            "https://c1.scryfall.com/file/scryfall-cards/large/front/3/5/358fde6f-9852-4c96-9ba5-e410fb591cbd.jpg?1562544014",
+            true,
+            deckId));
+        this.store.addItem(deck);
+
       }, 100);
     }
 

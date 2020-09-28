@@ -1,6 +1,8 @@
 export enum ItemType {
   CARD = "CARD",
-  HAND_CARD = "HAND_CARD"
+  HAND_CARD = "HAND_CARD",
+  DECK = "DECK",
+  DECK_CARD = "DECK_CARD"
 }
 
 export enum TranslateUnit {
