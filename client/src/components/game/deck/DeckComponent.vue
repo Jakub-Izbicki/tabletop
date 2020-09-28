@@ -14,14 +14,13 @@
             @drag="onItemDrag"
             @dragEnd="onItemDragEnd">
     <div :id="id"
-         class="relative
-                h-cardItem
+         class="h-cardItem
                 w-cardItem
                 rounded-cardItem
                 transform
                 -translate-x-1/2
                 -translate-y-1/2
-                card-flip-perspective">
+                flex items-center justify-center">
       <img v-if="secondCard"
            class="h-cardItem w-cardItem
                   rounded-cardItem"
@@ -32,14 +31,6 @@
                          :game-instance-id="item.getGameInstanceId()"
                          :hand-id="id">
       </DeckCardComponent>
-
-      <!--      <div class="h-cardItem w-cardItem-->
-      <!--                  rounded-cardItem-->
-      <!--                  bg-purple-400-->
-      <!--                  flex justify-center items-center-->
-      <!--                  border-cardBack border-black">-->
-      <!--        <p class="text-cardBackLabel">Card Back</p>-->
-      <!--      </div>-->
     </div>
   </Moveable>
 </template>

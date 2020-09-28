@@ -1,7 +1,6 @@
 <template>
   <Moveable class="moveable
                    absolute
-                   top-0 left-0
                    h-0 w-0
                    transform"
             :class="[{'transition-transform': isMovingAnimate},
