@@ -20,8 +20,8 @@
                 transform
                 -translate-x-1/2
                 -translate-y-1/2
-                flex items-center justify-center"
-         :class="{'shadow-hoverTarget': isHover}">
+                flex items-center justify-center
+                shadow-deck">
       <img v-if="secondCard"
            :id="draggableId"
            class="h-cardItem w-cardItem
@@ -33,7 +33,8 @@
                     h-cardItem w-cardItem
                     rounded-cardItem"
            :class="[{'bg-green-100': isHover},
-                    {'bg-opacity-25': isHover}]">
+                    {'bg-opacity-25': isHover},
+                    {'shadow-hoverTarget': isHover}]">
       </div>
 
       <DeckCardComponent v-if="topCard"
