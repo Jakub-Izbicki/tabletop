@@ -35,18 +35,30 @@ export default class Deck extends Item {
     this.deckCards.push(card);
   }
 
-  /*eslint-disable */
   accepts(item: Item): boolean {
     return item.getItemType() === ItemType.DECK_CARD;
   }
 
-  onDragEnd(item: Item): void {
-  }
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onHover(item: Item): void {
+    if (this.isHover()) {
+      return;
+    }
+
+    this.setHover(true);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onHoverLeave(item: Item): void {
+    if (!this.isHover()) {
+      return;
+    }
+
+    this.setHover(false);
+  }
+
+  onDragEnd(item: Item): void {
+    this.onHoverLeave(item);
   }
 
   /*eslint-enable */

@@ -20,12 +20,21 @@
                 transform
                 -translate-x-1/2
                 -translate-y-1/2
-                flex items-center justify-center">
+                flex items-center justify-center"
+         :class="{'shadow-hoverTarget': isHover}">
       <img v-if="secondCard"
            :id="draggableId"
            class="h-cardItem w-cardItem
                   rounded-cardItem"
            :src="secondCard.getImageUrl()">
+      <div class="pointer-events-none
+                    absolute
+                    top-0
+                    h-cardItem w-cardItem
+                    rounded-cardItem"
+           :class="[{'bg-green-100': isHover},
+                    {'bg-opacity-25': isHover}]">
+      </div>
 
       <DeckCardComponent v-if="topCard"
                          :deck-card="topCard"
@@ -43,11 +52,13 @@
   import Deck from "@/domain/game/item/Deck";
   import DeckCard from "@/domain/game/item/DeckCard";
   import DeckCardComponent from "@/components/game/deck/DeckCardComponent.vue";
+  import {mixins} from "vue-class-component";
+  import HoverableComponent from "@/components/game/interface/HoverableComponent";
 
   @Component({
     components: {DeckCardComponent}
   })
-  export default class DeckComponent extends ItemComponent<Deck> {
+  export default class DeckComponent extends mixins<ItemComponent<Deck>, HoverableComponent<Deck>>(ItemComponent, HoverableComponent) {
 
     private draggableId = this.id + "-deck-draggable-img";
 
