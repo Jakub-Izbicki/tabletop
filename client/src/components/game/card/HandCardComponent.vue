@@ -68,7 +68,7 @@
             this.onDropOnHand();
             break;
           default:
-            throw `Invalid CardComponent.onDrop() invocation with target: ${JSON.stringify(target)}`;
+            throw `Invalid HandCardComponent.onDrop() invocation with target: ${JSON.stringify(target)}`;
         }
       }
     }

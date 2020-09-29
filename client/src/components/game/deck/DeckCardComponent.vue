@@ -1,3 +1,4 @@
+import {TranslateUnit} from "@/domain/game/GameTypes";
 <template>
   <Moveable class="moveable
                    absolute
@@ -60,6 +61,9 @@
   import HoverableComponent from "../interface/HoverableComponent";
   import {Component, Prop} from "vue-property-decorator";
   import DeckCard from "@/domain/game/item/DeckCard";
+  import Hoverable from "@/domain/game/interface/Hoverable";
+  import Deck from "@/domain/game/item/Deck";
+  import {TranslateUnit} from "@/domain/game/GameTypes";
 
   @Component
   export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard>, HoverableComponent<DeckCard>>(BaseCardComponent, HoverableComponent) {
@@ -68,6 +72,30 @@
     private readonly handId!: string;
 
     protected triggerOnNoHoverable = true;
+
+    protected onDrop(target: Hoverable | undefined): void {
+      if (!target) {
+        console.info('drop on no target')
+      } else {
+        switch (target.constructor) {
+          case Deck:
+            this.onDropOnDeck(target as Deck);
+            break;
+          default:
+            throw `Invalid DeckComponent.onDrop() invocation with target: ${JSON.stringify(target)}`;
+        }
+      }
+    }
+
+    private onDropOnDeck(deck: Deck): void {
+      if (deck.getId() === this.item.getDeckId()) {
+        this.animateMoveToOwnDeck();
+      }
+    }
+
+    private animateMoveToOwnDeck() {
+      this.item.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM});
+    }
   }
 
 </script>

@@ -37,7 +37,7 @@ export default class Deck extends Item {
 
   /*eslint-disable */
   accepts(item: Item): boolean {
-    return false;
+    return item.getItemType() === ItemType.DECK_CARD;
   }
 
   onDragEnd(item: Item): void {
