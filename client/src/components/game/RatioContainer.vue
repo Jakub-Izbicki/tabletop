@@ -26,7 +26,7 @@
   import {DimensionsPx, TranslateUnit} from "@/domain/game/GameTypes";
   import Card from "@/domain/game/item/Card";
   import EntityStore from "@/domain/game/EntityStore";
-  // import {v4 as uuid4} from 'uuid';
+  import {v4 as uuid4} from 'uuid';
   import RelativeFontSize from "@/domain/game/util/RelativeFontSize";
   import HandCard from "@/domain/game/item/HandCard";
   import Deck from "@/domain/game/item/Deck";
@@ -115,6 +115,16 @@
             "https://c1.scryfall.com/file/scryfall-cards/large/front/3/5/358fde6f-9852-4c96-9ba5-e410fb591cbd.jpg?1562544014",
             true,
             deckId));
+
+        [...Array(20).keys()].forEach(i => {
+          deck.pushCard(new DeckCard(`${i}-${uuid4()}`,
+              {x: 0, y: 0, unit: TranslateUnit.EM},
+              this.gameInstanceId,
+              "https://c1.scryfall.com/file/scryfall-cards/large/front/3/5/358fde6f-9852-4c96-9ba5-e410fb591cbd.jpg?1562544014",
+              true,
+              deckId));
+        });
+
         this.store.addItem(deck);
 
       }, 100);

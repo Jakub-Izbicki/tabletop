@@ -14,17 +14,17 @@ import {ItemType} from "@/domain/game/GameTypes";
       </RatioContainer>
     </div>
 
-    <div class="absolute
-                h-full
-                pointer-events-none">
-      <div v-for="(item, i) in items"
-           :key="item.getId()"
-           class="w-64
-                  text-2xs">
-        <p>{{`${i + 1}.`}} <b>{{item.constructor.name}}</b> {{JSON.stringify(item, null, 3)}}</p>
-        <p><br></p>
-      </div>
-    </div>
+<!--    <div class="absolute-->
+<!--                h-full-->
+<!--                pointer-events-none">-->
+<!--      <div v-for="(item, i) in items"-->
+<!--           :key="item.getId()"-->
+<!--           class="w-64-->
+<!--                  text-2xs">-->
+<!--        <p>{{`${i + 1}.`}} <b>{{item.constructor.name}}</b> {{JSON.stringify(item, null, 3)}}</p>-->
+<!--        <p><br></p>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -47,8 +47,8 @@ import {ItemType} from "@/domain/game/GameTypes";
 
     private store: EntityStore = EntityStore.getInstance(this.gameInstanceId);
 
-    get items() {
-      return this.store.getEntities();
-    }
+    // get items() {
+    //   return this.store.getEntities();
+    // }
   }
 </script>
