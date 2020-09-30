@@ -5,6 +5,7 @@ import Card from "@/domain/game/item/Card";
 import HandCard from "@/domain/game/item/HandCard";
 import Hand from "@/domain/game/hoverable/Hand";
 import Deck from "@/domain/game/item/Deck";
+import DeckCard from "@/domain/game/item/DeckCard";
 
 export default class EntityStore {
 
@@ -39,9 +40,15 @@ export default class EntityStore {
   }
 
   public getHoverables(): Hoverable[] {
-    return this.getEntities()
+    const topHoverables = this.getEntities()
     .filter(e => e instanceof Hoverable)
     .map(e => e as Hoverable);
+
+    const topDeckCards = this.getDecks()
+    .map(deck => deck.getTopCard())
+    .filter(topCard => topCard) as DeckCard[];
+
+    return [...topDeckCards, ...topHoverables];
   }
 
   public getItems(): Item[] {
