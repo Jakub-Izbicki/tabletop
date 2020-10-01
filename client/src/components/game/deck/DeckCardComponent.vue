@@ -54,7 +54,8 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
                     h-cardItem w-cardItem
                     rounded-cardItem"
              :class="[{'bg-green-100': isHover},
-                      {'bg-opacity-25': isHover}]">
+                      {'bg-opacity-25': isHover},
+                      {'shadow-hoverTarget': isMouseOver}]">
         </div>
       </div>
     </div>

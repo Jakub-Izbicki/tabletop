@@ -26,7 +26,8 @@ module.exports = {
         deckBase: '0.7em'
       },
       boxShadow: {
-        hoverTarget: ' 0 0 0.1em 0.05em rgba(255,255,255,0.75)',
+        hoverTarget: '0 0 0.1em 0.05em rgba(255,255,255,0.75)',
+        hoverTargetNoBottom: '0 -0.1em 0.1em 0.05em rgba(255,255,255,0.75)',
         deck: '0em 0.5em 0.5em 0em rgb(0 0 0)'
       },
       cursor: {

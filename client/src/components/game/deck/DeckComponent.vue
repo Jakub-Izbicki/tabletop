@@ -55,7 +55,8 @@
                     rounded-cardItem"
            :class="[{'bg-green-100': isHover},
                     {'bg-opacity-25': isHover},
-                    {'shadow-hoverTarget': isHover || isMouseOver}]">
+                    {'shadow-hoverTarget': isHover},
+                    {'shadow-hoverTargetNoBottom': isMouseOver}]">
       </div>
       <DeckCardComponent v-if="topCard"
                          :deck-card="topCard"
