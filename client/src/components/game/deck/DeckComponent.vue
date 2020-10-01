@@ -22,7 +22,9 @@
                 -translate-x-1/2
                 -translate-y-1/2
                 flex items-center justify-center
-                shadow-deck">
+                shadow-deck"
+         @mouseover="onMouseOver"
+         @mouseout="onMouseOut">
       <div class="absolute
                   bottom-0
                   transform
@@ -34,7 +36,8 @@
                     rounded-cardItem
                     bg-gray-800
                     pointer-events-none
-                    deck-base">
+                    deck-base"
+             :class="{'shadow-hoverTarget': isMouseOver}">
         </div>
       </div>
       <img v-if="secondCard"
@@ -52,9 +55,8 @@
                     rounded-cardItem"
            :class="[{'bg-green-100': isHover},
                     {'bg-opacity-25': isHover},
-                    {'shadow-hoverTarget': isHover}]">
+                    {'shadow-hoverTarget': isHover || isMouseOver}]">
       </div>
-
       <DeckCardComponent v-if="topCard"
                          :deck-card="topCard"
                          :id="topCard.getId()"

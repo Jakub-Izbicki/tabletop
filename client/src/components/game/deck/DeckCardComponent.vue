@@ -23,8 +23,8 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
                 -translate-y-1/2
                 card-flip-perspective"
          :class="{'shadow-hoverTarget': isHover}"
-         @mouseover="onMouseOver"
-         @mouseout="onMouseOut"
+         @mouseover.stop="onMouseOver"
+         @mouseout.stop="onMouseOut"
          v-hotkey="keymap">
       <div class="card-flip-container"
            :class="{'card-face-down': !isFaceUp}">
@@ -48,7 +48,7 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
                     h-cardItem w-cardItem
                     rounded-cardItem"
              :class="[{'bg-green-100': isHover},
-                    {'bg-opacity-25': isHover}]">
+                      {'bg-opacity-25': isHover}]">
         </div>
       </div>
     </div>

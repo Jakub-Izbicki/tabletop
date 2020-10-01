@@ -18,7 +18,7 @@ export default class BaseCardComponent<T extends BaseCard> extends ItemComponent
   }
 
   protected flipCard(): void {
-    if (this.isMouseOver()) {
+    if (this.getMouseOver()) {
       this.item.setFaceUp(!this.isFaceUp);
     }
   }

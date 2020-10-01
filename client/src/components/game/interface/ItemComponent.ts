@@ -72,7 +72,11 @@ export default class ItemComponent<T extends Item> extends Vue {
     return this.item.isDragged();
   }
 
-  protected isMouseOver(): boolean {
+  get isMouseOver(): boolean {
+    return this.item.isMouseOver();
+  }
+
+  protected getMouseOver(): boolean {
     return this.item.isMouseOver();
   }
 
