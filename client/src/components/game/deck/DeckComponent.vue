@@ -14,7 +14,8 @@
             @drag="onDeckDrag"
             @dragEnd="onDeckDragEnd">
     <div :id="id"
-         class="h-cardItem
+         class="relative
+                h-cardItem
                 w-cardItem
                 rounded-cardItem
                 transform
@@ -22,11 +23,28 @@
                 -translate-y-1/2
                 flex items-center justify-center
                 shadow-deck">
+      <div class="absolute
+                  bottom-0
+                  transform
+                  translate-y-deckBase
+                  scale-95
+                  pointer-events-none
+                  deck-base-perspective">
+        <div class="h-deckBase w-cardItem
+                    rounded-cardItem
+                    bg-gray-800
+                    pointer-events-none
+                    deck-base">
+        </div>
+      </div>
       <img v-if="secondCard"
            :id="draggableId"
-           class="h-cardItem w-cardItem
+           class="absolute
+                  top-0
+                  h-cardItem w-cardItem
                   rounded-cardItem"
            :src="secondCard.getImageUrl()">
+
       <div class="pointer-events-none
                     absolute
                     top-0
@@ -89,5 +107,11 @@
 </script>
 
 <style scoped>
+  .deck-base {
+    transform: rotateX(-8deg);
+  }
 
+  .deck-base-perspective {
+    perspective: 50px;
+  }
 </style>

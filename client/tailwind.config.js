@@ -3,13 +3,13 @@ module.exports = {
     extend: {
       height: {
         cardItem: `${5 * 0.88}em`,
+        deckBase: `${5 * 0.2}em`,
       },
       width: {
         cardItem: `${5 * 0.63}em`,
       },
       borderRadius: {
         cardItem: '0.25em',
-
       },
       borderWidth: {
         cardBack: '.1em',
@@ -21,11 +21,12 @@ module.exports = {
         '270': '270deg',
       },
       spacing: {
-        '1.5em': '1.5em'
+        '1.5em': '1.5em',
+        deckBase: '0.7em'
       },
       boxShadow: {
         hoverTarget: ' 0 0 0.1em 0.05em rgba(255,255,255,0.75)',
-        deck: '0.05em 0.15em 0em 0em rgb(0 0 0), 0.1em 0.25em 0em 0em rgb(0 0 0), 0.15em 0.35em 0em 0em rgb(0 0 0), 0.2em 0.4em 0em 0em rgb(0 0 0), 0.2em 0.5em 0.5em 0em rgb(0 0 0)'
+        deck: '0em 0.5em 0.5em 0em rgb(0 0 0)'
       },
       cursor: {
         grab: 'grab',
