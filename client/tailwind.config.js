@@ -3,6 +3,7 @@ module.exports = {
     extend: {
       height: {
         cardItem: `${5 * 0.88}em`,
+        cardItemHalf: `${2.5 * 0.88}em`,
         deckBase: `${5 * 0.2}em`,
       },
       width: {

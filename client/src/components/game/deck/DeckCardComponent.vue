@@ -15,6 +15,7 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
             @dragEnd="onItemDragEnd">
     <div :id="id"
          class="relative
+                pointer-events-none
                 h-cardItem
                 w-cardItem
                 rounded-cardItem
@@ -28,6 +29,12 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
          v-hotkey="keymap">
       <div class="card-flip-container"
            :class="{'card-face-down': !isFaceUp}">
+        <div class="absolute
+                    h-cardItemHalf w-cardItem
+                    rounded-cardItem"
+             :class="[{'pointer-events-auto': !isNonePointerEvents},
+                      {'pointer-events-none': isNonePointerEvents}]">
+        </div>
         <img class="absolute
                     h-cardItem w-cardItem
                     rounded-cardItem
@@ -42,8 +49,7 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
                     card-face-down hidden-backface">
           <p class="text-cardBackLabel">Card Back</p>
         </div>
-        <div class="pointer-events-none
-                    absolute
+        <div class="absolute
                     top-0
                     h-cardItem w-cardItem
                     rounded-cardItem"
