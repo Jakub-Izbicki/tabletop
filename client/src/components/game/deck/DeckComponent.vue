@@ -94,14 +94,14 @@
 
     // eslint-disable-next-line
     protected onDeckDrag(movableEvent: any) {
-      if (movableEvent.inputEvent.target.id === this.draggableId) {
+      if (!movableEvent.inputEvent.defaultPrevented) {
         this.onItemDrag(movableEvent);
       }
     }
 
     // eslint-disable-next-line
     protected onDeckDragEnd(movableEvent: any) {
-      if (movableEvent.inputEvent.target.id === this.draggableId) {
+      if (!movableEvent.inputEvent.defaultPrevented) {
         this.onItemDragEnd();
       }
     }

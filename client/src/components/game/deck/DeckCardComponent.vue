@@ -11,8 +11,8 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
                      {'cursor-grabbing': isDragged}]"
             :style="transformStyle"
             v-bind="moveable"
-            @drag="onItemDrag"
-            @dragEnd="onItemDragEnd">
+            @drag="onDeckCardDrag"
+            @dragEnd="onDeckCardDragEnd">
     <div :id="id"
          class="relative
                 pointer-events-none
@@ -79,6 +79,19 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
     private readonly handId!: string;
 
     protected triggerOnNoHoverable = true;
+
+
+    // eslint-disable-next-line
+    protected onDeckCardDrag(movableEvent: any) {
+      movableEvent.inputEvent.preventDefault();
+      this.onItemDrag(movableEvent);
+    }
+
+    // eslint-disable-next-line
+    protected onDeckCardDragEnd(movableEvent: any) {
+      movableEvent.inputEvent.preventDefault();
+      this.onItemDragEnd();
+    }
 
     protected onDrop(target: Hoverable | undefined): void {
       if (!target) {
