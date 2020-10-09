@@ -29,12 +29,14 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
          @mouseout.stop="onMouseOut"
          v-hotkey="keymap">
       <div class="card-flip-container"
-           :class="{'card-face-down': !isFaceUp}">
+           :class="[{'card-face-down': !isFaceUp},
+                    {'transform -translate-y-itemHover': isMouseOver}]">
         <div class="absolute
                     h-cardItemHalf w-cardItem
                     rounded-cardItem"
              :class="[{'pointer-events-auto': !isNonePointerEvents},
-                      {'pointer-events-none': isNonePointerEvents}]">
+                      {'pointer-events-none': isNonePointerEvents},
+                      {'transform translate-y-itemHover': isMouseOver}]">
         </div>
         <img class="absolute
                     h-cardItem w-cardItem

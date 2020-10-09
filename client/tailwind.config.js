@@ -23,7 +23,8 @@ module.exports = {
       },
       spacing: {
         '1.5em': '1.5em',
-        deckBase: '0.7em'
+        deckBase: '0.7em',
+        itemHover: '0.2em'
       },
       boxShadow: {
         hoverTarget: '0 0 0.1em 0.05em rgba(255,255,255,0.75)',
