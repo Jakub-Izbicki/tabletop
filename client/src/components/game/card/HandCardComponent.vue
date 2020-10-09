@@ -8,7 +8,8 @@
                      {'duration-100' : isMovingAnimate},
                      {'pointer-events-none': isNonePointerEvents},
                      {'cursor-grab': !isDragged},
-                     {'cursor-grabbing': isDragged}]"
+                     {'cursor-grabbing': isDragged},
+                     {'z-onTop': isDragged}]"
             :style="transformStyle"
             v-bind="moveable"
             @drag="onItemDrag"

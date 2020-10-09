@@ -37,6 +37,9 @@ module.exports = {
       fontSize: {
         '2xs': '.60rem',
         cardBackLabel: '.5em'
+      },
+      zIndex: {
+        'onTop': '999'
       }
     },
   },
