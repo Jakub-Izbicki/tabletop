@@ -28,37 +28,41 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
          @mouseover.stop="onMouseOver"
          @mouseout.stop="onMouseOut"
          v-hotkey="keymap">
-      <div class="card-flip-container"
-           :class="[{'card-face-down': !isFaceUp},
-                    {'transform -translate-y-itemHover': isMouseOver}]">
-        <div class="absolute
-                    h-cardItemHalf w-cardItem
-                    rounded-cardItem"
-             :class="[{'pointer-events-auto': !isNonePointerEvents},
-                      {'pointer-events-none': isNonePointerEvents},
-                      {'transform translate-y-itemHover': isMouseOver}]">
-        </div>
-        <img class="absolute
-                    h-cardItem w-cardItem
-                    rounded-cardItem
-                    hidden-backface"
-             :src="item ? item.getImageUrl() : ''">
-        <div class="absolute
-                    h-cardItem w-cardItem
-                    rounded-cardItem
-                    bg-purple-400
-                    flex justify-center items-center
-                    border-cardBack border-black
-                    card-face-down hidden-backface">
-          <p class="text-cardBackLabel">Card Back</p>
-        </div>
-        <div class="absolute
-                    top-0
-                    h-cardItem w-cardItem
-                    rounded-cardItem"
-             :class="[{'bg-green-100': isHover},
-                      {'bg-opacity-25': isHover},
-                      {'shadow-hoverTarget': isMouseOver}]">
+      <div class="transform
+                  transition-transform
+                  duration-200"
+           :class="{'-translate-y-itemHover': isMouseOver}">
+        <div class="card-flip-container"
+             :class="{'card-face-down': !isFaceUp}">
+          <div class="absolute
+                      h-cardItemHalf w-cardItem
+                      rounded-cardItem"
+               :class="[{'pointer-events-auto': !isNonePointerEvents},
+                        {'pointer-events-none': isNonePointerEvents},
+                        {'transform translate-y-itemHover': isMouseOver}]">
+          </div>
+          <img class="absolute
+                      h-cardItem w-cardItem
+                      rounded-cardItem
+                      hidden-backface"
+               :src="item ? item.getImageUrl() : ''">
+          <div class="absolute
+                      h-cardItem w-cardItem
+                      rounded-cardItem
+                      bg-purple-400
+                      flex justify-center items-center
+                      border-cardBack border-black
+                      card-face-down hidden-backface">
+            <p class="text-cardBackLabel">Card Back</p>
+          </div>
+          <div class="absolute
+                      top-0
+                      h-cardItem w-cardItem
+                      rounded-cardItem"
+               :class="[{'bg-green-100': isHover},
+                        {'bg-opacity-25': isHover},
+                        {'shadow-hoverTarget': isMouseOver}]">
+          </div>
         </div>
       </div>
     </div>
