@@ -21,35 +21,41 @@
                 rounded-cardItem
                 transform
                 -translate-x-1/2
-                -translate-y-1/2
-                card-flip-perspective"
+                -translate-y-1/2"
          :class="{'shadow-hoverTarget': isHover}"
          @mouseover="onMouseOver"
          @mouseout="onMouseOut"
          v-hotkey="keymap">
-      <div class="card-flip-container"
-           :class="{'card-face-down': !isFaceUp}">
-        <img class="absolute
-                    h-cardItem w-cardItem
-                    rounded-cardItem
-                    hidden-backface"
-             :src="item.getImageUrl()">
-        <div class="absolute
-                    h-cardItem w-cardItem
-                    rounded-cardItem
-                    bg-purple-400
-                    flex justify-center items-center
-                    border-cardBack border-black
-                    card-face-down hidden-backface">
-          <p class="text-cardBackLabel">Card Back</p>
-        </div>
-        <div class="pointer-events-none
-                    absolute
-                    top-0
-                    h-cardItem w-cardItem
-                    rounded-cardItem"
-             :class="[{'bg-green-100': isHover},
-                    {'bg-opacity-25': isHover}]">
+      <div class="transform
+                  transition-transform
+                  duration-200
+                  h-cardItem
+                  w-cardItem
+                  card-flip-perspective"
+           :class="{'-translate-y-itemHover': isMouseOver}">
+        <div class="card-flip-container"
+             :class="{'card-face-down': !isFaceUp}">
+          <img class="absolute
+                      h-cardItem w-cardItem
+                      rounded-cardItem
+                      hidden-backface"
+               :src="item.getImageUrl()">
+          <div class="absolute
+                      h-cardItem w-cardItem
+                      rounded-cardItem
+                      bg-purple-400
+                      flex justify-center items-center
+                      border-cardBack border-black
+                      card-face-down hidden-backface">
+            <p class="text-cardBackLabel">Card Back</p>
+          </div>
+          <div class="absolute
+                      pointer-events-none
+                      top-0
+                      h-cardItem w-cardItem
+                      rounded-cardItem"
+               :class="{'shadow-hoverTarget': isMouseOver}">
+          </div>
         </div>
       </div>
     </div>

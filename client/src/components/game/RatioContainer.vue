@@ -201,6 +201,6 @@
   }
 
   .card-flip-perspective {
-    perspective: 1000px;
+    perspective: 700px;
   }
 </style>

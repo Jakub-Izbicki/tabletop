@@ -22,15 +22,17 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
                 rounded-cardItem
                 transform
                 -translate-x-1/2
-                -translate-y-1/2
-                card-flip-perspective"
+                -translate-y-1/2"
          :class="{'shadow-hoverTarget': isHover}"
          @mouseover.stop="onMouseOver"
          @mouseout.stop="onMouseOut"
          v-hotkey="keymap">
       <div class="transform
                   transition-transform
-                  duration-200"
+                  duration-200
+                  h-cardItem
+                  w-cardItem
+                  card-flip-perspective"
            :class="{'-translate-y-itemHover': isMouseOver}">
         <div class="card-flip-container"
              :class="{'card-face-down': !isFaceUp}">
@@ -56,6 +58,7 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
             <p class="text-cardBackLabel">Card Back</p>
           </div>
           <div class="absolute
+                      pointer-events-none
                       top-0
                       h-cardItem w-cardItem
                       rounded-cardItem"
