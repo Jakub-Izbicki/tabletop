@@ -53,8 +53,14 @@
                       pointer-events-none
                       top-0
                       h-cardItem w-cardItem
-                      rounded-cardItem"
-               :class="{'shadow-hoverTarget': isMouseOver}">
+                      rounded-cardItem
+                      duration-200"
+               :class="[{'shadow-card': !isMouseOver},
+                        {'shadow-cardHover': isMouseOver}]">
+            <div class="h-cardItem w-cardItem
+                        rounded-cardItem"
+                 :class="{'shadow-hoverTarget': isMouseOver}">
+            </div>
           </div>
         </div>
       </div>

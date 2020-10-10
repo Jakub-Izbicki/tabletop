@@ -47,7 +47,7 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
                       h-cardItem w-cardItem
                       rounded-cardItem
                       hidden-backface"
-               :src="item ? item.getImageUrl() : ''">
+               :src="item.getImageUrl()">
           <div class="absolute
                       h-cardItem w-cardItem
                       rounded-cardItem
@@ -61,10 +61,14 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
                       pointer-events-none
                       top-0
                       h-cardItem w-cardItem
-                      rounded-cardItem"
-               :class="[{'bg-green-100': isHover},
-                        {'bg-opacity-25': isHover},
-                        {'shadow-hoverTarget': isMouseOver}]">
+                      rounded-cardItem
+                      duration-200"
+               :class="[{'shadow-card': !isMouseOver},
+                        {'shadow-cardHover': isMouseOver}]">
+            <div class="h-cardItem w-cardItem
+                        rounded-cardItem"
+                 :class="{'shadow-hoverTarget': isMouseOver}">
+            </div>
           </div>
         </div>
       </div>
