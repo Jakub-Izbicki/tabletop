@@ -42,7 +42,8 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
                       rounded-cardItem"
                :class="[{'pointer-events-auto': !isNonePointerEvents},
                         {'pointer-events-none': isNonePointerEvents},
-                        {'transform translate-y-itemHover': isMouseOver}]">
+                        {'transform translate-y-itemHover': isMouseOver && !isDragged},
+                        {'transform translate-y-itemDrag': isMouseOver && isDragged}]">
           </div>
           <img class="absolute
                       h-cardItem w-cardItem
