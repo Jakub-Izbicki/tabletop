@@ -65,8 +65,7 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
                       rounded-cardItem
                       transition-shadow
                       duration-200"
-               :class="[{'shadow-card': !isMouseOver},
-                        {'shadow-cardHover': isMouseOver && !isDragged},
+               :class="[{'shadow-cardHover': isMouseOver && !isDragged},
                         {'shadow-cardDrag': isMouseOver && isDragged}]">
             <div class="h-cardItem w-cardItem
                         rounded-cardItem"

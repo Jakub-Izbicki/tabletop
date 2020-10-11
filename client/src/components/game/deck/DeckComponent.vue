@@ -31,8 +31,8 @@
                   transform
                   translate-y-deckBase
                   scale-95
-                  pointer-events-none
-                  deck-base-perspective">
+                  pointer-events-none"
+           :style="{'perspective': deckBasePerspective}">
         <div class="h-deckBase w-cardItem
                     rounded-cardItem
                     bg-gray-800
@@ -77,6 +77,8 @@
   import DeckCardComponent from "@/components/game/deck/DeckCardComponent.vue";
   import {mixins} from "vue-class-component";
   import HoverableComponent from "@/components/game/interface/HoverableComponent";
+  import RelativeFontSize from "@/domain/game/util/RelativeFontSize";
+  import Element from "@/domain/game/interface/Element";
 
   @Component({
     components: {DeckCardComponent}
@@ -91,6 +93,10 @@
 
     get secondCard(): DeckCard | null {
       return this.item.getCards().length >= 2 ? this.item.getCards()[1] : null;
+    }
+
+    get deckBasePerspective(): string {
+      return `${RelativeFontSize.getPx(0.85, Element.from(this.gameInstanceId))}px`;
     }
 
     // eslint-disable-next-line
