@@ -1,5 +1,6 @@
 <template>
-  <Moveable class="moveable
+  <Moveable :key="topCard.getId()"
+            class="moveable
                    absolute
                    top-0 left-0
                    h-0 w-0
@@ -47,22 +48,22 @@
                   h-cardItem w-cardItem
                   rounded-cardItem"
            :src="secondCard.getImageUrl()">
-
       <div class="pointer-events-none
-                    absolute
-                    top-0
-                    h-cardItem w-cardItem
-                    rounded-cardItem"
+                  absolute
+                  top-0
+                  h-cardItem w-cardItem
+                  rounded-cardItem"
            :class="[{'bg-green-100': isHover},
                     {'bg-opacity-25': isHover},
                     {'shadow-hoverTarget': isHover},
                     {'shadow-hoverTargetNoBottom': isMouseOver}]">
       </div>
       <DeckCardComponent v-if="topCard"
+                         :key="topCard.getId()"
                          :deck-card="topCard"
                          :id="topCard.getId()"
                          :game-instance-id="item.getGameInstanceId()"
-                         :hand-id="id">
+                         :deck-id="id">
       </DeckCardComponent>
     </div>
   </Moveable>
@@ -85,11 +86,11 @@
     private draggableId = this.id + "-deck-draggable-img";
 
     get topCard(): DeckCard | null {
-      return this.item.getTopCard();
+      return this.item.getCards().length ? this.item.getCards()[0] : null;
     }
 
     get secondCard(): DeckCard | null {
-      return this.item.getSecondCard();
+      return this.item.getCards().length >= 2 ? this.item.getCards()[1] : null;
     }
 
     // eslint-disable-next-line

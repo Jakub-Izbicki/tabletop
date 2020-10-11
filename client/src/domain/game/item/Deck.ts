@@ -19,10 +19,6 @@ export default class Deck extends Item {
     return this.deckCards.length ? this.deckCards[0] : null;
   }
 
-  public getSecondCard(): DeckCard | null {
-    return this.deckCards.length >= 2 ? this.deckCards[1] : null;
-  }
-
   public getCard(cardId: string): DeckCard | undefined {
     return this.deckCards.find(card => card.getId() === cardId);
   }
@@ -31,7 +27,11 @@ export default class Deck extends Item {
     return this.deckCards;
   }
 
-  public pushCard(card: DeckCard): void {
+  public pushOnTop(card: DeckCard): void {
+    this.deckCards.unshift(card);
+  }
+
+  public pushOnBottom(card: DeckCard): void {
     this.deckCards.push(card);
   }
 

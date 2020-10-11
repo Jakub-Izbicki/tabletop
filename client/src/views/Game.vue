@@ -16,8 +16,9 @@ import {ItemType} from "@/domain/game/GameTypes";
 
 <!--    <div class="absolute-->
 <!--                h-full-->
-<!--                pointer-events-none">-->
-<!--      <div v-for="(item, i) in items"-->
+<!--                pointer-events-none"-->
+<!--         v-if="items">-->
+<!--      <div v-for="(item, i) in items.getCards()"-->
 <!--           :key="item.getId()"-->
 <!--           class="w-64-->
 <!--                  text-2xs">-->
@@ -47,8 +48,8 @@ import {ItemType} from "@/domain/game/GameTypes";
 
     private store: EntityStore = EntityStore.getInstance(this.gameInstanceId);
 
-    // get items() {
-    //   return this.store.getEntities();
+    // get items(): Deck {
+    //   return this.store.getEntities().find(e => e instanceof Deck) as Deck;
     // }
   }
 </script>

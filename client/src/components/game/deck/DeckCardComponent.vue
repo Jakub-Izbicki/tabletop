@@ -23,7 +23,6 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
                 transform
                 -translate-x-1/2
                 -translate-y-1/2"
-         :class="{'shadow-hoverTarget': isHover}"
          @mouseover.stop="onMouseOver"
          @mouseout.stop="onMouseOut"
          v-hotkey="keymap">
@@ -71,7 +70,9 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
                         {'shadow-cardDrag': isMouseOver && isDragged}]">
             <div class="h-cardItem w-cardItem
                         rounded-cardItem"
-                 :class="{'shadow-hoverTarget': isMouseOver}">
+                 :class="[{'bg-green-100': isHover},
+                          {'bg-opacity-25': isHover},
+                          {'shadow-hoverTarget': isHover || isMouseOver}]">
             </div>
           </div>
         </div>
@@ -94,10 +95,9 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
   export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard>, HoverableComponent<DeckCard>>(BaseCardComponent, HoverableComponent) {
 
     @Prop({type: String, required: true})
-    private readonly handId!: string;
+    private readonly deckId!: string;
 
     protected triggerOnNoHoverable = true;
-
 
     // eslint-disable-next-line
     protected onDeckCardDrag(movableEvent: any) {

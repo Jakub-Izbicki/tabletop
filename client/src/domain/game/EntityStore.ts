@@ -106,13 +106,10 @@ export default class EntityStore {
         return e;
       }
     });
-
   }
 
-  private addEntity(entity: Entity): void {
-    this.assureUnique(entity);
-    this.getEntities().push(entity);
-    this.sort();
+  public removeEntity(removedId: string): void {
+    this.entities = this.getEntities().filter(e => e.getId() !== removedId);
   }
 
   // sort entities first by type, then by their position on screen
@@ -137,6 +134,12 @@ export default class EntityStore {
       // second sort by position
       return (first as Item).compareTo(second as Item);
     });
+  }
+
+  private addEntity(entity: Entity): void {
+    this.assureUnique(entity);
+    this.getEntities().push(entity);
+    this.sort();
   }
 
   private static getClassOrder(entity: Entity, constructors: Function[]): number {

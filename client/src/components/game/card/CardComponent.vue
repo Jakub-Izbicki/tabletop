@@ -79,6 +79,8 @@
   import Hoverable from "@/domain/game/interface/Hoverable";
   import Hand from "@/domain/game/hoverable/Hand";
   import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
+  import DeckCard from "@/domain/game/item/DeckCard";
+  import {TranslateUnit} from "@/domain/game/GameTypes";
 
   @Component
   export default class CardComponent extends mixins<BaseCardComponent<Card>, HoverableComponent<Card>>(BaseCardComponent, HoverableComponent) {
@@ -91,6 +93,9 @@
             break;
           case Hand:
             this.onDropOnHand(target as Hand);
+            break;
+          case DeckCard:
+            this.onDropOnDeck(target as DeckCard);
             break;
         }
       } else {
@@ -106,6 +111,10 @@
       this.moveToHand(hand);
     }
 
+    private onDropOnDeck(currentDeckTopCard: DeckCard): void {
+      this.moveToDeck(currentDeckTopCard);
+    }
+
     private moveToHand(hand: Hand): void {
       const handCard = this.item.toHandCard(hand);
       this.store.replaceEntity(this.item.getId(), handCard);
@@ -114,6 +123,17 @@
       // and only then start moving hand cards to position
       this.$nextTick(() =>
           this.store.getHandCards().forEach(hc => hc.animateMoveToHandPosition()));
+    }
+
+    private moveToDeck(currentDeckTopCard: DeckCard): void {
+      const newDeckCard = this.item.toDeckCard(currentDeckTopCard);
+      this.store.removeEntity(this.id);
+      this.store.getDecks().find(deck => deck.getId() === newDeckCard.getDeckId())
+        ?.pushOnTop(newDeckCard);
+
+      this.$nextTick(
+          () => {
+            newDeckCard.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM})});
     }
   }
 </script>
