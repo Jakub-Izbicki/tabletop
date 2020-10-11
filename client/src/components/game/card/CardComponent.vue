@@ -32,7 +32,8 @@
                   h-cardItem
                   w-cardItem
                   card-flip-perspective"
-           :class="{'-translate-y-itemHover': isMouseOver}">
+           :class="[{'-translate-y-itemHover': isMouseOver && !isDragged},
+                    {'-translate-y-itemDrag': isMouseOver && isDragged}]">
         <div class="card-flip-container"
              :class="{'card-face-down': !isFaceUp}">
           <img class="absolute
@@ -54,9 +55,11 @@
                       top-0
                       h-cardItem w-cardItem
                       rounded-cardItem
+                      transition-shadow
                       duration-200"
                :class="[{'shadow-card': !isMouseOver},
-                        {'shadow-cardHover': isMouseOver}]">
+                        {'shadow-cardHover': isMouseOver && !isDragged},
+                        {'shadow-cardDrag': isMouseOver && isDragged}]">
             <div class="h-cardItem w-cardItem
                         rounded-cardItem"
                  :class="{'shadow-hoverTarget': isMouseOver}">
