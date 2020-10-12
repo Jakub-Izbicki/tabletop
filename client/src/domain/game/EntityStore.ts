@@ -114,7 +114,7 @@ export default class EntityStore {
 
   // sort entities first by type, then by their position on screen
   public sort(): void {
-    const classesOrder: Function[] = [Card, HandCard, Hand]; // all allowed instances of entities in store
+    const classesOrder: Function[] = [Deck, Card, HandCard, Hand]; // all allowed instances of entities in store
     const nonMovableEntities: Function[] = [Hand];
 
     this.entities.sort((first: Entity, second: Entity) => {

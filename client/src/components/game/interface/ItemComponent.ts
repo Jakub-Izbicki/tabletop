@@ -132,12 +132,12 @@ export default class ItemComponent<T extends Item> extends Vue {
 
     if (this.currentHoverable) {
       this.onDrop(this.currentHoverable);
+      this.currentHoverable = null;
     } else if (this.triggerOnNoHoverable) {
       this.onDropNoTarget();
     }
 
     this.store.sort();
-    this.currentHoverable = null;
     this.hoverables.forEach(h => h.onDragEnd(this.item));
   }
 
