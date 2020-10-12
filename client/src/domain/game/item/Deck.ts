@@ -7,7 +7,7 @@ export default class Deck extends Item {
   public constructor(protected id: string,
                      protected deckTranslate: Translate,
                      protected readonly gameInstanceId: string,
-                     protected readonly deckCards: DeckCard[]) {
+                     protected deckCards: DeckCard[]) {
     super(id, deckTranslate, gameInstanceId);
   }
 
@@ -33,6 +33,10 @@ export default class Deck extends Item {
 
   public pushOnBottom(card: DeckCard): void {
     this.deckCards.push(card);
+  }
+
+  public remove(cardId: string): void {
+    this.deckCards = this.deckCards.filter(card => card.getId() !== cardId);
   }
 
   accepts(item: Item): boolean {

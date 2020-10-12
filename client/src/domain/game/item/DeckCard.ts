@@ -1,6 +1,8 @@
 import Item from "@/domain/game/interface/Item";
 import {ItemType, Translate} from "@/domain/game/GameTypes";
 import BaseCard from "@/domain/game/interface/BaseCard";
+import Card from "@/domain/game/item/Card";
+import AbsoluteDistance from "@/domain/game/util/AbsoluteDistance";
 
 export default class DeckCard extends BaseCard {
 
@@ -19,6 +21,15 @@ export default class DeckCard extends BaseCard {
 
   public getDeckId(): string {
     return this.deckId;
+  }
+
+  public toCard(): Card {
+    const position = AbsoluteDistance.getPxFromRootOfContainer(this.getId(), this.gameInstanceId);
+    return new Card(this.getId(),
+        position,
+        this.getGameInstanceId(),
+        this.getImageUrl(),
+        this.getIsFaceUp());
   }
 
   accepts(item: Item): boolean {

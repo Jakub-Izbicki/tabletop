@@ -112,7 +112,7 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
 
     protected onDrop(target: Hoverable | undefined): void {
       if (!target) {
-        console.info('drop on no target')
+        this.moveOntoBoard();
       } else {
         switch (target.constructor) {
           case Deck:
@@ -128,6 +128,12 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
       if (deck.getId() === this.item.getDeckId()) {
         this.animateMoveToOwnDeck();
       }
+    }
+
+    private moveOntoBoard(): void {
+      const card = this.item.toCard();
+      this.store.getDecks().find(deck => deck.getId() === this.deckId)?.remove(this.id);
+      this.store.addItem(card);
     }
 
     private animateMoveToOwnDeck() {
