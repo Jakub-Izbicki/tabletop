@@ -128,8 +128,6 @@ export default class ItemComponent<T extends Item> extends Vue {
   }
 
   private onDragEnd() {
-    this.item.setDragged(false);
-
     if (this.currentHoverable) {
       this.onDrop(this.currentHoverable);
       this.currentHoverable = null;
@@ -139,6 +137,7 @@ export default class ItemComponent<T extends Item> extends Vue {
 
     this.store.sort();
     this.hoverables.forEach(h => h.onDragEnd(this.item));
+    setTimeout(() => this.item.setDragged(false), 0);
   }
 
   private findCurrentHoverable(): Hoverable | undefined {
