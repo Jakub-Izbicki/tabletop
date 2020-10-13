@@ -30,7 +30,7 @@ module.exports = {
       boxShadow: {
         hoverTarget: '0 0 0.1em 0.05em rgba(255,255,255,0.75)',
         hoverTargetNoBottom: '0 -0.1em 0.1em 0.05em rgba(255,255,255,0.75)',
-        deck: '0em 0.5em 0.5em 0em rgb(0 0 0)',
+        deck: '0em 0.8em 0.2em -0.2em rgb(0 0 0)',
         card: '0em 0.05em 0.05em 0em rgb(0 0 0)',
         cardHover: '0em 0.3em 0.5em -0.2em rgb(0 0 0)',
         cardDrag: '0em 0.6em 1em -0.3em rgb(0 0 0)'
