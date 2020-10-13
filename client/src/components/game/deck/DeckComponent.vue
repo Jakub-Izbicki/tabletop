@@ -41,13 +41,28 @@
              :class="{'shadow-hoverTarget': isMouseOver}">
         </div>
       </div>
-      <img v-if="secondCard"
-           :id="draggableId"
+      <div v-if="secondCard"
            class="absolute
                   top-0
                   h-cardItem w-cardItem
-                  rounded-cardItem"
-           :src="secondCard.getImageUrl()">
+                  rounded-cardItem">
+        <img v-if="secondCard.getIsFaceUp()"
+             :id="draggableId"
+             class="absolute
+                    top-0
+                    h-cardItem w-cardItem
+                    rounded-cardItem"
+             :src="secondCard.getImageUrl()">
+        <div v-else
+             class="absolute
+                    h-cardItem w-cardItem
+                    rounded-cardItem
+                    bg-purple-400
+                    flex justify-center items-center
+                    border-cardBack border-black">
+          <p class="text-cardBackLabel">Card Back</p>
+        </div>
+      </div>
       <div class="pointer-events-none
                   absolute
                   top-0
