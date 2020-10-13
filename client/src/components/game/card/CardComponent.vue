@@ -129,11 +129,10 @@
       const newDeckCard = this.item.toDeckCard(currentDeckTopCard);
       this.store.removeEntity(this.id);
       this.store.getDecks().find(deck => deck.getId() === newDeckCard.getDeckId())
-        ?.pushOnTop(newDeckCard);
+      ?.pushOnTop(newDeckCard);
 
-      this.$nextTick(
-          () => {
-            newDeckCard.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM})});
+      this.$nextTick(() =>
+          newDeckCard.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM}));
     }
   }
 </script>

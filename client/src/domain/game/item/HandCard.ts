@@ -4,6 +4,7 @@ import EntityStore from "@/domain/game/EntityStore";
 import Card from "@/domain/game/item/Card";
 import AbsoluteDistance from "@/domain/game/util/AbsoluteDistance";
 import BaseCard from "@/domain/game/interface/BaseCard";
+import DeckCard from "@/domain/game/item/DeckCard";
 
 export default class HandCard extends BaseCard {
 
@@ -67,6 +68,16 @@ export default class HandCard extends BaseCard {
         this.getGameInstanceId(),
         this.getImageUrl(),
         this.getIsFaceUp());
+  }
+
+  toDeckCard(currentDeckCard: DeckCard): DeckCard {
+    const position = AbsoluteDistance.getPxFromTo(this.getId(), currentDeckCard.getDeckId());
+    return new DeckCard(this.getId(),
+        position,
+        this.getGameInstanceId(),
+        this.getImageUrl(),
+        this.getIsFaceUp(),
+        currentDeckCard.getDeckId());
   }
 
   /*eslint-disable */

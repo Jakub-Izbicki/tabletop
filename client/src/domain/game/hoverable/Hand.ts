@@ -5,7 +5,7 @@ import {ItemType} from "@/domain/game/GameTypes";
 export default class Hand extends Hoverable {
 
   public accepts(item: Item): boolean {
-    const accepted = [ItemType.CARD, ItemType.HAND_CARD];
+    const accepted = [ItemType.CARD, ItemType.HAND_CARD, ItemType.DECK_CARD];
 
     return accepted.includes(item.getItemType());
   }

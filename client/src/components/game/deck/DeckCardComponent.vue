@@ -89,6 +89,7 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
   import Hoverable from "@/domain/game/interface/Hoverable";
   import Deck from "@/domain/game/item/Deck";
   import {TranslateUnit} from "@/domain/game/GameTypes";
+  import Hand from "@/domain/game/hoverable/Hand";
 
   @Component
   export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard>, HoverableComponent<DeckCard>>(BaseCardComponent, HoverableComponent) {
@@ -118,8 +119,11 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
           case Deck:
             this.onDropOnDeck(target as Deck);
             break;
+          case Hand:
+            this.onDropOnHand(target as Hand);
+            break;
           default:
-            throw `Invalid DeckComponent.onDrop() invocation with target: ${JSON.stringify(target)}`;
+            throw `Invalid DeckCardComponent.onDrop() invocation with target: ${JSON.stringify(target)}`;
         }
       }
     }
@@ -138,6 +142,15 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
 
     private animateMoveToOwnDeck() {
       this.item.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM});
+    }
+
+    private onDropOnHand(hand: Hand): void {
+      const handCard = this.item.toHandCard(hand);
+      this.store.getDecks().find(deck => deck.getId() === this.deckId)?.remove(this.id);
+      this.store.addItem(handCard);
+
+      this.$nextTick(() =>
+          this.store.getHandCards().forEach(hc => hc.animateMoveToHandPosition()));
     }
   }
 

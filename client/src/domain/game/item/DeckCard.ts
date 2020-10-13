@@ -3,6 +3,8 @@ import {ItemType, Translate} from "@/domain/game/GameTypes";
 import BaseCard from "@/domain/game/interface/BaseCard";
 import Card from "@/domain/game/item/Card";
 import AbsoluteDistance from "@/domain/game/util/AbsoluteDistance";
+import HandCard from "@/domain/game/item/HandCard";
+import Hand from "@/domain/game/hoverable/Hand";
 
 export default class DeckCard extends BaseCard {
 
@@ -27,6 +29,16 @@ export default class DeckCard extends BaseCard {
     const position = AbsoluteDistance.getPxFromRootOfContainer(this.getId(), this.gameInstanceId);
     return new Card(this.getId(),
         position,
+        this.getGameInstanceId(),
+        this.getImageUrl(),
+        this.getIsFaceUp());
+  }
+
+  public toHandCard(hand: Hand): HandCard {
+    const position = AbsoluteDistance.getPxFromRootOfContainer(this.getId(), hand.getId());
+    return new HandCard(this.getId(),
+        position,
+        hand.getId(),
         this.getGameInstanceId(),
         this.getImageUrl(),
         this.getIsFaceUp());
