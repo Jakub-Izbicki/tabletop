@@ -4,8 +4,8 @@
                    top-0 left-0
                    h-0 w-0
                    transform"
-            :class="[{'transition-transform': isMovingAnimate && !isSkipAnimation},
-                     {'duration-100' : isMovingAnimate && !isSkipAnimation},
+            :class="[{'transition-transform': isMovingAnimate},
+                     {'duration-100' : isMovingAnimate },
                      {'pointer-events-none': isNonePointerEvents},
                      {'cursor-grab': !isDragged},
                      {'cursor-grabbing': isDragged},
@@ -104,7 +104,7 @@
     }
 
     private onDropOnCard(card: Card): void {
-      this.item.animateMoveItem(card.getTranslate());
+      setTimeout(() => this.item.animateMoveItem(card.getTranslate()), 0);
     }
 
     private onDropOnHand(hand: Hand): void {
