@@ -4,8 +4,8 @@
                    top-0 left-0
                    h-0 w-0
                    transform"
-            :class="[{'transition-transform': isMovingAnimate},
-                     {'duration-100' : isMovingAnimate},
+            :class="[{'transition-transform': isMovingAnimate && !isSkipAnimation},
+                     {'duration-100' : isMovingAnimate && !isSkipAnimation},
                      {'pointer-events-none': isNonePointerEvents},
                      {'cursor-grab': !isDragged},
                      {'cursor-grabbing': isDragged},
@@ -28,11 +28,11 @@
          v-hotkey="keymap">
       <div class="transform
                   transition-transform
-                  duration-200
                   h-cardItem
                   w-cardItem
                   card-flip-perspective"
-           :class="[{'-translate-y-itemHover': isMouseOver && !isDragged},
+           :class="[{'duration-200': !isSkipAnimation},
+                    {'-translate-y-itemHover': isMouseOver && !isDragged},
                     {'-translate-y-itemDrag': isMouseOver && isDragged}]">
         <div class="card-flip-container"
              :class="{'card-face-down': !isFaceUp}">
@@ -54,10 +54,10 @@
                       pointer-events-none
                       top-0
                       h-cardItem w-cardItem
-                      rounded-cardItem
-                      transition-shadow
-                      duration-200"
-               :class="[{'shadow-card': !isMouseOver},
+                      rounded-cardItem"
+               :class="[{'duration-200': !isSkipAnimation},
+                        {'transition-shadow': !isSkipAnimation},
+                        {'shadow-card': !isMouseOver},
                         {'shadow-cardHover': isMouseOver && !isDragged},
                         {'shadow-cardDrag': isMouseOver && isDragged}]">
             <div class="h-cardItem w-cardItem

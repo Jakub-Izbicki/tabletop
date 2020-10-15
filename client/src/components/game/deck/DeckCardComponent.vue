@@ -136,8 +136,15 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
 
     private moveOntoBoard(): void {
       const card = this.item.toCard();
+      card.setIsSkipAnimation(true);
+      card.setDragged(true);
+
       this.store.getDecks().find(deck => deck.getId() === this.deckId)?.remove(this.id);
       this.store.addItem(card);
+      setTimeout(() => {
+        card.setIsSkipAnimation(false);
+        card.setDragged(false);
+      }, 0);
     }
 
     private animateMoveToOwnDeck() {

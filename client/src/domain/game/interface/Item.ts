@@ -59,6 +59,10 @@ export default abstract class Item extends Hoverable {
     return this.states.includes(EntityStates.IS_MOVING_ANIMATE);
   }
 
+  public isSkipAnimation(): boolean {
+    return this.states.includes(EntityStates.IS_SKIP_ANIMATION);
+  }
+
   public isNonePointerEvents(): boolean {
     return this.states.includes(EntityStates.IS_NONE_POINTER_EVENTS);
   }
@@ -69,6 +73,10 @@ export default abstract class Item extends Hoverable {
 
   public setDragged(isDragged: boolean): void {
     this.setState(EntityStates.IS_DRAGGED, isDragged);
+  }
+
+  public setIsSkipAnimation(isSkip: boolean): void {
+    this.setState(EntityStates.IS_SKIP_ANIMATION, isSkip);
   }
 
   public getTranslate(): Translate {

@@ -64,6 +64,10 @@ export default class ItemComponent<T extends Item> extends Vue {
     return this.item.isMovingAnimate();
   }
 
+  get isSkipAnimation(): boolean {
+    return this.item.isSkipAnimation();
+  }
+
   get isNonePointerEvents(): boolean {
     return this.item.isNonePointerEvents();
   }

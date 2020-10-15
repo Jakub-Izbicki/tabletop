@@ -79,7 +79,7 @@
   import Hand from "@/domain/game/hoverable/Hand";
   import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
   import DeckCard from "@/domain/game/item/DeckCard";
-  import {TranslateUnit} from "@/domain/game/GameTypes";
+  import {EntityStates, TranslateUnit} from "@/domain/game/GameTypes";
 
   @Component
   export default class HandCardComponent extends BaseCardComponent<HandCard> {
@@ -113,8 +113,15 @@
 
     private moveOntoBoard() {
       const card = this.item.toCard();
+      card.setIsSkipAnimation(true);
+      card.setDragged(true);
+
       this.store.replaceEntity(this.item.getId(), card);
       this.store.getHandCards().forEach(handCard => handCard.animateMoveToHandPosition());
+      setTimeout(() => {
+        card.setIsSkipAnimation(false);
+        card.setDragged(false);
+      }, 0);
     }
 
     private onDropOnDeck(currentDeckTopCard: DeckCard) {
