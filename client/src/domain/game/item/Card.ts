@@ -10,10 +10,11 @@ export default class Card extends BaseCard {
 
   constructor(protected id: string,
               protected cardTranslate: Translate,
+              protected cardRotation: number,
               protected readonly gameInstanceId: string,
               protected readonly imageUrl: string,
               protected readonly isFaceUp: boolean) {
-    super(id, cardTranslate, gameInstanceId, imageUrl, isFaceUp);
+    super(id, cardTranslate, cardRotation, gameInstanceId, imageUrl, isFaceUp);
   }
 
   public getItemType(): ItemType {
@@ -24,6 +25,7 @@ export default class Card extends BaseCard {
     const position = AbsoluteDistance.getPxFromRootOfContainer(this.getId(), hand.getId());
     return new HandCard(this.getId(),
         position,
+        this.getRotation(),
         hand.getId(),
         this.getGameInstanceId(),
         this.imageUrl,
@@ -34,6 +36,7 @@ export default class Card extends BaseCard {
     const position = AbsoluteDistance.getPxFromTo(this.getId(), currentDeckCard.getDeckId());
     return new DeckCard(this.getId(),
         position,
+        this.getRotation(),
         this.getGameInstanceId(),
         this.getImageUrl(),
         this.getIsFaceUp(),

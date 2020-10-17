@@ -8,6 +8,7 @@ export default abstract class Item extends Hoverable {
 
   protected constructor(protected id: string,
                         protected translate: Translate,
+                        protected rotation: number,
                         protected readonly gameInstanceId: string) {
     super(id, gameInstanceId, id);
     this.setTranslate(translate);
@@ -33,10 +34,6 @@ export default abstract class Item extends Hoverable {
   }
 
   public moveItem(position: Translate): void {
-    // if (this.containerId) {
-    //   position = Trim.trimIfOutsideElement(position, this.containerId);
-    // }
-
     this.setTranslate(position);
   }
 
@@ -81,6 +78,10 @@ export default abstract class Item extends Hoverable {
 
   public getTranslate(): Translate {
     return this.translate;
+  }
+
+  public getRotation(): number {
+    return this.rotation;
   }
 
   public compareTo(other: Item): number {

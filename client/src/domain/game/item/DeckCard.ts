@@ -9,12 +9,13 @@ import Hand from "@/domain/game/hoverable/Hand";
 export default class DeckCard extends BaseCard {
 
   constructor(protected id: string,
-              protected cardTranslate: Translate,
+              protected deckCardTranslate: Translate,
+              protected deckCardRotation: number,
               protected readonly gameInstanceId: string,
               protected readonly imageUrl: string,
               protected readonly isFaceUp: boolean,
               protected readonly deckId: string) {
-    super(id, cardTranslate, gameInstanceId, imageUrl, isFaceUp);
+    super(id, deckCardTranslate, deckCardRotation, gameInstanceId, imageUrl, isFaceUp);
   }
 
   public getItemType(): ItemType {
@@ -29,6 +30,7 @@ export default class DeckCard extends BaseCard {
     const position = AbsoluteDistance.getPxFromRootOfContainer(this.getId(), this.gameInstanceId);
     return new Card(this.getId(),
         position,
+        this.getRotation(),
         this.getGameInstanceId(),
         this.getImageUrl(),
         this.getIsFaceUp());
@@ -38,6 +40,7 @@ export default class DeckCard extends BaseCard {
     const position = AbsoluteDistance.getPxFromRootOfContainer(this.getId(), hand.getId());
     return new HandCard(this.getId(),
         position,
+        this.getRotation(),
         hand.getId(),
         this.getGameInstanceId(),
         this.getImageUrl(),

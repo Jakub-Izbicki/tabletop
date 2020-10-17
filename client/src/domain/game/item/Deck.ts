@@ -6,9 +6,10 @@ export default class Deck extends Item {
 
   public constructor(protected id: string,
                      protected deckTranslate: Translate,
+                     protected deckRotation: number,
                      protected readonly gameInstanceId: string,
                      protected deckCards: DeckCard[]) {
-    super(id, deckTranslate, gameInstanceId);
+    super(id, deckTranslate, deckRotation, gameInstanceId);
   }
 
   public getItemType(): ItemType {

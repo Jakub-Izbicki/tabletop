@@ -5,10 +5,11 @@ export default abstract class BaseCard extends Item {
 
   protected constructor(protected id: string,
                         protected baseCardTranslate: Translate,
+                        protected baseCardRotation: number,
                         protected readonly gameInstanceId: string,
                         protected readonly imageUrl: string,
                         protected readonly isFaceUp: boolean) {
-    super(id, baseCardTranslate, gameInstanceId);
+    super(id, baseCardTranslate, baseCardRotation, gameInstanceId);
     this.setFaceUp(isFaceUp);
   }
 
