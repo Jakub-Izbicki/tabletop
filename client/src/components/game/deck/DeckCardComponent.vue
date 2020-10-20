@@ -15,8 +15,7 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
             @drag="onDeckCardDrag"
             @dragEnd="onDeckCardDragEnd">
     <div :id="id"
-         class="relative
-                pointer-events-none
+         class="pointer-events-none
                 h-cardItem
                 w-cardItem
                 rounded-cardItem

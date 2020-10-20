@@ -46,8 +46,7 @@
         </div>
       </div>
       <div :id="id"
-           class="relative
-                  h-cardItem
+           class="h-cardItem
                   w-cardItem
                   rounded-cardItem
                   transform
