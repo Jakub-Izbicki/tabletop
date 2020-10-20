@@ -61,7 +61,7 @@
                     w-cardItem
                     card-flip-perspective">
           <div class="card-flip-container
-                      transition-transforms"
+                      transition-transform"
                :class="[{'card-face-down': !isFaceUp},
                         {'duration-200': !isSkipAnimation}]">
             <img class="absolute
