@@ -5,7 +5,7 @@
                    h-0 w-0
                    transform"
             :class="[{'transition-transform': isMovingAnimate},
-                     {'duration-100' : isMovingAnimate },
+                     {'duration-100' : isMovingAnimate},
                      {'pointer-events-none': isNonePointerEvents},
                      {'cursor-grab': !isDragged},
                      {'cursor-grabbing': isDragged},
@@ -65,7 +65,8 @@
                :class="[{'card-face-down': !isFaceUp},
                         {'duration-200': !isSkipAnimation}]">
             <img class="absolute
-                        h-cardItem w-cardItem
+                        h-cardItem
+                        w-cardItem
                         rounded-cardItem
                         hidden-backface"
                  :src="item.getImageUrl()">
