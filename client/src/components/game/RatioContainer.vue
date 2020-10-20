@@ -57,7 +57,7 @@
           this.store.addItem(
               new Card(`plains${i}`,
                   {x: 1, y: i + 1, unit: TranslateUnit.EM},
-                  0,
+                  45,
                   this.gameInstanceId,
                   "https://img.scryfall.com/cards/large/front/8/a/8a299a1e-1ce9-4668-a5f5-c587081acf6b.jpg?1594737787",
                   true));
@@ -65,7 +65,7 @@
         this.store.addItem(
             new Card('Great Forge',
                 {x: 2, y: 2, unit: TranslateUnit.EM},
-                0,
+                90,
                 this.gameInstanceId,
                 "https://c1.scryfall.com/file/scryfall-cards/large/front/b/f/bfddf910-babf-4d3c-b664-208041405460.jpg?1561957150",
                 true));
@@ -210,6 +210,10 @@
 
   .card-flip-container {
     transition: transform 0.2s;
+    transform-style: preserve-3d;
+  }
+
+  .card-flip-container-3d-only {
     transform-style: preserve-3d;
   }
 

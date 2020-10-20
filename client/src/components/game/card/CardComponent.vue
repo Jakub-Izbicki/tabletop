@@ -14,55 +14,73 @@
             v-bind="moveable"
             @drag="onItemDrag"
             @dragEnd="onItemDragEnd">
-    <div :id="id"
-         class="relative
-                h-cardItem
-                w-cardItem
-                rounded-cardItem
-                transform
-                -translate-x-1/2
-                -translate-y-1/2"
-         :class="{'shadow-hoverTarget': isHover}"
-         @mouseover="onMouseOver"
-         @mouseout="onMouseOut"
-         v-hotkey="keymap">
-      <div class="transform
+    <div class="transform
+                transition-transform"
+         :class="[{'duration-200': !isSkipAnimation},
+                  {'-translate-y-itemHover': isMouseOver && !isDragged},
+                  {'-translate-y-itemDrag': isMouseOver && isDragged}]">
+      <div class="absolute
+                  pointer-events-none
+                  h-cardItemShadow
+                  w-cardItemShadow
+                  rounded-cardItem
+                  transform
                   transition-transform
-                  h-cardItem
-                  w-cardItem
+                  -translate-x-1/2
                   card-flip-perspective"
            :class="[{'duration-200': !isSkipAnimation},
-                    {'-translate-y-itemHover': isMouseOver && !isDragged},
-                    {'-translate-y-itemDrag': isMouseOver && isDragged}]">
-        <div class="card-flip-container"
-             :class="{'card-face-down': !isFaceUp}">
-          <img class="absolute
-                      h-cardItem w-cardItem
-                      rounded-cardItem
-                      hidden-backface"
-               :src="item.getImageUrl()">
-          <div class="absolute
-                      h-cardItem w-cardItem
-                      rounded-cardItem
-                      bg-purple-400
-                      flex justify-center items-center
-                      border-cardBack border-black
-                      card-face-down hidden-backface">
-            <p class="text-cardBackLabel">Card Back</p>
-          </div>
-          <div class="absolute
-                      pointer-events-none
-                      top-0
-                      h-cardItem w-cardItem
-                      rounded-cardItem"
-               :class="[{'duration-200': !isSkipAnimation},
-                        {'transition-shadow': !isSkipAnimation},
-                        {'shadow-card': !isMouseOver},
-                        {'shadow-cardHover': isMouseOver && !isDragged},
-                        {'shadow-cardDrag': isMouseOver && isDragged}]">
-            <div class="h-cardItem w-cardItem
+                    {'-translate-y-1/2': !isMouseOver},
+                    {'-translate-y-shadowCardHover': isMouseOver && !isDragged},
+                    {'-translate-y-shadowCardDrag': isMouseOver && isDragged}]"
+           :style="rotationStyle">
+        <div class="transition-transform-shadow
+                    h-cardItemShadow
+                    w-cardItemShadow
+                    rounded-cardItem
+                    card-flip-container-3d-only"
+             :class="[{'card-face-down': !isFaceUp},
+                      {'duration-200': !isSkipAnimation},
+                      {'shadow-card': !isMouseOver},
+                      {'shadow-cardHover': isMouseOver && !isDragged},
+                      {'shadow-cardDrag': isMouseOver && isDragged}]">
+        </div>
+      </div>
+      <div :id="id"
+           class="relative
+                  h-cardItem
+                  w-cardItem
+                  rounded-cardItem
+                  transform
+                  -translate-x-1/2
+                  -translate-y-1/2"
+           :style="rotationStyle"
+           @mouseover="onMouseOver"
+           @mouseout="onMouseOut"
+           v-hotkey="keymap">
+        <div class="h-cardItem
+                    w-cardItem
+                    card-flip-perspective">
+          <div class="card-flip-container"
+               :class="{'card-face-down': !isFaceUp}">
+            <img class="absolute
+                        h-cardItem w-cardItem
+                        rounded-cardItem
+                        hidden-backface"
+                 :src="item.getImageUrl()">
+            <div class="absolute
+                        h-cardItem w-cardItem
+                        rounded-cardItem
+                        bg-purple-400
+                        flex justify-center items-center
+                        border-cardBack border-black
+                        card-face-down hidden-backface">
+              <p class="text-cardBackLabel">Card Back</p>
+            </div>
+            <div class="absolute
+                        pointer-events-none
+                        h-cardItem w-cardItem
                         rounded-cardItem"
-                 :class="{'shadow-hoverTarget': isMouseOver}">
+                 :class="[{'shadow-hoverTarget': isMouseOver}]">
             </div>
           </div>
         </div>

@@ -43,6 +43,10 @@ export default class ItemComponent<T extends Item> extends Vue {
     return this.item?.getTranslate();
   }
 
+  get rotation(): number | undefined {
+    return this.item?.getRotation();
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   get transformStyle(): any {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -54,6 +58,17 @@ export default class ItemComponent<T extends Item> extends Vue {
       transformStyle[TransformConsts.TRANSFORM_Y] = `${t.y}${t.unit}`;
     }
     return transformStyle;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  get rotationStyle(): any {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rotationStyle: any = {};
+
+    if (this.rotation) {
+      rotationStyle[TransformConsts.ROTATION] = `${this.rotation}deg`;
+    }
+    return rotationStyle;
   }
 
   get hoverables(): Hoverable[] {

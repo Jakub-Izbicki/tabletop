@@ -18,7 +18,8 @@ export interface Translate {
 
 export enum TransformConsts {
   TRANSFORM_X = "--transform-translate-x",
-  TRANSFORM_Y = "--transform-translate-y"
+  TRANSFORM_Y = "--transform-translate-y",
+  ROTATION = "--transform-rotate"
 }
 
 export interface DimensionsPx {

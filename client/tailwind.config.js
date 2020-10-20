@@ -3,11 +3,13 @@ module.exports = {
     extend: {
       height: {
         cardItem: `${5 * 0.88}em`,
+        cardItemShadow: `${5 * 0.78}em`,
         cardItemHalf: `${2.5 * 0.88}em`,
         deckBase: `${5 * 0.2}em`,
       },
       width: {
         cardItem: `${5 * 0.63}em`,
+        cardItemShadow: `${5 * 0.53}em`,
       },
       borderRadius: {
         cardItem: '0.25em',
@@ -25,15 +27,17 @@ module.exports = {
         '1.5em': '1.5em',
         deckBase: '0.7em',
         itemHover: '0.2em',
-        itemDrag: '0.4em'
+        itemDrag: '0.4em',
+        shadowCardHover: '1.7em',
+        shadowCardDrag: '1.7em',
       },
       boxShadow: {
         hoverTarget: '0 0 0.1em 0.05em rgba(255,255,255,0.75)',
         hoverTargetNoBottom: '0 -0.1em 0.1em 0.05em rgba(255,255,255,0.75)',
         deck: '0em 0.8em 0.2em -0.2em rgb(0 0 0)',
-        card: '0em 0.05em 0.05em 0em rgb(0 0 0)',
-        cardHover: '0em 0.3em 0.5em -0.2em rgb(0 0 0)',
-        cardDrag: '0em 0.6em 1em -0.3em rgb(0 0 0)'
+        card: '0em 0em 0.1em 0.25em rgb(0 0 0)',
+        cardHover: '0em 0.0em 0.4em 0.1em rgb(0 0 0)',
+        cardDrag: '0em 0em 0.8em 0.1em rgb(0 0 0)'
       },
       cursor: {
         grab: 'grab',
@@ -45,6 +49,9 @@ module.exports = {
       },
       zIndex: {
         'onTop': '999'
+      },
+      transitionProperty: {
+        'transform-shadow': 'transform, box-shadow',
       }
     },
   },
