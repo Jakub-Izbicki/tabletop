@@ -31,9 +31,13 @@ export default class HandCard extends BaseCard {
   public getHandCardOffset(): number {
     const handCards = EntityStore.getInstance(this.gameInstanceId).getHandCards();
     const index = handCards.findIndex(handCard => handCard.getId() === this.getId());
-    const position = index * HandCard.HAND_CARDS_SPACING;
+    const maxHandWidth = 7;
+    const spacing = handCards.length <= maxHandWidth ?
+        HandCard.HAND_CARDS_SPACING :
+        (HandCard.HAND_CARDS_SPACING * maxHandWidth / handCards.length);
+    const position = index * spacing;
 
-    const maxPosition = handCards.length * HandCard.HAND_CARDS_SPACING;
+    const maxPosition = (handCards.length - 1) * spacing;
 
     return position - maxPosition / 2;
   }
@@ -54,11 +58,16 @@ export default class HandCard extends BaseCard {
   }
 
   public animateMoveToHandPosition(): void {
-    this.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM})
+    this.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM});
+    this.setRotation(this.getHandCardOffset());
   }
 
   public setTranslate(translate: Translate): void {
-    super.setTranslate({...translate, x: translate.x + this.getHandCardOffset()});
+    super.setTranslate({
+      ...translate,
+      x: translate.x + this.getHandCardOffset(),
+      y: translate.y + Math.pow((Math.abs(this.getHandCardOffset()) / 10), 2)
+    });
   }
 
   public toCard(): Card {

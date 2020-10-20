@@ -103,6 +103,10 @@ export default abstract class Item extends Hoverable {
     }
   }
 
+  public setRotation(rotation: number) {
+    this.rotation = rotation;
+  }
+
   private setNonePointerEvents(isNone: boolean): void {
     this.setState(EntityStates.IS_NONE_POINTER_EVENTS, isNone);
   }
