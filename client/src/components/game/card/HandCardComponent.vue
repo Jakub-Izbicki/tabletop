@@ -34,8 +34,10 @@
                   card-flip-perspective"
            :class="[{'-translate-y-itemHover': isMouseOver && !isDragged},
                     {'-translate-y-itemDrag': isMouseOver && isDragged}]">
-        <div class="card-flip-container"
-             :class="{'card-face-down': !isFaceUp}">
+        <div class="card-flip-container
+                    transition-transforms"
+             :class="[{'card-face-down': !isFaceUp},
+                      {'duration-200': !isSkipAnimation}]">
           <img class="absolute
                       h-cardItem
                       w-cardItem
@@ -79,7 +81,7 @@
   import Hand from "@/domain/game/hoverable/Hand";
   import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
   import DeckCard from "@/domain/game/item/DeckCard";
-  import {EntityStates, TranslateUnit} from "@/domain/game/GameTypes";
+  import {TranslateUnit} from "@/domain/game/GameTypes";
 
   @Component
   export default class HandCardComponent extends BaseCardComponent<HandCard> {

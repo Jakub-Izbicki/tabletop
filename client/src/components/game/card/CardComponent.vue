@@ -37,7 +37,7 @@
                     h-cardItemShadow
                     w-cardItemShadow
                     rounded-cardItem
-                    card-flip-container-3d-only"
+                    card-flip-container"
              :class="[{'card-face-down': !isFaceUp},
                       {'duration-200': !isSkipAnimation},
                       {'shadow-card': !isMouseOver},
@@ -60,8 +60,10 @@
         <div class="h-cardItem
                     w-cardItem
                     card-flip-perspective">
-          <div class="card-flip-container"
-               :class="{'card-face-down': !isFaceUp}">
+          <div class="card-flip-container
+                      transition-transforms"
+               :class="[{'card-face-down': !isFaceUp},
+                        {'duration-200': !isSkipAnimation}]">
             <img class="absolute
                         h-cardItem w-cardItem
                         rounded-cardItem

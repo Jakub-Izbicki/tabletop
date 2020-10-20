@@ -209,11 +209,6 @@
   }
 
   .card-flip-container {
-    transition: transform 0.2s;
-    transform-style: preserve-3d;
-  }
-
-  .card-flip-container-3d-only {
     transform-style: preserve-3d;
   }
 

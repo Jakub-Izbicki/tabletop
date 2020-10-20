@@ -34,10 +34,13 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
                   card-flip-perspective"
            :class="[{'-translate-y-itemHover': isMouseOver && !isDragged},
                     {'-translate-y-itemDrag': isMouseOver && isDragged}]">
-        <div class="card-flip-container"
-             :class="{'card-face-down': !isFaceUp}">
+        <div class="card-flip-container
+                    transition-transforms"
+             :class="[{'card-face-down': !isFaceUp},
+                      {'duration-200': !isSkipAnimation}]">
           <div class="absolute
-                      h-cardItemHalf w-cardItem
+                      h-cardItemHalf
+                      w-cardItem
                       rounded-cardItem"
                :class="[{'pointer-events-auto': !isNonePointerEvents},
                         {'pointer-events-none': isNonePointerEvents},
