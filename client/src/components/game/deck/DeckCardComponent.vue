@@ -1,4 +1,3 @@
-import {TranslateUnit} from "@/domain/game/GameTypes";
 <template>
   <Moveable class="moveable
                    absolute
@@ -14,40 +13,55 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
             v-bind="moveable"
             @drag="onDeckCardDrag"
             @dragEnd="onDeckCardDragEnd">
-    <div :id="id"
-         class="pointer-events-none
-                h-cardItem
-                w-cardItem
-                rounded-cardItem
+    <div class="absolute
+                pointer-events-none
                 transform
-                -translate-x-1/2
-                -translate-y-1/2"
-         @mouseover.stop="onMouseOver"
-         @mouseout.stop="onMouseOut"
-         v-hotkey="keymap">
-      <div class="transform
+                h-0 w-0
+                transition-transform"
+         :class="[{'duration-200': !isSkipAnimation},
+                  {'-translate-y-itemHover': isMouseOver && !isDragged},
+                  {'-translate-y-itemDrag': isMouseOver && isDragged}]">
+      <div class="absolute
+                  pointer-events-none
+                  h-cardItemShadow
+                  w-cardItemShadow
+                  rounded-cardItem
+                  transform
                   transition-transform
-                  duration-200
-                  h-cardItem
-                  w-cardItem
+                  -translate-x-1/2
                   card-flip-perspective"
-           :class="[{'-translate-y-itemHover': isMouseOver && !isDragged},
-                    {'-translate-y-itemDrag': isMouseOver && isDragged}]">
+           :class="[{'duration-200': !isSkipAnimation},
+                    {'-translate-y-1/2': !isMouseOver},
+                    {'-translate-y-shadowCardHover': isMouseOver && !isDragged},
+                    {'-translate-y-shadowCardDrag': isMouseOver && isDragged}]"
+           :style="rotationStyle">
+        <div class="transition-transform-shadow
+                    h-cardItemShadow
+                    w-cardItemShadow
+                    rounded-cardItem
+                    card-flip-container"
+             :class="[{'card-face-down': !isFaceUp},
+                      {'duration-200': !isSkipAnimation},
+                      {'shadow-card': !isMouseOver},
+                      {'shadow-cardHover': isMouseOver && !isDragged},
+                      {'shadow-cardDrag': isMouseOver && isDragged}]">
+        </div>
+      </div>
+      <div class="h-cardItem
+                  w-cardItem
+                  transform
+                  -translate-x-1/2
+                  -translate-y-1/2
+                  rounded-cardItem
+                  card-flip-perspective"
+           :style="rotationStyle">
         <div class="card-flip-container
                     transition-transform"
              :class="[{'card-face-down': !isFaceUp},
                       {'duration-200': !isSkipAnimation}]">
-          <div class="absolute
-                      h-cardItemHalf
-                      w-cardItem
-                      rounded-cardItem"
-               :class="[{'pointer-events-auto': !isNonePointerEvents},
-                        {'pointer-events-none': isNonePointerEvents},
-                        {'transform translate-y-itemHover': isMouseOver && !isDragged},
-                        {'transform translate-y-itemDrag': isMouseOver && isDragged}]">
-          </div>
           <img class="absolute
-                      h-cardItem w-cardItem
+                      h-cardItem
+                      w-cardItem
                       rounded-cardItem
                       hidden-backface"
                :src="item.getImageUrl()">
@@ -62,21 +76,31 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
           </div>
           <div class="absolute
                       pointer-events-none
-                      top-0
                       h-cardItem w-cardItem
-                      rounded-cardItem
-                      transition-shadow
-                      duration-200"
-               :class="[{'shadow-cardHover': isMouseOver && !isDragged},
-                        {'shadow-cardDrag': isMouseOver && isDragged}]">
-            <div class="h-cardItem w-cardItem
-                        rounded-cardItem"
-                 :class="[{'bg-green-100': isHover},
-                          {'bg-opacity-25': isHover},
-                          {'shadow-hoverTarget': isHover || isMouseOver}]">
-            </div>
+                      rounded-cardItem"
+               :class="[{'bg-green-100': isHover},
+                        {'bg-opacity-25': isHover},
+                        {'shadow-hoverTarget': isHover || isMouseOver}]">
           </div>
         </div>
+      </div>
+    </div>
+    <div :id="id"
+         class="absolute
+                pointer-events-none
+                h-cardItem
+                w-cardItem
+                rounded-cardItem
+                transform
+                -translate-x-1/2
+                -translate-y-1/2"
+         :style="rotationStyle"
+         @mouseover.stop="onMouseOver"
+         @mouseout.stop="onMouseOut"
+         v-hotkey="keymap">
+      <div class="pointer-events-auto
+                  h-cardItemHalf
+                  w-cardItem">
       </div>
     </div>
   </Moveable>

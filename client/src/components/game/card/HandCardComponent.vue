@@ -15,6 +15,7 @@
             @drag="onItemDrag"
             @dragEnd="onItemDragEnd">
     <div class="absolute
+                pointer-events-none
                 transform
                 h-0 w-0
                 transition-transform"
@@ -22,7 +23,6 @@
                   {'-translate-y-itemHover': isMouseOver && !isDragged},
                   {'-translate-y-itemDrag': isMouseOver && isDragged}]">
       <div class="absolute
-                  pointer-events-none
                   h-cardItemShadow
                   w-cardItemShadow
                   rounded-cardItem
@@ -75,7 +75,6 @@
             <p class="text-cardBackLabel">Card Back</p>
           </div>
           <div class="absolute
-                      pointer-events-none
                       h-cardItem w-cardItem
                       rounded-cardItem"
                :class="[{'shadow-hoverTarget': isMouseOver}]">
