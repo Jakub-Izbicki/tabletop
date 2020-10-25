@@ -25,7 +25,8 @@
                 flex items-center justify-center
                 shadow-deck"
          @mouseover="onMouseOver"
-         @mouseout="onMouseOut">
+         @mouseout="onMouseOut"
+         v-hotkey="keymap">
       <div class="absolute
                   bottom-0
                   transform
@@ -93,6 +94,7 @@
   import DeckCardComponent from "@/components/game/deck/DeckCardComponent.vue";
   import {mixins} from "vue-class-component";
   import HoverableComponent from "@/components/game/interface/HoverableComponent";
+  import Hand from "@/domain/game/hoverable/Hand";
 
   @Component({
     components: {DeckCardComponent}
@@ -100,6 +102,18 @@
   export default class DeckComponent extends mixins<ItemComponent<Deck>, HoverableComponent<Deck>>(ItemComponent, HoverableComponent) {
 
     private draggableId = this.id + "-deck-draggable-img";
+
+    get hand(): Hand {
+      return this.store.getEntities().find(e => e instanceof Hand) as Hand;
+    }
+
+    get keymap() {
+      return {
+        '7': {
+          keyup: () => this.drawCards(7),
+        }
+      }
+    }
 
     get topCard(): DeckCard | null {
       return this.item.getCards().length ? this.item.getCards()[0] : null;
@@ -121,6 +135,30 @@
       if (!movableEvent.inputEvent.defaultPrevented) {
         this.onItemDragEnd();
       }
+    }
+
+    private drawCards(amount: number): void {
+      if (this.getMouseOver() || this.topCard?.isMouseOver()) {
+        const betweenDrawDelay = 20;
+        [...new Array(amount).keys()].map(i => i * betweenDrawDelay)
+        .forEach(delay => setTimeout(() => this.drawTopCard(), delay));
+      }
+    }
+
+    private drawTopCard(): void {
+      if (!this.topCard) {
+        return;
+      }
+
+      const handCard = this.topCard.toHandCard(this.hand);
+      this.item.remove(this.topCard.getId());
+      this.store.addItem(handCard);
+
+      this.$nextTick(() =>
+          this.store.getHandCards().forEach(hc => {
+            hc.setFaceUp(true);
+            hc.animateMoveToHandPosition();
+          }));
     }
   }
 

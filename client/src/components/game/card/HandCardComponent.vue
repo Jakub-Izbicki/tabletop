@@ -9,7 +9,7 @@
                      {'pointer-events-none': isNonePointerEvents},
                      {'cursor-grab': !isDragged},
                      {'cursor-grabbing': isDragged},
-                     {'z-onTop': isDragged}]"
+                     {'z-onTop': isDragged || isMovingAnimate}]"
             :style="transformStyle"
             v-bind="moveable"
             @drag="onHandCardDrag"
