@@ -46,7 +46,7 @@ module.exports = {
       },
       fontSize: {
         '2xs': '.60rem',
-        cardBackLabel: '.5em',
+        cardBackLabel: '2em',
         title: '8rem',
         subtitle: '3rem',
       },

@@ -60,7 +60,8 @@
                     bg-purple-400
                     flex justify-center items-center
                     border-cardBack border-black">
-          <p class="text-cardBackLabel">Card Back</p>
+          <p class="text-cardBackLabel
+                    font-wizard">w</p>
         </div>
       </div>
       <div class="pointer-events-none

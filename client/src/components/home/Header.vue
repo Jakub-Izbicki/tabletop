@@ -19,7 +19,7 @@
                   translate-y-subtitle
                   font-wizard
                   text-subtitle
-                  text-purple-600">a goldfish simulator</p>
+                  text-purple-400">a goldfish simulator</p>
     </div>
   </div>
 </template>

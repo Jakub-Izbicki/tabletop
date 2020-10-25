@@ -78,7 +78,8 @@
                         flex justify-center items-center
                         border-cardBack border-black
                         card-face-down hidden-backface">
-              <p class="text-cardBackLabel">Card Back</p>
+              <p class="text-cardBackLabel
+                        font-wizard">w</p>
             </div>
             <div class="absolute
                         pointer-events-none
