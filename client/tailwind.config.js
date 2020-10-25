@@ -30,6 +30,7 @@ module.exports = {
         itemDrag: '0.4em',
         shadowCardHover: '1.7em',
         shadowCardDrag: '1.7em',
+        subtitle: '4.5rem'
       },
       boxShadow: {
         hoverTarget: '0 0 0.1em 0.05em rgba(255,255,255,0.75)',
@@ -45,13 +46,21 @@ module.exports = {
       },
       fontSize: {
         '2xs': '.60rem',
-        cardBackLabel: '.5em'
+        cardBackLabel: '.5em',
+        title: '8rem',
+        subtitle: '3rem',
       },
       zIndex: {
         'onTop': '999'
       },
       transitionProperty: {
         'transform-shadow': 'transform, box-shadow',
+      },
+      fontFamily: {
+        'wizard': ['WizardFont', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+      },
+      inset: {
+        1: '100%'
       }
     },
   },

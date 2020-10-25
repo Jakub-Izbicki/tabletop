@@ -1,6 +1,7 @@
-import {ItemType} from "@/domain/game/GameTypes";
 <template>
-  <div class="flex
+  <div class="relative
+              flex
+              flex-col
               h-full w-full">
     <div class="h-full
                 flex-1
@@ -14,18 +15,20 @@ import {ItemType} from "@/domain/game/GameTypes";
       </RatioContainer>
     </div>
 
-<!--    <div class="absolute-->
-<!--                h-full-->
-<!--                pointer-events-none"-->
-<!--         v-if="items">-->
-<!--      <div v-for="(item, i) in items.getCards()"-->
-<!--           :key="item.getId()"-->
-<!--           class="w-64-->
-<!--                  text-2xs">-->
-<!--        <p>{{`${i + 1}.`}} <b>{{item.constructor.name}}</b> {{JSON.stringify(item, null, 3)}}</p>-->
-<!--        <p><br></p>-->
-<!--      </div>-->
-<!--    </div>-->
+    <Header></Header>
+
+    <!--    <div class="absolute-->
+    <!--                h-full-->
+    <!--                pointer-events-none"-->
+    <!--         v-if="items">-->
+    <!--      <div v-for="(item, i) in items.getCards()"-->
+    <!--           :key="item.getId()"-->
+    <!--           class="w-64-->
+    <!--                  text-2xs">-->
+    <!--        <p>{{`${i + 1}.`}} <b>{{item.constructor.name}}</b> {{JSON.stringify(item, null, 3)}}</p>-->
+    <!--        <p><br></p>-->
+    <!--      </div>-->
+    <!--    </div>-->
   </div>
 </template>
 
@@ -36,9 +39,10 @@ import {ItemType} from "@/domain/game/GameTypes";
   import {RatioConstants} from '@/domain/game/util/Ratio';
   import EntityStore from "@/domain/game/EntityStore";
   import HandComponent from "@/components/game/hand/HandComponent.vue";
+  import Header from "@/components/home/Header.vue";
 
   @Component({
-    components: {HandComponent: HandComponent, RatioContainer, ItemSpawner}
+    components: {Header, HandComponent: HandComponent, RatioContainer, ItemSpawner}
   })
   export default class Game extends Vue {
 

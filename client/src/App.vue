@@ -20,6 +20,13 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  @font-face {
+    font-family: 'WizardFont';
+    src: url('./assets/font/wizzta-vada-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   /*#nav {*/
   /*  padding: 30px;*/
 
