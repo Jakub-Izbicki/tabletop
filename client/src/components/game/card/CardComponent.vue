@@ -174,15 +174,37 @@
     }
 
     private rotateCounterClockwise(): void {
-      if (this.getMouseOver()) {
+      if (!this.getMouseOver()) {
+        return;
+      }
+
+      if (this.item.getRotation() <= -Rotation.R_1_2) {
+        this.rotateOnTimeout(Rotation.R_1_2, Rotation.R_1_4);
+      } else {
         this.item.setRotation(this.item.getRotation() - Rotation.R_1_4);
       }
     }
 
     private rotateClockwise(): void {
-      if (this.getMouseOver()) {
+      if (!this.getMouseOver()) {
+        return;
+      }
+
+      if (this.item.getRotation() >= Rotation.R_1_2) {
+        this.rotateOnTimeout(-Rotation.R_1_2, -Rotation.R_1_4);
+      } else {
         this.item.setRotation(this.item.getRotation() + Rotation.R_1_4);
       }
+    }
+
+    private rotateOnTimeout(current: number, next: number): void {
+      this.item.setIsSkipAnimation(true);
+      this.item.setRotation(current);
+
+      setTimeout(() => {
+        this.item.setIsSkipAnimation(false);
+        this.item.setRotation(next);
+      }, 10);
     }
   }
 </script>
