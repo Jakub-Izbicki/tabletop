@@ -1,3 +1,3 @@
 export enum Timeouts {
-  SMALL_MS = 100
+  SMALL_MS = 200
 }

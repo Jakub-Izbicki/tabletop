@@ -4,7 +4,7 @@
                    h-0 w-0
                    transform"
             :class="[{'transition-transform': isMovingAnimate},
-                     {'duration-100' : isMovingAnimate},
+                     {'duration-200' : isMovingAnimate},
                      {'pointer-events-none': isNonePointerEvents},
                      {'cursor-grab': !isDragged},
                      {'cursor-grabbing': isDragged},
