@@ -36,3 +36,10 @@ export enum EntityStates {
   IS_FACE_UP,
   IS_MOUSE_OVER
 }
+
+export enum Rotation {
+  R_0 = 0,
+  R_1_4 = 90,
+  R_1_2 = 180,
+  R_3_4 = -90
+}

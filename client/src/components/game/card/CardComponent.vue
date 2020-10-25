@@ -50,8 +50,10 @@
                   w-cardItem
                   rounded-cardItem
                   transform
+                  transition-transform
                   -translate-x-1/2
                   -translate-y-1/2"
+           :class="{'duration-200': !isSkipAnimation}"
            :style="rotationStyle"
            @mouseover="onMouseOver"
            @mouseout="onMouseOut"
@@ -100,10 +102,24 @@
   import Hand from "@/domain/game/hoverable/Hand";
   import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
   import DeckCard from "@/domain/game/item/DeckCard";
-  import {TranslateUnit} from "@/domain/game/GameTypes";
+  import {Rotation, TranslateUnit} from "@/domain/game/GameTypes";
 
   @Component
   export default class CardComponent extends mixins<BaseCardComponent<Card>, HoverableComponent<Card>>(BaseCardComponent, HoverableComponent) {
+
+    get keymap() {
+      return {
+        'f': {
+          keyup: this.flipCard
+        },
+        'q': {
+          keyup: this.rotateCounterClockwise
+        },
+        'e': {
+          keyup: this.rotateClockwise
+        }
+      }
+    }
 
     protected onDrop(target: Hoverable | undefined): void {
       if (target) {
@@ -151,8 +167,22 @@
       this.store.getDecks().find(deck => deck.getId() === newDeckCard.getDeckId())
       ?.pushOnTop(newDeckCard);
 
-      this.$nextTick(() =>
-          newDeckCard.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM}));
+      this.$nextTick(() => {
+        newDeckCard.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM});
+        newDeckCard.setRotation(Rotation.R_0);
+      });
+    }
+
+    private rotateCounterClockwise(): void {
+      if (this.getMouseOver()) {
+        this.item.setRotation(this.item.getRotation() - Rotation.R_1_4);
+      }
+    }
+
+    private rotateClockwise(): void {
+      if (this.getMouseOver()) {
+        this.item.setRotation(this.item.getRotation() + Rotation.R_1_4);
+      }
     }
   }
 </script>

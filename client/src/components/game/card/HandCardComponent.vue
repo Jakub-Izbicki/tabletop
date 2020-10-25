@@ -12,7 +12,7 @@
                      {'z-onTop': isDragged}]"
             :style="transformStyle"
             v-bind="moveable"
-            @drag="onItemDrag"
+            @drag="onHandCardDrag"
             @dragEnd="onItemDragEnd">
     <div class="absolute
                 pointer-events-none
@@ -50,10 +50,12 @@
       <div class="h-cardItem
                   w-cardItem
                   transform
+                  transition-transform
                   -translate-x-1/2
                   -translate-y-1/2
                   rounded-cardItem
                   card-flip-perspective"
+           :class="{'duration-200': !isSkipAnimation}"
            :style="rotationStyle">
         <div class="card-flip-container
                     transition-transform"
@@ -104,12 +106,21 @@
   import Hand from "@/domain/game/hoverable/Hand";
   import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
   import DeckCard from "@/domain/game/item/DeckCard";
-  import {TranslateUnit} from "@/domain/game/GameTypes";
+  import {Rotation, TranslateUnit} from "@/domain/game/GameTypes";
 
   @Component
   export default class HandCardComponent extends BaseCardComponent<HandCard> {
 
     protected triggerOnNoHoverable = true;
+
+    // eslint-disable-next-line
+    protected onHandCardDrag(movableEvent: any) {
+      if (!this.item.isDragged()) {
+        this.item.setRotation(Rotation.R_0);
+      }
+
+      this.onItemDrag(movableEvent);
+    }
 
     protected onDrop(target: Hoverable | undefined): void {
       if (!target) {

@@ -50,10 +50,12 @@
       <div class="h-cardItem
                   w-cardItem
                   transform
+                  transition-transform
                   -translate-x-1/2
                   -translate-y-1/2
                   rounded-cardItem
                   card-flip-perspective"
+           :class="{'duration-200': !isSkipAnimation}"
            :style="rotationStyle">
         <div class="card-flip-container
                     transition-transform"
