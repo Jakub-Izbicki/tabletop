@@ -4,8 +4,7 @@ import {TranslateUnit} from "@/domain/game/GameTypes";
   <div :id="hoverableAreaElId"
        class="h-cardItem
               flex flex-col justify-center items-center"
-       :class="[{'bg-green-400': !isHover},
-                {'bg-green-100': isHover}]">
+       :class="{'bg-purple-200': isHover}">
     <div :id="id"
          class="relative
                 h-0

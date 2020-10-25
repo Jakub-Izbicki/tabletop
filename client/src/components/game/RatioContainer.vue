@@ -2,7 +2,7 @@
   <div ref="container"
        class="relative
               h-full w-full
-              bg-red-200"
+              bg-blue-100"
        :style="[{'font-size': pixelSize},
                 {padding: `${paddingY} ${paddingX} ${paddingY} ${paddingX}`}]">
     <div class="absolute
@@ -10,8 +10,7 @@
                 flex items-center justify-center">
       <div :id="gameInstanceId"
            class="relative
-                  flex flex-col
-                  bg-green-300"
+                  flex flex-col"
            :style="[{width: `${dimensions.width}px`},
                     {height: `${dimensions.height}px`}]">
         <slot/>
