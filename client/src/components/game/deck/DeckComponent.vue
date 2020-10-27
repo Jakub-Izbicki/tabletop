@@ -87,101 +87,101 @@
 </template>
 
 <script lang="ts">
-  import {Component} from "vue-property-decorator";
-  import ItemComponent from "@/components/game/interface/ItemComponent";
-  import Deck from "@/domain/game/item/Deck";
-  import DeckCard from "@/domain/game/item/DeckCard";
-  import DeckCardComponent from "@/components/game/deck/DeckCardComponent.vue";
-  import {mixins} from "vue-class-component";
-  import HoverableComponent from "@/components/game/interface/HoverableComponent";
-  import Hand from "@/domain/game/hoverable/Hand";
+import {Component} from "vue-property-decorator";
+import ItemComponent from "@/components/game/interface/ItemComponent";
+import Deck from "@/domain/game/item/Deck";
+import DeckCard from "@/domain/game/item/DeckCard";
+import DeckCardComponent from "@/components/game/deck/DeckCardComponent.vue";
+import {mixins} from "vue-class-component";
+import HoverableComponent from "@/components/game/interface/HoverableComponent";
+import Hand from "@/domain/game/hoverable/Hand";
 
-  @Component({
-    components: {DeckCardComponent}
-  })
-  export default class DeckComponent extends mixins<ItemComponent<Deck>, HoverableComponent<Deck>>(ItemComponent, HoverableComponent) {
+@Component({
+  components: {DeckCardComponent}
+})
+export default class DeckComponent extends mixins<ItemComponent<Deck>, HoverableComponent<Deck>>(ItemComponent, HoverableComponent) {
 
-    private draggableId = this.id + "-deck-draggable-img";
+  private draggableId = this.id + "-deck-draggable-img";
 
-    get hand(): Hand {
-      return this.store.getEntities().find(e => e instanceof Hand) as Hand;
-    }
+  get hand(): Hand {
+    return this.store.getEntities().find(e => e instanceof Hand) as Hand;
+  }
 
-    get keymap() {
-      return {
-        '1': {
-          keyup: () => this.drawCards(1),
-        },
-        '7': {
-          keyup: () => this.drawCards(7),
-        }
+  get keymap() {
+    return {
+      '1': {
+        keyup: () => this.drawCards(1),
+      },
+      '7': {
+        keyup: () => this.drawCards(7),
       }
-    }
-
-    get topCard(): DeckCard | null {
-      return this.item.getCards().length ? this.item.getCards()[0] : null;
-    }
-
-    get secondCard(): DeckCard | null {
-      return this.item.getCards().length >= 2 ? this.item.getCards()[1] : null;
-    }
-
-    // eslint-disable-next-line
-    protected onDeckDrag(movableEvent: any) {
-      if (!movableEvent.inputEvent.defaultPrevented) {
-        this.onItemDrag(movableEvent);
-      }
-    }
-
-    // eslint-disable-next-line
-    protected onDeckDragEnd(movableEvent: any) {
-      if (!movableEvent.inputEvent.defaultPrevented) {
-        this.onItemDragEnd();
-      }
-    }
-
-    private drawCards(amount: number): void {
-      if (!this.getMouseOver() && !this.topCard?.isMouseOver()) {
-        return;
-      }
-
-      this.setNoPointerEvents(true);
-
-      const betweenDrawDelay = 100;
-      const delays = [...new Array(amount).keys()].map(i => i * betweenDrawDelay);
-
-      delays.forEach(delay => setTimeout(() => {
-        const isLastDraw = delays[delays.length - 1] === delay;
-
-        if (isLastDraw) {
-          this.setNoPointerEvents(false);
-        }
-        this.drawTopCard(isLastDraw);
-      }, delay));
-    }
-
-    private setNoPointerEvents(isNone: boolean): void {
-      this.item.setNonePointerEvents(isNone);
-      this.topCard?.setNonePointerEvents(isNone);
-    }
-
-    private drawTopCard(lastCardDrawn: boolean): void {
-      if (!this.topCard) {
-        return;
-      }
-
-      const handCard = this.topCard.toHandCard(this.hand);
-      this.item.remove(this.topCard.getId());
-      this.store.addItem(handCard);
-
-      this.$nextTick(() => {
-        handCard.setFaceUp(true);
-        this.store.getHandCards().forEach(hc => {
-          hc.animateMoveToHandPosition(lastCardDrawn);
-        });
-      });
     }
   }
+
+  get topCard(): DeckCard | null {
+    return this.item.getCards().length ? this.item.getCards()[0] : null;
+  }
+
+  get secondCard(): DeckCard | null {
+    return this.item.getCards().length >= 2 ? this.item.getCards()[1] : null;
+  }
+
+  // eslint-disable-next-line
+  protected onDeckDrag(movableEvent: any) {
+    if (!movableEvent.inputEvent.defaultPrevented) {
+      this.onItemDrag(movableEvent);
+    }
+  }
+
+  // eslint-disable-next-line
+  protected onDeckDragEnd(movableEvent: any) {
+    if (!movableEvent.inputEvent.defaultPrevented) {
+      this.onItemDragEnd();
+    }
+  }
+
+  private drawCards(amount: number): void {
+    if (!this.getMouseOver() && !this.topCard?.isMouseOver()) {
+      return;
+    }
+
+    this.setNoPointerEvents(true);
+
+    const betweenDrawDelay = 100;
+    const delays = [...new Array(amount).keys()].map(i => i * betweenDrawDelay);
+
+    delays.forEach(delay => setTimeout(() => {
+      const isLastDraw = delays[delays.length - 1] === delay;
+
+      if (isLastDraw) {
+        this.setNoPointerEvents(false);
+      }
+      this.drawTopCard(isLastDraw);
+    }, delay));
+  }
+
+  private setNoPointerEvents(isNone: boolean): void {
+    this.item.setNonePointerEvents(isNone);
+    this.topCard?.setNonePointerEvents(isNone);
+  }
+
+  private drawTopCard(lastCardDrawn: boolean): void {
+    if (!this.topCard) {
+      return;
+    }
+
+    const handCard = this.topCard.toHandCard(this.hand);
+    this.item.remove(this.topCard.getId());
+    this.store.addItem(handCard);
+
+    this.$nextTick(() => {
+      handCard.setFaceUp(true);
+      this.store.getHandCards().forEach(hc => {
+        hc.animateMoveToHandPosition(lastCardDrawn);
+      });
+    });
+  }
+}
 
 </script>
 

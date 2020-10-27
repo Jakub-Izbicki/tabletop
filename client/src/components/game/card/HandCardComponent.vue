@@ -101,78 +101,78 @@
 </template>
 
 <script lang="ts">
-  import {Component} from 'vue-property-decorator';
-  import HandCard from "@/domain/game/item/HandCard";
-  import Hoverable from "@/domain/game/interface/Hoverable";
-  import Hand from "@/domain/game/hoverable/Hand";
-  import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
-  import DeckCard from "@/domain/game/item/DeckCard";
-  import {Rotation, TranslateUnit} from "@/domain/game/GameTypes";
+import {Component} from 'vue-property-decorator';
+import HandCard from "@/domain/game/item/HandCard";
+import Hoverable from "@/domain/game/interface/Hoverable";
+import Hand from "@/domain/game/hoverable/Hand";
+import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
+import DeckCard from "@/domain/game/item/DeckCard";
+import {Rotation, TranslateUnit} from "@/domain/game/GameTypes";
 
-  @Component
-  export default class HandCardComponent extends BaseCardComponent<HandCard> {
+@Component
+export default class HandCardComponent extends BaseCardComponent<HandCard> {
 
-    protected triggerOnNoHoverable = true;
+  protected triggerOnNoHoverable = true;
 
-    // eslint-disable-next-line
-    protected onHandCardDrag(movableEvent: any) {
-      if (!this.item.isDragged()) {
-        this.item.setRotation(Rotation.R_0);
+  // eslint-disable-next-line
+  protected onHandCardDrag(movableEvent: any) {
+    if (!this.item.isDragged()) {
+      this.item.setRotation(Rotation.R_0);
+    }
+
+    this.onItemDrag(movableEvent);
+  }
+
+  protected onDrop(target: Hoverable | undefined): void {
+    if (!target) {
+      this.moveOntoBoard();
+    } else {
+      switch (target.constructor) {
+        case Hand:
+          this.onDropOnHand();
+          break;
+        case DeckCard:
+          this.onDropOnDeck(target as DeckCard);
+          break;
+        default:
+          throw `Invalid HandCardComponent.onDrop() invocation with target: ${JSON.stringify(target)}`;
       }
-
-      this.onItemDrag(movableEvent);
-    }
-
-    protected onDrop(target: Hoverable | undefined): void {
-      if (!target) {
-        this.moveOntoBoard();
-      } else {
-        switch (target.constructor) {
-          case Hand:
-            this.onDropOnHand();
-            break;
-          case DeckCard:
-            this.onDropOnDeck(target as DeckCard);
-            break;
-          default:
-            throw `Invalid HandCardComponent.onDrop() invocation with target: ${JSON.stringify(target)}`;
-        }
-      }
-    }
-
-    private onDropOnHand() {
-      this.moveToHand();
-    }
-
-    private moveToHand(): void {
-      this.item.animateMoveToHandPosition();
-    }
-
-    private moveOntoBoard() {
-      const card = this.item.toCard();
-      card.setIsSkipAnimation(true);
-      card.setDragged(true);
-
-      this.store.replaceEntity(this.item.getId(), card);
-      this.store.getHandCards().forEach(handCard => handCard.animateMoveToHandPosition());
-      setTimeout(() => {
-        card.setIsSkipAnimation(false);
-        card.setDragged(false);
-      }, 0);
-    }
-
-    private onDropOnDeck(currentDeckTopCard: DeckCard) {
-      const newDeckCard = this.item.toDeckCard(currentDeckTopCard);
-      this.store.removeEntity(this.id);
-      this.store.getDecks().find(deck => deck.getId() === newDeckCard.getDeckId())
-      ?.pushOnTop(newDeckCard);
-
-      this.$nextTick(() => {
-        newDeckCard.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM});
-        this.store.getHandCards().forEach(hc => hc.animateMoveToHandPosition());
-      });
     }
   }
+
+  private onDropOnHand() {
+    this.moveToHand();
+  }
+
+  private moveToHand(): void {
+    this.item.animateMoveToHandPosition();
+  }
+
+  private moveOntoBoard() {
+    const card = this.item.toCard();
+    card.setIsSkipAnimation(true);
+    card.setDragged(true);
+
+    this.store.replaceEntity(this.item.getId(), card);
+    this.store.getHandCards().forEach(handCard => handCard.animateMoveToHandPosition());
+    setTimeout(() => {
+      card.setIsSkipAnimation(false);
+      card.setDragged(false);
+    }, 0);
+  }
+
+  private onDropOnDeck(currentDeckTopCard: DeckCard) {
+    const newDeckCard = this.item.toDeckCard(currentDeckTopCard);
+    this.store.removeEntity(this.id);
+    this.store.getDecks().find(deck => deck.getId() === newDeckCard.getDeckId())
+    ?.pushOnTop(newDeckCard);
+
+    this.$nextTick(() => {
+      newDeckCard.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM});
+      this.store.getHandCards().forEach(hc => hc.animateMoveToHandPosition());
+    });
+  }
+}
 </script>
 
 <style scoped>

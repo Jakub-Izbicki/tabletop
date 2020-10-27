@@ -9,20 +9,20 @@
 </template>
 
 <script lang="ts">
-  import {Component, Prop, PropSync, Vue} from 'vue-property-decorator';
+import {Component, Prop, PropSync, Vue} from 'vue-property-decorator';
 
-  @Component
-  export default class HelloWorld extends Vue {
+@Component
+export default class HelloWorld extends Vue {
 
-    @Prop(String)
-    private readonly msg!: string;
+  @Prop(String)
+  private readonly msg!: string;
 
-    @PropSync('firstName', {type: String})
-    public syncedName!: string;
+  @PropSync('firstName', {type: String})
+  public syncedName!: string;
 
-    @PropSync('firstName2', {type: String})
-    public syncedName2!: string;
-  }
+  @PropSync('firstName2', {type: String})
+  public syncedName2!: string;
+}
 </script>
 
 <style scoped lang="scss">

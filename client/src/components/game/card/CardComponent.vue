@@ -95,119 +95,119 @@
 </template>
 
 <script lang="ts">
-  import {Component} from 'vue-property-decorator';
-  import Card from "@/domain/game/item/Card";
-  import {mixins} from "vue-class-component";
-  import HoverableComponent from "@/components/game/interface/HoverableComponent";
-  import Hoverable from "@/domain/game/interface/Hoverable";
-  import Hand from "@/domain/game/hoverable/Hand";
-  import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
-  import DeckCard from "@/domain/game/item/DeckCard";
-  import {Rotation, TranslateUnit} from "@/domain/game/GameTypes";
+import {Component} from 'vue-property-decorator';
+import Card from "@/domain/game/item/Card";
+import {mixins} from "vue-class-component";
+import HoverableComponent from "@/components/game/interface/HoverableComponent";
+import Hoverable from "@/domain/game/interface/Hoverable";
+import Hand from "@/domain/game/hoverable/Hand";
+import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
+import DeckCard from "@/domain/game/item/DeckCard";
+import {Rotation, TranslateUnit} from "@/domain/game/GameTypes";
 
-  @Component
-  export default class CardComponent extends mixins<BaseCardComponent<Card>, HoverableComponent<Card>>(BaseCardComponent, HoverableComponent) {
+@Component
+export default class CardComponent extends mixins<BaseCardComponent<Card>, HoverableComponent<Card>>(BaseCardComponent, HoverableComponent) {
 
-    get keymap() {
-      return {
-        'f': {
-          keyup: this.flipCard
-        },
-        'q': {
-          keyup: this.rotateCounterClockwise
-        },
-        'e': {
-          keyup: this.rotateClockwise
-        }
+  get keymap() {
+    return {
+      'f': {
+        keyup: this.flipCard
+      },
+      'q': {
+        keyup: this.rotateCounterClockwise
+      },
+      'e': {
+        keyup: this.rotateClockwise
       }
-    }
-
-    protected onDrop(target: Hoverable | undefined): void {
-      if (target) {
-        switch (target.constructor) {
-          case Card:
-            this.onDropOnCard(target as Card);
-            break;
-          case Hand:
-            this.onDropOnHand(target as Hand);
-            break;
-          case DeckCard:
-            this.onDropOnDeck(target as DeckCard);
-            break;
-        }
-      } else {
-        throw `Invalid CardComponent::onDrop invocation with target: ${JSON.stringify(target)}`;
-      }
-    }
-
-    private onDropOnCard(card: Card): void {
-      setTimeout(() => this.item.animateMoveItem(card.getTranslate()), 0);
-    }
-
-    private onDropOnHand(hand: Hand): void {
-      this.moveToHand(hand);
-    }
-
-    private onDropOnDeck(currentDeckTopCard: DeckCard): void {
-      this.moveToDeck(currentDeckTopCard);
-    }
-
-    private moveToHand(hand: Hand): void {
-      const handCard = this.item.toHandCard(hand);
-      this.store.replaceEntity(this.item.getId(), handCard);
-
-      // give vue time to render new HandCardComponent,
-      // and only then start moving hand cards to position
-      this.$nextTick(() =>
-          this.store.getHandCards().forEach(hc => hc.animateMoveToHandPosition()));
-    }
-
-    private moveToDeck(currentDeckTopCard: DeckCard): void {
-      const newDeckCard = this.item.toDeckCard(currentDeckTopCard);
-      this.store.removeEntity(this.id);
-      this.store.getDecks().find(deck => deck.getId() === newDeckCard.getDeckId())
-      ?.pushOnTop(newDeckCard);
-
-      this.$nextTick(() => {
-        newDeckCard.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM});
-        newDeckCard.setRotation(Rotation.R_0);
-      });
-    }
-
-    private rotateCounterClockwise(): void {
-      if (!this.getMouseOver()) {
-        return;
-      }
-
-      if (this.item.getRotation() <= -Rotation.R_1_2) {
-        this.rotateOnTimeout(Rotation.R_1_2, Rotation.R_1_4);
-      } else {
-        this.item.setRotation(this.item.getRotation() - Rotation.R_1_4);
-      }
-    }
-
-    private rotateClockwise(): void {
-      if (!this.getMouseOver()) {
-        return;
-      }
-
-      if (this.item.getRotation() >= Rotation.R_1_2) {
-        this.rotateOnTimeout(-Rotation.R_1_2, -Rotation.R_1_4);
-      } else {
-        this.item.setRotation(this.item.getRotation() + Rotation.R_1_4);
-      }
-    }
-
-    private rotateOnTimeout(current: number, next: number): void {
-      this.item.setIsSkipAnimation(true);
-      this.item.setRotation(current);
-
-      setTimeout(() => {
-        this.item.setIsSkipAnimation(false);
-        this.item.setRotation(next);
-      }, 10);
     }
   }
+
+  protected onDrop(target: Hoverable | undefined): void {
+    if (target) {
+      switch (target.constructor) {
+        case Card:
+          this.onDropOnCard(target as Card);
+          break;
+        case Hand:
+          this.onDropOnHand(target as Hand);
+          break;
+        case DeckCard:
+          this.onDropOnDeck(target as DeckCard);
+          break;
+      }
+    } else {
+      throw `Invalid CardComponent::onDrop invocation with target: ${JSON.stringify(target)}`;
+    }
+  }
+
+  private onDropOnCard(card: Card): void {
+    setTimeout(() => this.item.animateMoveItem(card.getTranslate()), 0);
+  }
+
+  private onDropOnHand(hand: Hand): void {
+    this.moveToHand(hand);
+  }
+
+  private onDropOnDeck(currentDeckTopCard: DeckCard): void {
+    this.moveToDeck(currentDeckTopCard);
+  }
+
+  private moveToHand(hand: Hand): void {
+    const handCard = this.item.toHandCard(hand);
+    this.store.replaceEntity(this.item.getId(), handCard);
+
+    // give vue time to render new HandCardComponent,
+    // and only then start moving hand cards to position
+    this.$nextTick(() =>
+        this.store.getHandCards().forEach(hc => hc.animateMoveToHandPosition()));
+  }
+
+  private moveToDeck(currentDeckTopCard: DeckCard): void {
+    const newDeckCard = this.item.toDeckCard(currentDeckTopCard);
+    this.store.removeEntity(this.id);
+    this.store.getDecks().find(deck => deck.getId() === newDeckCard.getDeckId())
+    ?.pushOnTop(newDeckCard);
+
+    this.$nextTick(() => {
+      newDeckCard.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM});
+      newDeckCard.setRotation(Rotation.R_0);
+    });
+  }
+
+  private rotateCounterClockwise(): void {
+    if (!this.getMouseOver()) {
+      return;
+    }
+
+    if (this.item.getRotation() <= -Rotation.R_1_2) {
+      this.rotateOnTimeout(Rotation.R_1_2, Rotation.R_1_4);
+    } else {
+      this.item.setRotation(this.item.getRotation() - Rotation.R_1_4);
+    }
+  }
+
+  private rotateClockwise(): void {
+    if (!this.getMouseOver()) {
+      return;
+    }
+
+    if (this.item.getRotation() >= Rotation.R_1_2) {
+      this.rotateOnTimeout(-Rotation.R_1_2, -Rotation.R_1_4);
+    } else {
+      this.item.setRotation(this.item.getRotation() + Rotation.R_1_4);
+    }
+  }
+
+  private rotateOnTimeout(current: number, next: number): void {
+    this.item.setIsSkipAnimation(true);
+    this.item.setRotation(current);
+
+    setTimeout(() => {
+      this.item.setIsSkipAnimation(false);
+      this.item.setRotation(next);
+    }, 10);
+  }
+}
 </script>
 
 <style scoped>

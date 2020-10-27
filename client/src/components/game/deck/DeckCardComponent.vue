@@ -110,85 +110,85 @@
 </template>
 
 <script lang="ts">
-  import {mixins} from "vue-class-component";
-  import BaseCardComponent from "../interface/BaseCardComponent";
-  import HoverableComponent from "../interface/HoverableComponent";
-  import {Component, Prop} from "vue-property-decorator";
-  import DeckCard from "@/domain/game/item/DeckCard";
-  import Hoverable from "@/domain/game/interface/Hoverable";
-  import Deck from "@/domain/game/item/Deck";
-  import {TranslateUnit} from "@/domain/game/GameTypes";
-  import Hand from "@/domain/game/hoverable/Hand";
+import {mixins} from "vue-class-component";
+import BaseCardComponent from "../interface/BaseCardComponent";
+import HoverableComponent from "../interface/HoverableComponent";
+import {Component, Prop} from "vue-property-decorator";
+import DeckCard from "@/domain/game/item/DeckCard";
+import Hoverable from "@/domain/game/interface/Hoverable";
+import Deck from "@/domain/game/item/Deck";
+import {TranslateUnit} from "@/domain/game/GameTypes";
+import Hand from "@/domain/game/hoverable/Hand";
 
-  @Component
-  export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard>, HoverableComponent<DeckCard>>(BaseCardComponent, HoverableComponent) {
+@Component
+export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard>, HoverableComponent<DeckCard>>(BaseCardComponent, HoverableComponent) {
 
-    @Prop({type: String, required: true})
-    private readonly deckId!: string;
+  @Prop({type: String, required: true})
+  private readonly deckId!: string;
 
-    protected triggerOnNoHoverable = true;
+  protected triggerOnNoHoverable = true;
 
-    // eslint-disable-next-line
-    protected onDeckCardDrag(movableEvent: any) {
-      movableEvent.inputEvent.preventDefault();
-      this.onItemDrag(movableEvent);
-    }
+  // eslint-disable-next-line
+  protected onDeckCardDrag(movableEvent: any) {
+    movableEvent.inputEvent.preventDefault();
+    this.onItemDrag(movableEvent);
+  }
 
-    // eslint-disable-next-line
-    protected onDeckCardDragEnd(movableEvent: any) {
-      movableEvent.inputEvent.preventDefault();
-      this.onItemDragEnd();
-    }
+  // eslint-disable-next-line
+  protected onDeckCardDragEnd(movableEvent: any) {
+    movableEvent.inputEvent.preventDefault();
+    this.onItemDragEnd();
+  }
 
-    protected onDrop(target: Hoverable | undefined): void {
-      if (!target) {
-        this.moveOntoBoard();
-      } else {
-        switch (target.constructor) {
-          case Deck:
-            this.onDropOnDeck(target as Deck);
-            break;
-          case Hand:
-            this.onDropOnHand(target as Hand);
-            break;
-          default:
-            throw `Invalid DeckCardComponent.onDrop() invocation with target: ${JSON.stringify(target)}`;
-        }
+  protected onDrop(target: Hoverable | undefined): void {
+    if (!target) {
+      this.moveOntoBoard();
+    } else {
+      switch (target.constructor) {
+        case Deck:
+          this.onDropOnDeck(target as Deck);
+          break;
+        case Hand:
+          this.onDropOnHand(target as Hand);
+          break;
+        default:
+          throw `Invalid DeckCardComponent.onDrop() invocation with target: ${JSON.stringify(target)}`;
       }
-    }
-
-    private onDropOnDeck(deck: Deck): void {
-      if (deck.getId() === this.item.getDeckId()) {
-        this.animateMoveToOwnDeck();
-      }
-    }
-
-    private moveOntoBoard(): void {
-      const card = this.item.toCard();
-      card.setIsSkipAnimation(true);
-      card.setDragged(true);
-
-      this.store.getDecks().find(deck => deck.getId() === this.deckId)?.remove(this.id);
-      this.store.addItem(card);
-      setTimeout(() => {
-        card.setIsSkipAnimation(false);
-        card.setDragged(false);
-      }, 0);
-    }
-
-    private animateMoveToOwnDeck() {
-      this.item.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM});
-    }
-
-    private onDropOnHand(hand: Hand): void {
-      const handCard = this.item.toHandCard(hand);
-      this.store.getDecks().find(deck => deck.getId() === this.deckId)?.remove(this.id);
-      this.store.addItem(handCard);
-
-      this.$nextTick(() =>
-          this.store.getHandCards().forEach(hc => hc.animateMoveToHandPosition()));
     }
   }
+
+  private onDropOnDeck(deck: Deck): void {
+    if (deck.getId() === this.item.getDeckId()) {
+      this.animateMoveToOwnDeck();
+    }
+  }
+
+  private moveOntoBoard(): void {
+    const card = this.item.toCard();
+    card.setIsSkipAnimation(true);
+    card.setDragged(true);
+
+    this.store.getDecks().find(deck => deck.getId() === this.deckId)?.remove(this.id);
+    this.store.addItem(card);
+    setTimeout(() => {
+      card.setIsSkipAnimation(false);
+      card.setDragged(false);
+    }, 0);
+  }
+
+  private animateMoveToOwnDeck() {
+    this.item.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM});
+  }
+
+  private onDropOnHand(hand: Hand): void {
+    const handCard = this.item.toHandCard(hand);
+    this.store.getDecks().find(deck => deck.getId() === this.deckId)?.remove(this.id);
+    this.store.addItem(handCard);
+
+    this.$nextTick(() =>
+        this.store.getHandCards().forEach(hc => hc.animateMoveToHandPosition()));
+  }
+}
 
 </script>
 

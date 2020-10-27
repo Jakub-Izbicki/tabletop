@@ -33,27 +33,27 @@
 </template>
 
 <script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator';
-  import ItemSpawner from "@/components/game/ItemSpawner.vue";
-  import RatioContainer from "@/components/game/RatioContainer.vue";
-  import {RatioConstants} from '@/domain/game/util/Ratio';
-  import EntityStore from "@/domain/game/EntityStore";
-  import HandComponent from "@/components/game/hand/HandComponent.vue";
-  import Header from "@/components/home/Header.vue";
+import {Component, Vue} from 'vue-property-decorator';
+import ItemSpawner from "@/components/game/ItemSpawner.vue";
+import RatioContainer from "@/components/game/RatioContainer.vue";
+import {RatioConstants} from '@/domain/game/util/Ratio';
+import EntityStore from "@/domain/game/EntityStore";
+import HandComponent from "@/components/game/hand/HandComponent.vue";
+import Header from "@/components/home/Header.vue";
 
-  @Component({
-    components: {Header, HandComponent: HandComponent, RatioContainer, ItemSpawner}
-  })
-  export default class Game extends Vue {
+@Component({
+  components: {Header, HandComponent: HandComponent, RatioContainer, ItemSpawner}
+})
+export default class Game extends Vue {
 
-    private containerRatio = RatioConstants.RATIO_16_9;
+  private containerRatio = RatioConstants.RATIO_16_9;
 
-    private gameInstanceId = "game-instance-main";
+  private gameInstanceId = "game-instance-main";
 
-    private store: EntityStore = EntityStore.getInstance(this.gameInstanceId);
+  private store: EntityStore = EntityStore.getInstance(this.gameInstanceId);
 
-    // get items(): Deck {
-    //   return this.store.getEntities().find(e => e instanceof Deck) as Deck;
-    // }
-  }
+  // get items(): Deck {
+  //   return this.store.getEntities().find(e => e instanceof Deck) as Deck;
+  // }
+}
 </script>

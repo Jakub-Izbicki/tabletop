@@ -10,33 +10,33 @@
 </template>
 
 <style lang="scss">
-  html, body, #app {
-    height: 100%;
-  }
+html, body, #app {
+  height: 100%;
+}
 
-  #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  @font-face {
-    font-family: 'WizardFont';
-    src: url('./assets/font/wizzta-vada-webfont.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-  }
+@font-face {
+  font-family: 'WizardFont';
+  src: url('./assets/font/wizzta-vada-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
 
-  /*#nav {*/
-  /*  padding: 30px;*/
+/*#nav {*/
+/*  padding: 30px;*/
 
-  /*  a {*/
-  /*    font-weight: bold;*/
-  /*    color: #2c3e50;*/
+/*  a {*/
+/*    font-weight: bold;*/
+/*    color: #2c3e50;*/
 
-  /*    &.router-link-exact-active {*/
-  /*      color: #42b983;*/
-  /*    }*/
-  /*  }*/
-  /*}*/
+/*    &.router-link-exact-active {*/
+/*      color: #42b983;*/
+/*    }*/
+/*  }*/
+/*}*/
 </style>
