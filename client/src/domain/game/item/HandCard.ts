@@ -57,8 +57,8 @@ export default class HandCard extends BaseCard {
     this.setTranslate({x: 0, y: 0, unit: TranslateUnit.EM});
   }
 
-  public animateMoveToHandPosition(): void {
-    this.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM});
+  public animateMoveToHandPosition(resetAnimateOnEnd = true): void {
+    this.animateMoveItem({x: 0, y: 0, unit: TranslateUnit.EM}, resetAnimateOnEnd);
     this.setRotation(this.getHandCardOffset());
   }
 

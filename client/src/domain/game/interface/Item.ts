@@ -37,14 +37,16 @@ export default abstract class Item extends Hoverable {
     this.setTranslate(position);
   }
 
-  public animateMoveItem(position: Translate): void {
+  public animateMoveItem(position: Translate, resetAnimateOnEnd = true): void {
     this.setNonePointerEvents(true);
     this.setIsMovingAnimate(true);
     this.setTranslate(position);
 
     setTimeout(() => {
-      this.setNonePointerEvents(false);
-      this.setIsMovingAnimate(false);
+      if (resetAnimateOnEnd) {
+        this.setNonePointerEvents(false);
+        this.setIsMovingAnimate(false);
+      }
     }, Timeouts.SMALL_MS.valueOf());
   }
 
@@ -107,7 +109,7 @@ export default abstract class Item extends Hoverable {
     this.rotation = rotation;
   }
 
-  private setNonePointerEvents(isNone: boolean): void {
+  public setNonePointerEvents(isNone: boolean): void {
     this.setState(EntityStates.IS_NONE_POINTER_EVENTS, isNone);
   }
 

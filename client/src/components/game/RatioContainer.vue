@@ -23,11 +23,9 @@
   import {Component, Prop, Vue} from "vue-property-decorator";
   import Ratio, {RatioConstants} from "@/domain/game/util/Ratio";
   import {DimensionsPx, TranslateUnit} from "@/domain/game/GameTypes";
-  import Card from "@/domain/game/item/Card";
   import EntityStore from "@/domain/game/EntityStore";
   import {v4 as uuid4} from 'uuid';
   import RelativeFontSize from "@/domain/game/util/RelativeFontSize";
-  import HandCard from "@/domain/game/item/HandCard";
   import Deck from "@/domain/game/item/Deck";
   import DeckCard from "@/domain/game/item/DeckCard";
 

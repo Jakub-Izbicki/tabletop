@@ -109,6 +109,9 @@
 
     get keymap() {
       return {
+        '1': {
+          keyup: () => this.drawCards(1),
+        },
         '7': {
           keyup: () => this.drawCards(7),
         }
@@ -138,14 +141,31 @@
     }
 
     private drawCards(amount: number): void {
-      if (this.getMouseOver() || this.topCard?.isMouseOver()) {
-        const betweenDrawDelay = 20;
-        [...new Array(amount).keys()].map(i => i * betweenDrawDelay)
-        .forEach(delay => setTimeout(() => this.drawTopCard(), delay));
+      if (!this.getMouseOver() && !this.topCard?.isMouseOver()) {
+        return;
       }
+
+      this.setNoPointerEvents(true);
+
+      const betweenDrawDelay = 100;
+      const delays = [...new Array(amount).keys()].map(i => i * betweenDrawDelay);
+
+      delays.forEach(delay => setTimeout(() => {
+        const isLastDraw = delays[delays.length - 1] === delay;
+
+        if (isLastDraw) {
+          this.setNoPointerEvents(false);
+        }
+        this.drawTopCard(isLastDraw);
+      }, delay));
     }
 
-    private drawTopCard(): void {
+    private setNoPointerEvents(isNone: boolean): void {
+      this.item.setNonePointerEvents(isNone);
+      this.topCard?.setNonePointerEvents(isNone);
+    }
+
+    private drawTopCard(lastCardDrawn: boolean): void {
       if (!this.topCard) {
         return;
       }
@@ -154,22 +174,23 @@
       this.item.remove(this.topCard.getId());
       this.store.addItem(handCard);
 
-      this.$nextTick(() =>
-          this.store.getHandCards().forEach(hc => {
-            hc.setFaceUp(true);
-            hc.animateMoveToHandPosition();
-          }));
+      this.$nextTick(() => {
+        handCard.setFaceUp(true);
+        this.store.getHandCards().forEach(hc => {
+          hc.animateMoveToHandPosition(lastCardDrawn);
+        });
+      });
     }
   }
 
 </script>
 
 <style scoped>
-  .deck-base {
-    transform: rotateX(-8deg);
-  }
+.deck-base {
+  transform: rotateX(-8deg);
+}
 
-  .deck-base-perspective {
-    perspective: 0.8em;
-  }
+.deck-base-perspective {
+  perspective: 0.8em;
+}
 </style>
