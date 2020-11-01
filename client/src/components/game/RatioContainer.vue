@@ -1,20 +1,18 @@
 <template>
   <div ref="container"
-       class="relative
-              h-full w-full
-              bg-blue-100"
-       :style="[{'font-size': pixelSize},
-                {padding: `${paddingY} ${paddingX} ${paddingY} ${paddingX}`}]">
-    <div class="absolute
-                top-0 bottom-0 left-0 right-0
-                flex items-center justify-center">
-      <div :id="gameInstanceId"
-           class="relative
-                  flex flex-col"
-           :style="[{width: `${dimensions.width}px`},
-                    {height: `${dimensions.height}px`}]">
-        <slot/>
-      </div>
+       class="h-full w-full bg-blue-100">
+      <div class="absolute
+                  top-0 bottom-0 left-0 right-0
+                  flex items-center justify-center">
+        <div :id="gameInstanceId"
+             class="relative
+                    flex flex-col"
+             :style="[{width: `${dimensions.width}px`},
+                      {height: `${dimensions.height}px`},
+                      {padding: `${paddingY} ${paddingX} ${paddingY} ${paddingX}`},
+                      {'font-size': pixelSize}]">
+          <slot/>
+        </div>
     </div>
   </div>
 </template>
@@ -28,6 +26,7 @@ import {v4 as uuid4} from 'uuid';
 import RelativeFontSize from "@/domain/game/util/RelativeFontSize";
 import Deck from "@/domain/game/item/Deck";
 import DeckCard from "@/domain/game/item/DeckCard";
+import debounce from "lodash.debounce";
 
 @Component
 export default class RatioContainer extends Vue {
@@ -156,12 +155,13 @@ export default class RatioContainer extends Vue {
 
   mounted() {
     /* eslint-disable */
+    const resizeRatioContainer = debounce(wrapper => {
+        this.setDimensions(wrapper.contentRect);
+    }, 200);
+
     // @ts-ignore
     this.observer = new ResizeObserver(singletonArray => {
-      // @ts-ignore
-      singletonArray.forEach(wrapper => {
-        this.setDimensions(wrapper.contentRect);
-      })
+      singletonArray.forEach(resizeRatioContainer);
     });
 
     // @ts-ignore
@@ -178,11 +178,12 @@ export default class RatioContainer extends Vue {
   }
 
   get paddingX(): string {
-    return `${RelativeFontSize.DEFAULT.valueOf() * this.width / 15}px`;
+    // return `${RelativeFontSize.DEFAULT.valueOf() * this.width / 15}px`;
+    return "0px";
   }
 
   get paddingY(): string {
-    return `${RelativeFontSize.DEFAULT.valueOf() * this.width / 13}px`;
+    return `${RelativeFontSize.DEFAULT.valueOf() * this.width / 45}px`;
   }
 
   get dimensions(): DimensionsPx {

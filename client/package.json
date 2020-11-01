@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "uuid": "^8.3.0",
     "v-hotkey": "^0.8.0",
@@ -21,6 +22,7 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.throttle": "^4.1.6",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",

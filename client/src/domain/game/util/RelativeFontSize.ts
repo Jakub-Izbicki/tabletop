@@ -4,7 +4,7 @@ export default class RelativeFontSize {
 
   public static DEFAULT = 1;
 
-  private static MULTIPLIER = 30;
+  private static MULTIPLIER = 40;
 
   public static getPixelSize(containerWidth: number): number {
     return this.DEFAULT * containerWidth / this.MULTIPLIER;
