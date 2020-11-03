@@ -1,25 +1,26 @@
 <template>
   <div class="absolute
-                pointer-events-none
-                flex
-                justify-center
-                w-full">
+              pointer-events-none
+              flex
+              justify-center
+              w-full">
     <div class="relative
-                  flex
-                  flex-row
-                  items-centers
-                  justify-center">
+                flex
+                flex-row
+                items-centers
+                justify-center">
       <p class="font-wizard
-                  text-title">Cardwizard</p>
+                text-title
+                ">Cardwizard</p>
       <p class="absolute
-                  left-1
-                  w-full
-                  mx-6
-                  transform
-                  translate-y-subtitle
-                  font-wizard
-                  text-subtitle
-                  text-purple-400">a goldfish simulator</p>
+                left-1
+                w-full
+                mx-3
+                transform
+                translate-y-subtitle
+                font-wizard
+                text-subtitle
+                text-purple-400">a goldfish simulator</p>
     </div>
   </div>
 </template>

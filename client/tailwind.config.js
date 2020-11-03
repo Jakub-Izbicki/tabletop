@@ -30,7 +30,7 @@ module.exports = {
         itemDrag: '0.4em',
         shadowCardHover: '1.7em',
         shadowCardDrag: '1.7em',
-        subtitle: '4.5rem'
+        subtitle: '2.25rem'
       },
       boxShadow: {
         hoverTarget: '0 0 0.1em 0.05em rgba(255,255,255,0.75)',
@@ -47,8 +47,8 @@ module.exports = {
       fontSize: {
         '2xs': '.60rem',
         cardBackLabel: '2em',
-        title: '8rem',
-        subtitle: '3rem',
+        title: '4rem',
+        subtitle: '1.5rem',
       },
       zIndex: {
         'onTop': '999'
