@@ -31,11 +31,9 @@ export default class ItemComponent<T extends Item> extends Vue {
   };
 
   private readonly hover = throttle(() => {
-    if (this.item.isDragged()) {
-      this.onHover();
-      this.onHoverLeave();
-    }
-  }, 16);
+    this.onHover();
+    this.onHoverLeave();
+  }, 16, {trailing: false});
 
   protected triggerOnNoHoverable = false;
 
@@ -149,7 +147,6 @@ export default class ItemComponent<T extends Item> extends Vue {
   private onDragEnd() {
     if (this.currentHoverable) {
       this.onDrop(this.currentHoverable);
-      this.currentHoverable = null;
     } else if (this.triggerOnNoHoverable) {
       this.onDropNoTarget();
     }
