@@ -9,9 +9,16 @@
                 flex-row
                 items-centers
                 justify-center">
-      <p class="font-wizard
+      <p class="font-wizards
                 text-title
-                ">Cardwizard</p>
+                ">card</p>
+      <p class="font-wizard
+                text-titleLetter
+                -my-5
+                ">w</p>
+      <p class="font-wizards
+                text-title
+                ">izard</p>
       <p class="absolute
                 left-1
                 w-full

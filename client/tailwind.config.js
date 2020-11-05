@@ -6,10 +6,12 @@ module.exports = {
         cardItemShadow: `${5 * 0.78}em`,
         cardItemHalf: `${2.5 * 0.88}em`,
         deckBase: `${5 * 0.2}em`,
+        lifecounter: '1.5em',
       },
       width: {
         cardItem: `${5 * 0.63}em`,
         cardItemShadow: `${5 * 0.53}em`,
+        lifecounter: '1.5em',
       },
       borderRadius: {
         cardItem: '0.25em',
@@ -30,7 +32,8 @@ module.exports = {
         itemDrag: '0.4em',
         shadowCardHover: '1.7em',
         shadowCardDrag: '1.7em',
-        subtitle: '2.25rem'
+        subtitle: '0.75rem',
+        lifecounterIconYOffset: '0.17em'
       },
       boxShadow: {
         hoverTarget: '0 0 0.1em 0.05em rgba(255,255,255,0.75)',
@@ -47,8 +50,11 @@ module.exports = {
       fontSize: {
         '2xs': '.60rem',
         cardBackLabel: '2em',
-        title: '4rem',
+        title: '2rem',
+        titleLetter: '4rem',
         subtitle: '1.5rem',
+        lifecounterIcon: '1.5em',
+        lifecounterHP: '1em'
       },
       zIndex: {
         'onTop': '999'

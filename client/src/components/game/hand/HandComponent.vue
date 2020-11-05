@@ -1,5 +1,3 @@
-import {EntityStates} from "@/domain/game/GameTypes";
-import {TranslateUnit} from "@/domain/game/GameTypes";
 <template>
   <div :id="hoverableAreaElId"
        class="h-cardItem
