@@ -130,7 +130,8 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
 
   private draggableId = this.id + "-deck-draggable-img";
 
-  get hand(): Hand {
+  get ownHand(): Hand {
+    // todo: change implementation when implementing online multiplayer
     return this.store.getEntities().find(e => e instanceof Hand) as Hand;
   }
 
@@ -201,6 +202,8 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
     }
 
     this.setNoPointerEvents(true);
+    this.setIsMouseOver(false);
+    this.setIsDragged(false);
 
     if (amount > this.deckSize) {
       amount = this.deckSize;
@@ -224,12 +227,22 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
     this.topCard?.setNonePointerEvents(isNone);
   }
 
+  private setIsMouseOver(isOver: boolean): void {
+    this.item.setMouseOver(isOver);
+    this.topCard?.setMouseOver(isOver);
+  }
+
+  private setIsDragged(isDragged: boolean): void {
+    this.item.setDragged(isDragged);
+    this.topCard?.setDragged(isDragged);
+  }
+
   private drawTopCard(lastCardDrawn: boolean): void {
     if (!this.topCard) {
       return;
     }
 
-    const handCard = this.topCard.toHandCard(this.hand);
+    const handCard = this.topCard.toHandCard(this.ownHand);
     this.item.remove(this.topCard.getId());
     if (!this.deckSize) {
       this.store.removeEntity(this.id);

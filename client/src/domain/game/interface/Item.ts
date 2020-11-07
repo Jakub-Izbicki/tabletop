@@ -69,6 +69,9 @@ export default abstract class Item extends Hoverable {
   public isMouseOver(): boolean {
     return this.states.includes(EntityStates.IS_MOUSE_OVER);
   }
+  public setMouseOver(isMouseOver: boolean): void {
+    this.setState(EntityStates.IS_MOUSE_OVER, isMouseOver);
+  }
 
   public setDragged(isDragged: boolean): void {
     this.setState(EntityStates.IS_DRAGGED, isDragged);

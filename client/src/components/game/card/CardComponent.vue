@@ -118,8 +118,16 @@ export default class CardComponent extends mixins<BaseCardComponent<Card>, Hover
       },
       'e': {
         keyup: this.rotateClockwise
+      },
+      '1': {
+        keyup: this.moveToOwnHand
       }
     }
+  }
+
+  get ownHand(): Hand {
+    // todo: change implementation when implementing online multiplayer
+    return this.store.getEntities().find(e => e instanceof Hand) as Hand;
   }
 
   protected onDrop(target: Hoverable | undefined): void {
@@ -150,6 +158,17 @@ export default class CardComponent extends mixins<BaseCardComponent<Card>, Hover
 
   private onDropOnDeck(currentDeckTopCard: DeckCard): void {
     this.moveToDeck(currentDeckTopCard);
+  }
+
+  private moveToOwnHand(): void {
+    if (!this.getMouseOver()) {
+      return;
+    }
+
+    const hand = this.store.getEntities().find(e => e instanceof Hand);
+    if (hand) {
+      this.moveToHand(hand as Hand)
+    }
   }
 
   private moveToHand(hand: Hand): void {
