@@ -78,6 +78,20 @@
                     font-wizard">w</p>
         </div>
       </div>
+      <div v-if="!secondCard"
+           class="absolute
+                  top-0
+                  h-cardItem w-cardItem
+                  rounded-cardItem">
+        <div class="absolute
+                    h-cardItem w-cardItem
+                    rounded-cardItem
+                    bg-teal-200
+                    flex justify-center items-center
+                    border-deckEmpty border-black">
+          <p class="text-deckEmptyCard">empty</p>
+        </div>
+      </div>
       <div class="pointer-events-none
                   absolute
                   top-0

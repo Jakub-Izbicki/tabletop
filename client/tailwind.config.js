@@ -18,6 +18,7 @@ module.exports = {
       },
       borderWidth: {
         cardBack: '.1em',
+        deckEmpty: '.01em',
       },
       rotate: {
         '0': '0deg',
@@ -51,6 +52,7 @@ module.exports = {
       fontSize: {
         '2xs': '.60rem',
         cardBackLabel: '2em',
+        deckEmptyCard: '0.3em',
         title: '2rem',
         titleLetter: '4rem',
         subtitle: '1.5rem',
