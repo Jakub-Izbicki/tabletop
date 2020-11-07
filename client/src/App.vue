@@ -22,4 +22,11 @@ html, body, #app {
   font-weight: normal;
   font-style: normal;
 }
+
+img.emoji {
+  height: 0.9em;
+  width: 0.9em;
+  margin: 0.25em 0.05em 0 0.1em;
+  vertical-align: -0.1em;
+}
 </style>

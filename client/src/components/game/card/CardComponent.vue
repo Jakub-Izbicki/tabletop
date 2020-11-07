@@ -167,7 +167,7 @@ export default class CardComponent extends mixins<BaseCardComponent<Card>, Hover
 
     const hand = this.store.getEntities().find(e => e instanceof Hand);
     if (hand) {
-      this.moveToHand(hand as Hand)
+      this.moveToHand(hand as Hand);
     }
   }
 
