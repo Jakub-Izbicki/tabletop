@@ -98,6 +98,12 @@ export default abstract class Item extends Hoverable {
         y: RelativeFontSize.getEmFromPx(translate.y, this.gameInstanceId),
         unit: TranslateUnit.EM
       };
+    } else if (translate.unit === TranslateUnit.PERCENT) {
+      this.translate = {
+        x: RelativeFontSize.getXEmFromPercent(translate.x, this.gameInstanceId),
+        y: RelativeFontSize.getYEmFromPercent(translate.y, this.gameInstanceId),
+        unit: TranslateUnit.EM
+      };
     } else if (translate.unit === TranslateUnit.EM) {
       this.translate = translate;
     } else {

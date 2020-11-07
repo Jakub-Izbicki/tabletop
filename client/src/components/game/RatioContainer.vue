@@ -98,7 +98,7 @@ export default class RatioContainer extends Vue {
       const deckId = "deck-1";
       const deck = new Deck(
           deckId,
-          {x: 15, y: 5, unit: TranslateUnit.EM},
+          {x: 50, y: 50, unit: TranslateUnit.PERCENT},
           0,
           this.gameInstanceId,
           []);
@@ -151,7 +151,7 @@ export default class RatioContainer extends Vue {
 
       this.store.addItem(deck);
 
-    }, 100);
+    }, 300);
   }
 
   mounted() {

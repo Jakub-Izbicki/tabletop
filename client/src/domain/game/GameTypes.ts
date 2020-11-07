@@ -8,6 +8,7 @@ export enum ItemType {
 export enum TranslateUnit {
   PX = "px",
   EM = "em",
+  PERCENT = "percent"
 }
 
 export interface Translate {

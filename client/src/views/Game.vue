@@ -37,7 +37,6 @@ import {Component, Vue} from 'vue-property-decorator';
 import ItemSpawner from "@/components/game/ItemSpawner.vue";
 import RatioContainer from "@/components/game/RatioContainer.vue";
 import {RatioConstants} from '@/domain/game/util/Ratio';
-import EntityStore from "@/domain/game/EntityStore";
 import HandComponent from "@/components/game/hand/HandComponent.vue";
 import Header from "@/components/home/Header.vue";
 
@@ -50,7 +49,7 @@ export default class Game extends Vue {
 
   private gameInstanceId = "game-instance-main";
 
-  private store: EntityStore = EntityStore.getInstance(this.gameInstanceId);
+  // private store: EntityStore = EntityStore.getInstance(this.gameInstanceId);
 
   // get items(): Deck {
   //   return this.store.getEntities().find(e => e instanceof Deck) as Deck;

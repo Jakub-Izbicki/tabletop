@@ -14,8 +14,8 @@ export default class Trim {
 
     if (translate.unit === TranslateUnit.EM) {
       translate = {
-        x: RelativeFontSize.getPxFromEM(translate.x, el),
-        y: RelativeFontSize.getPxFromEM(translate.y, el),
+        x: RelativeFontSize.getPxFromEM(translate.x, elId),
+        y: RelativeFontSize.getPxFromEM(translate.y, elId),
         unit: TranslateUnit.PX
       }
     }
