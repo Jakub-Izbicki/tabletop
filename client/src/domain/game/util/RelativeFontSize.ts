@@ -10,11 +10,11 @@ export default class RelativeFontSize {
     return this.DEFAULT * containerWidth / this.MULTIPLIER;
   }
 
-  public static getEm(px: number, gameInstanceId: string) {
+  public static getEmFromPx(px: number, gameInstanceId: string) {
     return px / (this.DEFAULT * Element.from(gameInstanceId).getRect().width / this.MULTIPLIER);
   }
 
-  public static getPx(em: number, container: Element) {
+  public static getPxFromEM(em: number, container: Element) {
     return em * (this.DEFAULT * container.getRect().width / this.MULTIPLIER);
   }
 }

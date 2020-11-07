@@ -19,8 +19,8 @@ export default abstract class Item extends Hoverable {
   public moveItemTo(elementId: string): void {
     const pxFromTo = AbsoluteDistance.getPxFromTo(this.id, elementId);
     const emFromTo = {
-      x: RelativeFontSize.getEm(pxFromTo.x, this.gameInstanceId),
-      y: RelativeFontSize.getEm(pxFromTo.y, this.gameInstanceId),
+      x: RelativeFontSize.getEmFromPx(pxFromTo.x, this.gameInstanceId),
+      y: RelativeFontSize.getEmFromPx(pxFromTo.y, this.gameInstanceId),
       unit: TranslateUnit.EM
     };
 
@@ -94,8 +94,8 @@ export default abstract class Item extends Hoverable {
   public setTranslate(translate: Translate): void {
     if (translate.unit === TranslateUnit.PX) {
       this.translate = {
-        x: RelativeFontSize.getEm(translate.x, this.gameInstanceId),
-        y: RelativeFontSize.getEm(translate.y, this.gameInstanceId),
+        x: RelativeFontSize.getEmFromPx(translate.x, this.gameInstanceId),
+        y: RelativeFontSize.getEmFromPx(translate.y, this.gameInstanceId),
         unit: TranslateUnit.EM
       };
     } else if (translate.unit === TranslateUnit.EM) {
