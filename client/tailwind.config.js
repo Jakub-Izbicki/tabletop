@@ -28,6 +28,7 @@ module.exports = {
       spacing: {
         '1.5em': '1.5em',
         deckBase: '0.7em',
+        deckInfo: '2.6em',
         itemHover: '0.2em',
         itemDrag: '0.4em',
         shadowCardHover: '1.7em',
@@ -54,7 +55,8 @@ module.exports = {
         titleLetter: '4rem',
         subtitle: '1.5rem',
         lifecounterIcon: '1.5em',
-        lifecounterHP: '1em'
+        lifecounterHP: '1em',
+        deckInfo: '0.8em'
       },
       zIndex: {
         'onTop': '999'
@@ -67,9 +69,14 @@ module.exports = {
       },
       inset: {
         1: '100%'
+      },
+      padding: {
+        deckInfo: '0.2em'
       }
     },
   },
-  variants: {},
+  variants: {
+    opacity: ['group-hover']
+  },
   plugins: [],
 };

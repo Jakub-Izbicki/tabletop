@@ -142,7 +142,7 @@ export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard
 
   protected onDrop(target: Hoverable | undefined): void {
     if (!target) {
-      this.moveOntoBoard();
+      this.onDropOnBoard();
     } else {
       switch (target.constructor) {
         case Deck:
@@ -163,13 +163,14 @@ export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard
     }
   }
 
-  private moveOntoBoard(): void {
+  private onDropOnBoard(): void {
     const card = this.item.toCard();
     card.setIsSkipAnimation(true);
     card.setDragged(true);
 
-    this.store.getDecks().find(deck => deck.getId() === this.deckId)?.remove(this.id);
+    this.removeCardFromDeckAndCheckRemainingCards();
     this.store.addItem(card);
+
     setTimeout(() => {
       card.setIsSkipAnimation(false);
       card.setDragged(false);
@@ -182,11 +183,25 @@ export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard
 
   private onDropOnHand(hand: Hand): void {
     const handCard = this.item.toHandCard(hand);
-    this.store.getDecks().find(deck => deck.getId() === this.deckId)?.remove(this.id);
+
+    this.removeCardFromDeckAndCheckRemainingCards();
     this.store.addItem(handCard);
 
     this.$nextTick(() =>
         this.store.getHandCards().forEach(hc => hc.animateMoveToHandPosition()));
+  }
+
+  private removeCardFromDeckAndCheckRemainingCards(): void {
+    const deck = this.store.getDecks().find(deck => deck.getId() === this.deckId);
+
+    deck?.remove(this.id);
+    this.removeDeckIdNoCardsLeft(deck);
+  }
+
+  private removeDeckIdNoCardsLeft(deck: Deck | undefined): void {
+    if (deck && !deck.getCards().length) {
+      this.store.removeEntity(deck.getId());
+    }
   }
 }
 

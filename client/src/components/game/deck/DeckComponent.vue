@@ -1,6 +1,7 @@
 <template>
   <Moveable :key="topCard.getId()"
             class="moveable
+                   group
                    absolute
                    top-0 left-0
                    h-0 w-0
@@ -41,6 +42,18 @@
                     deck-base"
              :class="{'shadow-hoverTarget': isMouseOver}">
         </div>
+      </div>
+      <div class="absolute
+                  pointer-events-none
+                  opacity-0
+                  group-hover:opacity-100
+                  w-cardItem
+                  px-deckInfo
+                  transform
+                  -translate-y-deckInfo">
+        <p class="text-deckInfo">
+          {{ deckSize }}
+        </p>
       </div>
       <div v-if="secondCard"
            class="absolute
@@ -112,18 +125,46 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
       '1': {
         keyup: () => this.drawCards(1),
       },
+      '2': {
+        keyup: () => this.drawCards(2),
+      },
+      '3': {
+        keyup: () => this.drawCards(3),
+      },
+      '4': {
+        keyup: () => this.drawCards(4),
+      },
+      '5': {
+        keyup: () => this.drawCards(5),
+      },
+      '6': {
+        keyup: () => this.drawCards(6),
+      },
       '7': {
         keyup: () => this.drawCards(7),
+      },
+      '8': {
+        keyup: () => this.drawCards(8),
+      },
+      '9': {
+        keyup: () => this.drawCards(9),
+      },
+      '0': {
+        keyup: () => this.drawCards(10),
       }
     }
   }
 
   get topCard(): DeckCard | null {
-    return this.item.getCards().length ? this.item.getCards()[0] : null;
+    return this.deckSize ? this.item.getCards()[0] : null;
   }
 
   get secondCard(): DeckCard | null {
-    return this.item.getCards().length >= 2 ? this.item.getCards()[1] : null;
+    return this.deckSize >= 2 ? this.item.getCards()[1] : null;
+  }
+
+  get deckSize(): number {
+    return this.item.getCards().length;
   }
 
   // eslint-disable-next-line
@@ -146,6 +187,10 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
     }
 
     this.setNoPointerEvents(true);
+
+    if (amount > this.deckSize) {
+      amount = this.deckSize;
+    }
 
     const betweenDrawDelay = 100;
     const delays = [...new Array(amount).keys()].map(i => i * betweenDrawDelay);
@@ -172,6 +217,10 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
 
     const handCard = this.topCard.toHandCard(this.hand);
     this.item.remove(this.topCard.getId());
+    if (!this.deckSize) {
+      this.store.removeEntity(this.id);
+    }
+
     this.store.addItem(handCard);
 
     this.$nextTick(() => {
