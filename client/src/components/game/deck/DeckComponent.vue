@@ -52,8 +52,8 @@
                   transform
                   -translate-y-deckInfo">
         <p class="text-deckInfo
-                  flex flex-row" v-twemoji>
-          {{ `${deckSize}📎` }}
+                  text-gray-700">
+          {{ `${deckSize}` }}
         </p>
       </div>
       <div v-if="secondCard"
