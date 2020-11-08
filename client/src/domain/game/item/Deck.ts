@@ -1,6 +1,7 @@
 import Item from "@/domain/game/interface/Item";
 import {ItemType, Translate} from "@/domain/game/GameTypes";
 import DeckCard from "@/domain/game/item/DeckCard";
+import Shuffle from "@/domain/game/util/Shuffle";
 
 export default class Deck extends Item {
 
@@ -38,6 +39,24 @@ export default class Deck extends Item {
 
   public remove(cardId: string): void {
     this.deckCards = this.deckCards.filter(card => card.getId() !== cardId);
+  }
+
+  public shuffle(): void {
+    this.getTopCard()?.setDragged(false);
+    this.getTopCard()?.setHover(false);
+    this.getTopCard()?.setMouseOver(false);
+    this.getCards().forEach(deckCard => deckCard.setFaceUp(false));
+
+    // copying existing array and setting it to deck cards after shuffle
+    // in order to trigger vue's recomputation of computed props,
+    // otherwise it won't trigger
+    const arrayToShuffle = [...this.getCards()];
+    Shuffle.anArray(arrayToShuffle);
+    this.setCards(arrayToShuffle);
+  }
+
+  private setCards(deckCards: DeckCard[]): void {
+    this.deckCards = deckCards;
   }
 
   accepts(item: Item): boolean {

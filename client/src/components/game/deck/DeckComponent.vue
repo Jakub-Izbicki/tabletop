@@ -167,20 +167,27 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
       },
       '0': {
         keyup: () => this.drawCards(10),
+      },
+      'r': {
+        keyup: this.shuffle
       }
     }
   }
 
   get topCard(): DeckCard | null {
-    return this.deckSize ? this.item.getCards()[0] : null;
+    return this.deckSize ? this.deckCards[0] : null;
   }
 
   get secondCard(): DeckCard | null {
-    return this.deckSize >= 2 ? this.item.getCards()[1] : null;
+    return this.deckSize >= 2 ? this.deckCards[1] : null;
   }
 
   get deckSize(): number {
-    return this.item.getCards().length;
+    return this.deckCards.length;
+  }
+
+  get deckCards(): DeckCard[] {
+    return this.item.getCards();
   }
 
   // eslint-disable-next-line
@@ -257,6 +264,10 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
         hc.animateMoveToHandPosition(lastCardDrawn);
       });
     });
+  }
+
+  private shuffle(): void {
+    this.item.shuffle();
   }
 }
 
