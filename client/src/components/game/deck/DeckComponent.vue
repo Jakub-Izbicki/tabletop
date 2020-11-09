@@ -232,7 +232,7 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
 
   private setNoPointerEvents(isNone: boolean): void {
     this.item.setNonePointerEvents(isNone);
-    this.topCard?.setNonePointerEvents(isNone);
+    this.deckCards.forEach(c => c.setNonePointerEvents(isNone));
   }
 
   private setIsMouseOver(isOver: boolean): void {

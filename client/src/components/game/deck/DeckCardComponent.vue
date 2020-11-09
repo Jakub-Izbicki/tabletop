@@ -101,9 +101,10 @@
          @mouseover.stop="onMouseOver"
          @mouseout.stop="onMouseOut"
          v-hotkey="keymap">
-      <div class="pointer-events-auto
-                  h-cardItemHalf
-                  w-cardItem">
+      <div class="h-cardItemHalf
+                  w-cardItem"
+           :class="[{'pointer-events-auto': !isNonePointerEvents},
+                    {'pointer-events-none': isNonePointerEvents}]">
       </div>
     </div>
   </Moveable>
