@@ -89,6 +89,10 @@ export default class ItemComponent<T extends Item> extends Vue {
     return this.item.isDragged();
   }
 
+  get isDisappeared(): boolean {
+    return this.item.isDisappeared();
+  }
+
   get isMouseOver(): boolean {
     return this.item.isMouseOver();
   }

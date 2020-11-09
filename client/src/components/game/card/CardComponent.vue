@@ -4,9 +4,10 @@
                    top-0 left-0
                    h-0 w-0
                    transform"
-            :class="[{'transition-transform': isMovingAnimate},
+            :class="[{'transition': isMovingAnimate},
                      {'duration-200' : isMovingAnimate},
                      {'pointer-events-none': isNonePointerEvents},
+                     {'opacity-0': isDisappeared},
                      {'cursor-grab': !isDragged},
                      {'cursor-grabbing': isDragged},
                      {'z-onTop': isDragged}]"
@@ -18,7 +19,7 @@
                 transition-transform"
          :class="[{'duration-200': !isSkipAnimation},
                   {'-translate-y-itemHover': isMouseOver && !isDragged},
-                  {'-translate-y-itemDrag': isMouseOver && isDragged}]">
+                  {'-translate-y-itemDrag': (isMouseOver && isDragged) || isDisappeared}]">
       <div class="absolute
                   pointer-events-none
                   h-cardItemShadow
@@ -31,7 +32,7 @@
            :class="[{'duration-200': !isSkipAnimation},
                     {'-translate-y-1/2': !isMouseOver},
                     {'-translate-y-shadowCardHover': isMouseOver && !isDragged},
-                    {'-translate-y-shadowCardDrag': isMouseOver && isDragged}]"
+                    {'-translate-y-shadowCardDrag': (isMouseOver && isDragged) || isDisappeared}]"
            :style="rotationStyle">
         <div class="transition-transform-shadow
                     h-cardItemShadow
@@ -42,7 +43,7 @@
                       {'duration-200': !isSkipAnimation},
                       {'shadow-card': !isMouseOver},
                       {'shadow-cardHover': isMouseOver && !isDragged},
-                      {'shadow-cardDrag': isMouseOver && isDragged}]">
+                      {'shadow-cardDrag': (isMouseOver && isDragged) || isDisappeared}]">
         </div>
       </div>
       <div :id="id"
@@ -121,6 +122,9 @@ export default class CardComponent extends mixins<BaseCardComponent<Card>, Hover
       },
       '1': {
         keyup: this.moveToOwnHand
+      },
+      'x': {
+        keyup: this.removeCard
       }
     }
   }
@@ -225,6 +229,19 @@ export default class CardComponent extends mixins<BaseCardComponent<Card>, Hover
       this.item.setIsSkipAnimation(false);
       this.item.setRotation(next);
     }, 10);
+  }
+
+  private removeCard(): void {
+    if (!this.getMouseOver()) {
+      return;
+    }
+
+    this.item.setMouseOver(false);
+    this.item.setDisappeared(true);
+    this.item.setNonePointerEvents(true);
+    this.item.setIsMovingAnimate(true);
+
+    setTimeout(() => this.store.removeEntity(this.id), 200);
   }
 }
 </script>

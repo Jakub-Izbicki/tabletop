@@ -54,6 +54,10 @@ export default abstract class Item extends Hoverable {
     return this.states.includes(EntityStates.IS_DRAGGED);
   }
 
+  public isDisappeared(): boolean {
+    return this.states.includes(EntityStates.IS_DISAPPEARED);
+  }
+
   public isMovingAnimate(): boolean {
     return this.states.includes(EntityStates.IS_MOVING_ANIMATE);
   }
@@ -69,12 +73,21 @@ export default abstract class Item extends Hoverable {
   public isMouseOver(): boolean {
     return this.states.includes(EntityStates.IS_MOUSE_OVER);
   }
+
   public setMouseOver(isMouseOver: boolean): void {
     this.setState(EntityStates.IS_MOUSE_OVER, isMouseOver);
   }
 
   public setDragged(isDragged: boolean): void {
     this.setState(EntityStates.IS_DRAGGED, isDragged);
+  }
+
+  public setDisappeared(isDisappeared: boolean): void {
+    this.setState(EntityStates.IS_DISAPPEARED, isDisappeared);
+  }
+
+  public setIsMovingAnimate(isMoving: boolean): void {
+    this.setState(EntityStates.IS_MOVING_ANIMATE, isMoving);
   }
 
   public setIsSkipAnimation(isSkip: boolean): void {
@@ -120,9 +133,5 @@ export default abstract class Item extends Hoverable {
 
   public setNonePointerEvents(isNone: boolean): void {
     this.setState(EntityStates.IS_NONE_POINTER_EVENTS, isNone);
-  }
-
-  private setIsMovingAnimate(isMoving: boolean): void {
-    this.setState(EntityStates.IS_MOVING_ANIMATE, isMoving);
   }
 }

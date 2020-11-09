@@ -31,6 +31,7 @@ export interface DimensionsPx {
 export enum EntityStates {
   IS_HOVER,
   IS_DRAGGED,
+  IS_DISAPPEARED,
   IS_NONE_POINTER_EVENTS,
   IS_MOVING_ANIMATE,
   IS_SKIP_ANIMATION,
