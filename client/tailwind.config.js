@@ -58,7 +58,8 @@ module.exports = {
         subtitle: '1.5rem',
         lifecounterIcon: '1.5em',
         lifecounterHP: '1em',
-        deckInfo: '0.6em'
+        deckInfo: '0.6em',
+        cardInfo: '0.5em',
       },
       zIndex: {
         'onTop': '999'

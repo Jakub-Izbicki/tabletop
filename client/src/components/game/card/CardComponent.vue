@@ -57,7 +57,7 @@
            :class="{'duration-200': !isSkipAnimation}"
            :style="rotationStyle"
            @mouseover="onMouseOver"
-           @mouseout="onMouseOut"
+           @mouseout="onMouseOutCard"
            v-hotkey="keymap">
         <div class="h-cardItem
                     w-cardItem
@@ -82,6 +82,16 @@
               <p class="text-cardBackLabel
                         font-wizard">w</p>
             </div>
+
+            <CardInfo :card-info-mode="cardInfoMode"
+                      delete-msg="Press 'x' again to remove card from the game">
+            </CardInfo>
+            <div class="card-face-down">
+              <CardInfo :card-info-mode="cardInfoMode"
+                        delete-msg="Press 'x' again to remove card from the game">
+              </CardInfo>
+            </div>
+
             <div class="absolute
                         pointer-events-none
                         h-cardItem w-cardItem
@@ -104,10 +114,15 @@ import Hoverable from "@/domain/game/interface/Hoverable";
 import Hand from "@/domain/game/hoverable/Hand";
 import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
 import DeckCard from "@/domain/game/item/DeckCard";
-import {Rotation, TranslateUnit} from "@/domain/game/GameTypes";
+import {CardInfoMode, Rotation, TranslateUnit} from "@/domain/game/GameTypes";
+import CardInfo from "@/components/game/card/CardInfo.vue";
 
-@Component
+@Component({
+  components: {CardInfo}
+})
 export default class CardComponent extends mixins<BaseCardComponent<Card>, HoverableComponent<Card>>(BaseCardComponent, HoverableComponent) {
+
+  private cardInfoMode = CardInfoMode.NONE
 
   get keymap() {
     return {
@@ -132,6 +147,11 @@ export default class CardComponent extends mixins<BaseCardComponent<Card>, Hover
   get ownHand(): Hand {
     // todo: change implementation when implementing online multiplayer
     return this.store.getEntities().find(e => e instanceof Hand) as Hand;
+  }
+
+  protected onMouseOutCard(): void {
+    this.resetCardInfo();
+    this.onMouseOut()
   }
 
   protected onDrop(target: Hoverable | undefined): void {
@@ -236,12 +256,21 @@ export default class CardComponent extends mixins<BaseCardComponent<Card>, Hover
       return;
     }
 
+    if (this.cardInfoMode === CardInfoMode.NONE) {
+      this.cardInfoMode = CardInfoMode.REMOVE_WARNING;
+      return;
+    }
+
     this.item.setMouseOver(false);
     this.item.setDisappeared(true);
     this.item.setNonePointerEvents(true);
     this.item.setIsMovingAnimate(true);
 
     setTimeout(() => this.store.removeEntity(this.id), 200);
+  }
+
+  private resetCardInfo(): void {
+    this.cardInfoMode = CardInfoMode.NONE;
   }
 }
 </script>

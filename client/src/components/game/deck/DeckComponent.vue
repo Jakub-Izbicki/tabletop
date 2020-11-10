@@ -90,7 +90,10 @@
                     bg-teal-200
                     flex justify-center items-center
                     border-deckEmpty border-black">
-          <p class="text-deckEmptyCard">empty</p>
+          <p class="text-deckEmptyCard
+                    font-bold">
+            empty
+          </p>
         </div>
       </div>
       <div class="pointer-events-none

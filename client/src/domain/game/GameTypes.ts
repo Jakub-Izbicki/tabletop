@@ -45,3 +45,8 @@ export enum Rotation {
   R_1_2 = 180,
   R_3_4 = -90
 }
+
+export enum CardInfoMode {
+  NONE,
+  REMOVE_WARNING
+}
