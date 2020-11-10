@@ -11,7 +11,7 @@ html, body, #app {
 }
 
 #app {
-  font-family: Courier, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Courier New", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

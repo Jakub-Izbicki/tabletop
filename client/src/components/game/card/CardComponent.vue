@@ -84,11 +84,11 @@
             </div>
 
             <CardInfo :card-info-mode="cardInfoMode"
-                      delete-msg="Press 'x' again to remove">
+                      delete-msg="Press `x` again to remove">
             </CardInfo>
             <div class="card-face-down">
               <CardInfo :card-info-mode="cardInfoMode"
-                        delete-msg="Press 'x' again to remove">
+                        delete-msg="Press `x` again to remove">
               </CardInfo>
             </div>
 
