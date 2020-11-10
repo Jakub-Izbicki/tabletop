@@ -4,11 +4,11 @@
               pointer-events-none
               flex items-center justify-center
               h-cardItem w-cardItem
+              p-cardInfo
               rounded-cardItem
               bg-orange-300
-              font-bold
               text-center
-              opacity-75">
+              opacity-95">
     <p class="text-cardInfo">{{ deleteMsg }}</p>
   </div>
 </template>

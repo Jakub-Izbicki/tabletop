@@ -74,7 +74,11 @@ module.exports = {
         1: '100%'
       },
       padding: {
-        deckInfo: '0.2em'
+        deckInfo: '0.2em',
+        cardInfo: '0.2em'
+      },
+      opacity: {
+        95: '0.95'
       }
     },
   },
