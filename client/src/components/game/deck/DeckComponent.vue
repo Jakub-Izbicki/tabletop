@@ -96,6 +96,11 @@
           </p>
         </div>
       </div>
+
+      <CardInfo :card-info-mode="deckInfoMode"
+                delete-msg="Press `x` again to remove deck">
+      </CardInfo>
+
       <div class="pointer-events-none
                   absolute
                   top-0
@@ -111,7 +116,8 @@
                          :deck-card="topCard"
                          :id="topCard.getId()"
                          :game-instance-id="item.getGameInstanceId()"
-                         :deck-id="id">
+                         :deck-id="id"
+                         :deck-card-info-mode.sync="deckInfoMode">
       </DeckCardComponent>
     </div>
   </Moveable>
@@ -126,13 +132,17 @@ import DeckCardComponent from "@/components/game/deck/DeckCardComponent.vue";
 import {mixins} from "vue-class-component";
 import HoverableComponent from "@/components/game/interface/HoverableComponent";
 import Hand from "@/domain/game/hoverable/Hand";
+import {CardInfoMode} from "@/domain/game/GameTypes";
+import CardInfo from "@/components/game/card/CardInfo.vue";
 
 @Component({
-  components: {DeckCardComponent}
+  components: {CardInfo, DeckCardComponent}
 })
 export default class DeckComponent extends mixins<ItemComponent<Deck>, HoverableComponent<Deck>>(ItemComponent, HoverableComponent) {
 
   private draggableId = this.id + "-deck-draggable-img";
+
+  private deckInfoMode = CardInfoMode.NONE;
 
   get ownHand(): Hand {
     // todo: change implementation when implementing online multiplayer
@@ -173,6 +183,9 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
       },
       'r': {
         keyup: this.shuffle
+      },
+      'x': {
+        keyup: this.removeDeck
       }
     }
   }
@@ -195,6 +208,8 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
 
   // eslint-disable-next-line
   protected onDeckDrag(movableEvent: any) {
+    this.resetDeckInfo();
+
     if (!movableEvent.inputEvent.defaultPrevented) {
       this.onItemDrag(movableEvent);
     }
@@ -202,6 +217,8 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
 
   // eslint-disable-next-line
   protected onDeckDragEnd(movableEvent: any) {
+    this.resetDeckInfo();
+
     if (!movableEvent.inputEvent.defaultPrevented) {
       this.onItemDragEnd();
     }
@@ -248,6 +265,16 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
     this.topCard?.setDragged(isDragged);
   }
 
+  private setDisappeared(isDisappeared: boolean): void {
+    this.item.setDisappeared(isDisappeared);
+    this.topCard?.setDisappeared(isDisappeared);
+  }
+
+  private setIsMovingAnimate(isMovingAnimate: boolean): void {
+    this.item.setIsMovingAnimate(isMovingAnimate);
+    this.topCard?.setIsMovingAnimate(isMovingAnimate);
+  }
+
   private drawTopCard(lastCardDrawn: boolean): void {
     if (!this.topCard) {
       return;
@@ -271,6 +298,28 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
 
   private shuffle(): void {
     this.item.shuffle();
+  }
+
+  private removeDeck(): void {
+    if (!this.getMouseOver() && !this.topCard?.isMouseOver()) {
+      return;
+    }
+
+    if (this.deckInfoMode === CardInfoMode.NONE) {
+      this.deckInfoMode = CardInfoMode.REMOVE_WARNING;
+      return;
+    }
+
+    this.setIsMouseOver(false);
+    this.setDisappeared(true);
+    this.setNoPointerEvents(true);
+    this.setIsMovingAnimate(true);
+
+    setTimeout(() => this.store.removeEntity(this.id), 200);
+  }
+
+  private resetDeckInfo(): void {
+    this.deckInfoMode = CardInfoMode.NONE;
   }
 }
 

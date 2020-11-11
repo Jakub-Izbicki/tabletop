@@ -77,6 +77,16 @@
             <p class="text-cardBackLabel
                       font-wizard">w</p>
           </div>
+
+          <CardInfo :card-info-mode="deckCardInfoModeSynced"
+                    delete-msg="Press `x` again to remove deck">
+          </CardInfo>
+          <div class="card-face-down">
+            <CardInfo :card-info-mode="deckCardInfoModeSynced"
+                      delete-msg="Press `x` again to remove deck">
+            </CardInfo>
+          </div>
+
           <div class="absolute
                       pointer-events-none
                       h-cardItem w-cardItem
@@ -99,7 +109,7 @@
                 -translate-y-1/2"
          :style="rotationStyle"
          @mouseover.stop="onMouseOver"
-         @mouseout.stop="onMouseOut"
+         @mouseout.stop="onMouseOutDeckCard"
          v-hotkey="keymap">
       <div class="h-cardItemHalf
                   w-cardItem"
@@ -114,31 +124,44 @@
 import {mixins} from "vue-class-component";
 import BaseCardComponent from "../interface/BaseCardComponent";
 import HoverableComponent from "../interface/HoverableComponent";
-import {Component, Prop} from "vue-property-decorator";
+import {Component, Prop, PropSync} from "vue-property-decorator";
 import DeckCard from "@/domain/game/item/DeckCard";
 import Hoverable from "@/domain/game/interface/Hoverable";
 import Deck from "@/domain/game/item/Deck";
-import {TranslateUnit} from "@/domain/game/GameTypes";
+import {CardInfoMode, TranslateUnit} from "@/domain/game/GameTypes";
 import Hand from "@/domain/game/hoverable/Hand";
+import CardInfo from "@/components/game/card/CardInfo.vue";
 
-@Component
+@Component({
+  components: {CardInfo}
+})
 export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard>, HoverableComponent<DeckCard>>(BaseCardComponent, HoverableComponent) {
 
   @Prop({type: String, required: true})
   private readonly deckId!: string;
+
+  @PropSync('deckCardInfoMode', {required: true})
+  private deckCardInfoModeSynced!: CardInfoMode;
 
   protected triggerOnNoHoverable = true;
 
   // eslint-disable-next-line
   protected onDeckCardDrag(movableEvent: any) {
     movableEvent.inputEvent.preventDefault();
+    this.resetDeckCardInfo();
     this.onItemDrag(movableEvent);
   }
 
   // eslint-disable-next-line
   protected onDeckCardDragEnd(movableEvent: any) {
     movableEvent.inputEvent.preventDefault();
+    this.resetDeckCardInfo();
     this.onItemDragEnd();
+  }
+
+  protected onMouseOutDeckCard(): void {
+    this.resetDeckCardInfo();
+    this.onMouseOut()
   }
 
   protected onDrop(target: Hoverable | undefined): void {
@@ -203,6 +226,10 @@ export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard
     if (deck && !deck.getCards().length) {
       this.store.removeEntity(deck.getId());
     }
+  }
+
+  private resetDeckCardInfo(): void {
+    this.deckCardInfoModeSynced = CardInfoMode.NONE;
   }
 }
 
