@@ -13,8 +13,8 @@
                      {'z-onTop': isDragged}]"
             :style="transformStyle"
             v-bind="moveable"
-            @drag="onItemDrag"
-            @dragEnd="onItemDragEnd">
+            @drag="onCardDrag"
+            @dragEnd="onCardDragEnd">
     <div class="transform
                 transition-transform"
          :class="[{'duration-200': !isSkipAnimation},
@@ -149,9 +149,21 @@ export default class CardComponent extends mixins<BaseCardComponent<Card>, Hover
     return this.store.getEntities().find(e => e instanceof Hand) as Hand;
   }
 
+  // eslint-disable-next-line
+  protected onCardDrag(movableEvent: any) {
+    this.resetCardInfo();
+    this.onItemDrag(movableEvent);
+  }
+
+  // eslint-disable-next-line
+  protected onCardDragEnd() {
+    this.resetCardInfo();
+    this.onItemDragEnd();
+  }
+
   protected onMouseOutCard(): void {
     this.resetCardInfo();
-    this.onMouseOut()
+    this.onMouseOut();
   }
 
   protected onDrop(target: Hoverable | undefined): void {
