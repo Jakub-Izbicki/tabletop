@@ -34,7 +34,7 @@ module.exports = {
         itemDrag: '0.4em',
         shadowCardHover: '1.7em',
         shadowCardDrag: '1.7em',
-        subtitle: '0.75rem',
+        subtitle: '1rem',
         lifecounterIconYOffset: '0.17em'
       },
       boxShadow: {
@@ -76,6 +76,9 @@ module.exports = {
       padding: {
         deckInfo: '0.2em',
         cardInfo: '0.2em'
+      },
+      margin: {
+        titleLetter: '-1.35rem'
       },
       opacity: {
         95: '0.95'

@@ -9,12 +9,11 @@
                 flex-row
                 items-centers
                 justify-center">
-      <p class="font-wizards
-                text-title
+      <p class="text-title
                 ">card</p>
       <p class="font-wizard
                 text-titleLetter
-                -my-5
+                my-titleLetter
                 ">w</p>
       <p class="font-wizards
                 text-title
@@ -27,7 +26,7 @@
                 translate-y-subtitle
                 font-wizard
                 text-subtitle
-                text-purple-400">a goldfish simulator</p>
+                text-purple-400">a card sandbox</p>
     </div>
   </div>
 </template>
