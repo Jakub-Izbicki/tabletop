@@ -11,7 +11,6 @@
                 items-centers
                 justify-center">
       <p class="font-thin
-                font-bold
                 text-title
                 ">card</p>
       <p class="font-wizard
@@ -19,7 +18,6 @@
                 my-titleLetter
                 ">w</p>
       <p class="font-thin
-                font-bold
                 text-title
                 ">izard</p>
       <p class="absolute
