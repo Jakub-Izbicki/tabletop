@@ -67,16 +67,7 @@
                       rounded-cardItem
                       hidden-backface"
                :src="item.getImageUrl()">
-          <div class="absolute
-                      h-cardItem w-cardItem
-                      rounded-cardItem
-                      bg-purple-400
-                      flex justify-center items-center
-                      border-cardBack border-black
-                      card-face-down hidden-backface">
-            <p class="text-cardBackLabel
-                      font-wizard">w</p>
-          </div>
+          <CardBack></CardBack>
           <div class="absolute
                       h-cardItem w-cardItem
                       rounded-cardItem"
@@ -108,8 +99,11 @@ import Hand from "@/domain/game/hoverable/Hand";
 import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
 import DeckCard from "@/domain/game/item/DeckCard";
 import {Rotation, TranslateUnit} from "@/domain/game/GameTypes";
+import CardBack from "@/components/game/card/CardBack.vue";
 
-@Component
+@Component({
+  components: {CardBack}
+})
 export default class HandCardComponent extends BaseCardComponent<HandCard> {
 
   protected triggerOnNoHoverable = true;

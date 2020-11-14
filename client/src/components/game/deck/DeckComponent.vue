@@ -68,16 +68,9 @@
                     h-cardItem w-cardItem
                     rounded-cardItem"
              :src="secondCard.getImageUrl()">
-        <div v-else
-             class="absolute
-                    h-cardItem w-cardItem
-                    rounded-cardItem
-                    bg-purple-400
-                    flex justify-center items-center
-                    border-cardBack border-black">
-          <p class="text-cardBackLabel
-                    font-wizard">w</p>
-        </div>
+        <CardBack v-else
+                  :is-face-down="false">
+        </CardBack>
       </div>
       <div v-if="!secondCard"
            class="absolute
@@ -132,9 +125,10 @@ import HoverableComponent from "@/components/game/interface/HoverableComponent";
 import Hand from "@/domain/game/hoverable/Hand";
 import {CardInfoMode} from "@/domain/game/GameTypes";
 import CardInfo from "@/components/game/card/CardInfo.vue";
+import CardBack from "@/components/game/card/CardBack.vue";
 
 @Component({
-  components: {CardInfo, DeckCardComponent}
+  components: {CardBack, CardInfo, DeckCardComponent}
 })
 export default class DeckComponent extends mixins<ItemComponent<Deck>, HoverableComponent<Deck>>(ItemComponent, HoverableComponent) {
 

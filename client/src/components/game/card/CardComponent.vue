@@ -72,16 +72,7 @@
                         rounded-cardItem
                         hidden-backface"
                  :src="item.getImageUrl()">
-            <div class="absolute
-                        h-cardItem w-cardItem
-                        rounded-cardItem
-                        bg-purple-400
-                        flex justify-center items-center
-                        border-cardBack border-black
-                        card-face-down hidden-backface">
-              <p class="text-cardBackLabel
-                        font-wizard">w</p>
-            </div>
+            <CardBack></CardBack>
 
             <CardInfo :card-info-mode="cardInfoMode"></CardInfo>
             <div class="card-face-down">
@@ -112,9 +103,10 @@ import BaseCardComponent from "@/components/game/interface/BaseCardComponent";
 import DeckCard from "@/domain/game/item/DeckCard";
 import {CardInfoMode, Rotation, TranslateUnit} from "@/domain/game/GameTypes";
 import CardInfo from "@/components/game/card/CardInfo.vue";
+import CardBack from "@/components/game/card/CardBack.vue";
 
 @Component({
-  components: {CardInfo}
+  components: {CardBack, CardInfo}
 })
 export default class CardComponent extends mixins<BaseCardComponent<Card>, HoverableComponent<Card>>(BaseCardComponent, HoverableComponent) {
 
