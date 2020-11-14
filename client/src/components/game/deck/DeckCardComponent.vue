@@ -42,7 +42,6 @@
                     card-flip-container"
              :class="[{'card-face-down': !isFaceUp},
                       {'duration-200': !isSkipAnimation},
-                      {'shadow-card': !isMouseOver},
                       {'shadow-cardHover': isMouseOver && !isDragged},
                       {'shadow-cardDrag': isMouseOver && isDragged}]">
         </div>
