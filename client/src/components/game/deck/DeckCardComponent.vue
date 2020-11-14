@@ -63,8 +63,7 @@
           <img class="absolute
                       h-cardItem
                       w-cardItem
-                      rounded-cardItem
-                      hidden-backface"
+                      rounded-cardItem"
                :src="item.getImageUrl()">
           <CardBack></CardBack>
 
@@ -80,6 +79,14 @@
                :class="[{'bg-green-100': isHover},
                         {'bg-opacity-25': isHover},
                         {'shadow-hoverTarget': isHover || isMouseOver}]">
+          </div>
+          <div class="absolute
+                      pointer-events-none
+                      h-cardItem w-cardItem
+                      rounded-cardItem
+                      card-face-down"
+               :class="[{'bg-green-100': isHover},
+                        {'bg-opacity-25': isHover}]">
           </div>
         </div>
       </div>
