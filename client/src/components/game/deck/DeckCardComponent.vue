@@ -78,13 +78,9 @@
                       font-wizard">w</p>
           </div>
 
-          <CardInfo :card-info-mode="deckCardInfoModeSynced"
-                    delete-msg="Press `x` again to remove deck">
-          </CardInfo>
+          <CardInfo :card-info-mode="deckCardInfoModeSynced"></CardInfo>
           <div class="card-face-down">
-            <CardInfo :card-info-mode="deckCardInfoModeSynced"
-                      delete-msg="Press `x` again to remove deck">
-            </CardInfo>
+            <CardInfo :card-info-mode="deckCardInfoModeSynced"></CardInfo>
           </div>
 
           <div class="absolute

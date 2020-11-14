@@ -83,13 +83,9 @@
                         font-wizard">w</p>
             </div>
 
-            <CardInfo :card-info-mode="cardInfoMode"
-                      delete-msg="Press `x` again to remove">
-            </CardInfo>
+            <CardInfo :card-info-mode="cardInfoMode"></CardInfo>
             <div class="card-face-down">
-              <CardInfo :card-info-mode="cardInfoMode"
-                        delete-msg="Press `x` again to remove">
-              </CardInfo>
+              <CardInfo :card-info-mode="cardInfoMode"></CardInfo>
             </div>
 
             <div class="absolute

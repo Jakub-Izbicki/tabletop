@@ -53,13 +53,14 @@ module.exports = {
         '2xs': '.60rem',
         cardBackLabel: '2em',
         deckEmptyCard: '0.3em',
-        title: '2rem',
+        title: '1.8rem',
         titleLetter: '4rem',
         subtitle: '1.5rem',
         lifecounterIcon: '1.5em',
         lifecounterHP: '1em',
         deckInfo: '0.6em',
         cardInfo: '0.5em',
+        cardInfoKeyboard: '2em',
       },
       zIndex: {
         'onTop': '999'
@@ -69,6 +70,8 @@ module.exports = {
       },
       fontFamily: {
         'wizard': ['WizardFont', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+        'thin': ['ThinFont', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+        'keyboard': ['KeyboardFont', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
       },
       inset: {
         1: '100%'
@@ -78,7 +81,8 @@ module.exports = {
         cardInfo: '0.2em'
       },
       margin: {
-        titleLetter: '-1.35rem'
+        titleLetter: '-1.7rem',
+        cardInfoKeyboard: '-0.3em',
       },
       opacity: {
         95: '0.95'

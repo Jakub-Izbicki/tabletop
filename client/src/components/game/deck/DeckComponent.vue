@@ -97,9 +97,7 @@
         </div>
       </div>
 
-      <CardInfo :card-info-mode="deckInfoMode"
-                delete-msg="Press `x` again to remove deck">
-      </CardInfo>
+      <CardInfo :card-info-mode="deckInfoMode"></CardInfo>
 
       <div class="pointer-events-none
                   absolute

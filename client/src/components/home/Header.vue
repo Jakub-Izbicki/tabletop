@@ -9,13 +9,16 @@
                 flex-row
                 items-centers
                 justify-center">
-      <p class="text-title
+      <p class="font-thin
+                font-bold
+                text-title
                 ">card</p>
       <p class="font-wizard
                 text-titleLetter
                 my-titleLetter
                 ">w</p>
-      <p class="font-wizards
+      <p class="font-thin
+                font-bold
                 text-title
                 ">izard</p>
       <p class="absolute

@@ -23,6 +23,20 @@ html, body, #app {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'ThinFont';
+  src: url('./assets/font/NugoSansLight-9YzoK.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'KeyboardFont';
+  src: url('./assets/font/212Keyboard-lmRZ.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 img.emoji {
   height: 0.9em;
   width: 0.9em;
