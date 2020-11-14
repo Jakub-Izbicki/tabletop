@@ -5,6 +5,7 @@
               justify-center
               w-full">
     <div class="relative
+                m-4
                 flex
                 flex-row
                 items-centers
