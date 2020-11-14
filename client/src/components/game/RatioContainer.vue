@@ -21,12 +21,9 @@
 <script lang="ts">
 import {Component, Prop, Vue} from "vue-property-decorator";
 import Ratio, {RatioConstants} from "@/domain/game/util/Ratio";
-import {DimensionsPx, TranslateUnit} from "@/domain/game/GameTypes";
+import {DimensionsPx} from "@/domain/game/GameTypes";
 import EntityStore from "@/domain/game/EntityStore";
-import {v4 as uuid4} from 'uuid';
 import RelativeFontSize from "@/domain/game/util/RelativeFontSize";
-import Deck from "@/domain/game/item/Deck";
-import DeckCard from "@/domain/game/item/DeckCard";
 import debounce from "lodash.debounce";
 import GameStateProvider from "@/domain/game/util/GameStateProvider";
 

@@ -26,7 +26,7 @@
                 flex items-center justify-center
                 shadow-deck"
          @mouseover="onMouseOver"
-         @mouseout="onMouseOut"
+         @mouseout="onMouseOutDeck"
          v-hotkey="keymap">
       <div class="absolute
                   bottom-0
@@ -214,6 +214,11 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
     if (!movableEvent.inputEvent.defaultPrevented) {
       this.onItemDragEnd();
     }
+  }
+
+  protected onMouseOutDeck(): void {
+    this.resetDeckInfo();
+    this.onMouseOut();
   }
 
   private drawCards(amount: number): void {
