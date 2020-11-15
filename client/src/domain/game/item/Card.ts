@@ -5,6 +5,7 @@ import HandCard from "@/domain/game/item/HandCard";
 import AbsoluteDistance from "@/domain/game/util/AbsoluteDistance";
 import BaseCard from "@/domain/game/interface/BaseCard";
 import DeckCard from "@/domain/game/item/DeckCard";
+import {v4 as uuid4} from "uuid";
 
 export default class Card extends BaseCard {
 
@@ -32,7 +33,7 @@ export default class Card extends BaseCard {
         this.getIsFaceUp());
   }
 
-  toDeckCard(currentDeckCard: DeckCard): DeckCard {
+  public toDeckCard(currentDeckCard: DeckCard): DeckCard {
     const position = AbsoluteDistance.getPxFromTo(this.getId(), currentDeckCard.getDeckId());
     return new DeckCard(this.getId(),
         position,
@@ -41,6 +42,10 @@ export default class Card extends BaseCard {
         this.getImageUrl(),
         this.getIsFaceUp(),
         currentDeckCard.getDeckId());
+  }
+
+  public copy(): Card {
+    return new Card(uuid4(), this.getTranslate(), this.getRotation(), this.getGameInstanceId(), this.getImageUrl(), this.getIsFaceUp());
   }
 
   accepts(item: Item): boolean {

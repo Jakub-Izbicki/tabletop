@@ -7,7 +7,6 @@
             :class="[{'transition': isMovingAnimate},
                      {'duration-200' : isMovingAnimate},
                      {'pointer-events-none': isNonePointerEvents},
-                     {'opacity-0': isDisappeared},
                      {'cursor-grab': !isDragged},
                      {'cursor-grabbing': isDragged},
                      {'z-onTop': isDragged}]"
@@ -16,8 +15,9 @@
             @drag="onCardDrag"
             @dragEnd="onCardDragEnd">
     <div class="transform
-                transition-transform"
+                transition-transform-shadow-opacity"
          :class="[{'duration-200': !isSkipAnimation},
+                  {'opacity-0x': isDisappeared},
                   {'-translate-y-itemHover': isMouseOver && !isDragged},
                   {'-translate-y-itemDrag': (isMouseOver && isDragged) || isDisappeared}]">
       <div class="absolute
@@ -103,6 +103,7 @@ import DeckCard from "@/domain/game/item/DeckCard";
 import {CardInfoMode, Rotation, TranslateUnit} from "@/domain/game/GameTypes";
 import CardInfo from "@/components/game/card/CardInfo.vue";
 import CardBack from "@/components/game/card/CardBack.vue";
+import RelativeFontSize from "@/domain/game/util/RelativeFontSize";
 
 @Component({
   components: {CardBack, CardInfo}
@@ -127,6 +128,9 @@ export default class CardComponent extends mixins<BaseCardComponent<Card>, Hover
       },
       'x': {
         keyup: this.removeCard
+      },
+      'd': {
+        keyup: this.duplicateCard
       }
     }
   }
@@ -263,13 +267,28 @@ export default class CardComponent extends mixins<BaseCardComponent<Card>, Hover
     this.item.setMouseOver(false);
     this.item.setDisappeared(true);
     this.item.setNonePointerEvents(true);
-    this.item.setIsMovingAnimate(true);
 
     setTimeout(() => this.store.removeEntity(this.id), 200);
   }
 
   private resetCardInfo(): void {
     this.cardInfoMode = CardInfoMode.NONE;
+  }
+
+  private duplicateCard(): void {
+    if (!this.getMouseOver()) {
+      return;
+    }
+
+    const duplicatedCard = this.item.copy();
+    const translate = duplicatedCard.getTranslate();
+    const duplicatedCardOffset = 3.5;
+
+    duplicatedCard.setTranslate({...translate, x: translate.x + duplicatedCardOffset});
+    duplicatedCard.setDisappeared(true);
+
+    this.store.addItem(duplicatedCard);
+    setTimeout(() => duplicatedCard.setDisappeared(false), 0);
   }
 }
 </script>
