@@ -1,4 +1,4 @@
-# client2
+# cardwizard
 
 ## Project setup
 ```
