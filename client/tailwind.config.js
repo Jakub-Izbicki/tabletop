@@ -32,6 +32,7 @@ module.exports = {
         deckInfo: '2.6em',
         itemHover: '0.2em',
         itemDrag: '0.4em',
+        deckDrag: '2.5em',
         shadowCardHover: '1.7em',
         shadowCardDrag: '1.7em',
         subtitle: '1rem',
@@ -41,6 +42,7 @@ module.exports = {
         hoverTarget: '0 0 0.1em 0.05em rgba(255,255,255,0.75)',
         hoverTargetNoBottom: '0 -0.1em 0.1em 0.05em rgba(255,255,255,0.75)',
         deck: '0em 0.8em 0.2em -0.2em rgb(0 0 0)',
+        deckDrag: '0em 1em 0.7em -0.1em rgb(0 0 0)',
         card: '0em 0em 0.1em 0.25em rgb(0 0 0)',
         cardHover: '0em 0.0em 0.4em 0.1em rgb(0 0 0)',
         cardDrag: '0em 0em 0.8em 0.1em rgb(0 0 0)'

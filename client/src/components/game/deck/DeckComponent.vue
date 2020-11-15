@@ -6,9 +6,10 @@
                    top-0 left-0
                    h-0 w-0
                    transform"
-            :class="[{'transition-transform': isMovingAnimate},
+            :class="[{'transition': isMovingAnimate},
                      {'duration-200' : isMovingAnimate},
                      {'pointer-events-none': isNonePointerEvents},
+                     {'opacity-0': isDisappeared},
                      {'cursor-grab': !isDragged},
                      {'cursor-grabbing': isDragged}]"
             :style="transformStyle"
@@ -22,9 +23,10 @@
                 rounded-cardItem
                 transform
                 -translate-x-1/2
-                -translate-y-1/2
-                flex items-center justify-center
-                shadow-deck"
+                flex items-center justify-center"
+         :class="[{'duration-200': !isSkipAnimation},
+                  {'-translate-y-1/2 shadow-deck': (!isMouseOver || !isDragged) && !isDisappeared},
+                  {'-translate-y-deckDrag shadow-deckDrag': (isMouseOver && isDragged) || isDisappeared}]"
          @mouseover="onMouseOver"
          @mouseout="onMouseOutDeck"
          v-hotkey="keymap">
