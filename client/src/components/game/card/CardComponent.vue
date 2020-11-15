@@ -17,7 +17,7 @@
     <div class="transform
                 transition-transform-shadow-opacity"
          :class="[{'duration-200': !isSkipAnimation},
-                  {'opacity-0x': isDisappeared},
+                  {'opacity-0': isDisappeared},
                   {'-translate-y-itemHover': isMouseOver && !isDragged},
                   {'-translate-y-itemDrag': (isMouseOver && isDragged) || isDisappeared}]">
       <div class="absolute
