@@ -54,8 +54,9 @@
                   transform
                   -translate-y-deckInfo">
         <p class="text-deckInfo
-                  text-gray-700">
-          {{ `${deckSize}` }}
+                  font-bold
+                  font-thin">
+          {{ deckSize }}
         </p>
       </div>
       <div v-if="secondCard"
