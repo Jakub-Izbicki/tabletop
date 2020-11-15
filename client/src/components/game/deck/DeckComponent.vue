@@ -312,7 +312,6 @@ export default class DeckComponent extends mixins<ItemComponent<Deck>, Hoverable
     this.setIsMouseOver(false);
     this.setDisappeared(true);
     this.setNoPointerEvents(true);
-    this.setIsMovingAnimate(true);
 
     setTimeout(() => this.store.removeEntity(this.id), 200);
   }
