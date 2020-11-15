@@ -86,7 +86,6 @@ export default class GameStateProvider {
 
   private static addCardsToDeck(deck: Deck, imageUrl: string, amount: number, gameInstanceId: string): void {
     [...Array(amount).keys()].forEach(() => {
-      console.info("deck card")
       deck.pushOnBottom(new DeckCard(uuid4(),
           {x: 0, y: 0, unit: TranslateUnit.EM},
           0,

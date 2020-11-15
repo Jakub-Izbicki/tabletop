@@ -69,6 +69,7 @@ module.exports = {
       },
       transitionProperty: {
         'transform-shadow': 'transform, box-shadow',
+        'transform-shadow-opacity': 'transform, box-shadow, opacity',
       },
       fontFamily: {
         'wizard': ['WizardFont', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],

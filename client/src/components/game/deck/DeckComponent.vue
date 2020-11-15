@@ -21,6 +21,7 @@
                 w-cardItem
                 rounded-cardItem
                 transform
+                transition-transform-shadow-opacity
                 -translate-x-1/2
                 flex items-center justify-center"
          :class="[{'duration-200': !isSkipAnimation},
