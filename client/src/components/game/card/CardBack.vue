@@ -6,7 +6,7 @@
               bg-purple-400
               flex justify-center items-center
               border-cardBack border-black"
-       :class="{'card-face-down': isFaceDown}">
+       :class="{'card-face-down hidden-backface': isFaceDown}">
     <p class="text-cardBackLabel
               font-wizard">w</p>
   </div>

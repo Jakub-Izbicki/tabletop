@@ -69,7 +69,8 @@
             <img class="absolute
                         h-cardItem
                         w-cardItem
-                        rounded-cardItem"
+                        rounded-cardItem
+                        hidden-backface"
                  :src="item.getImageUrl()">
             <CardBack></CardBack>
 

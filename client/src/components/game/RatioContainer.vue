@@ -113,6 +113,11 @@ export default class RatioContainer extends Vue {
   transform: rotateY(180deg);
 }
 
+.hidden-backface {
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
 .card-flip-container {
   transform-style: preserve-3d;
 }
