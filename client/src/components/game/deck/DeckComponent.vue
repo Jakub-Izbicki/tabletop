@@ -9,7 +9,6 @@
             :class="[{'transition': isMovingAnimate},
                      {'duration-200' : isMovingAnimate},
                      {'pointer-events-none': isNonePointerEvents},
-                     {'opacity-0': isDisappeared},
                      {'cursor-grab': !isDragged},
                      {'cursor-grabbing': isDragged}]"
             :style="transformStyle"
@@ -25,6 +24,7 @@
                 -translate-x-1/2
                 flex items-center justify-center"
          :class="[{'duration-200': !isSkipAnimation},
+                  {'opacity-0': isDisappeared},
                   {'-translate-y-1/2 shadow-deck': (!isMouseOver || !isDragged) && !isDisappeared},
                   {'-translate-y-deckDrag shadow-deckDrag': (isMouseOver && isDragged) || isDisappeared}]"
          @mouseover="onMouseOver"

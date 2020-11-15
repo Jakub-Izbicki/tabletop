@@ -78,7 +78,10 @@ export default class GameStateProvider {
     this.addCardsToDeck(deck, "https://c1.scryfall.com/file/scryfall-cards/large/front/5/8/5841e5dd-2a4a-42b9-a04f-d7c5c4840d74.jpg?1592764877", 2, gameInstanceId);
 
     deck.shuffle();
+    deck.setDisappeared(true);
     gameInstance.addItem(deck);
+
+    setTimeout(() => deck.setDisappeared(false), 0);
   }
 
   private static addCardsToDeck(deck: Deck, imageUrl: string, amount: number, gameInstanceId: string): void {
