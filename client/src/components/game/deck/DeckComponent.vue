@@ -54,9 +54,7 @@
                   px-deckInfo
                   transform
                   -translate-y-deckInfo">
-        <p class="text-deckInfo
-                  font-bold
-                  font-thin">
+        <p class="text-deckInfo">
           {{ deckSize }}
         </p>
       </div>

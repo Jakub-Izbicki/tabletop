@@ -8,18 +8,15 @@
               rounded-cardItem
               bg-orange-300
               text-center
-              font-thin
               opacity-95">
-    <p class="text-cardInfo
-              font-bold">Press</p>
+    <p class="text-cardInfo">Press</p>
     <p class="inline
               font-keyboard
               text-cardInfoKeyboard
               my-cardInfoKeyboard">
       X
     </p>
-    <p class="text-cardInfo
-              font-bold">again to remove</p>
+    <p class="text-cardInfo">again to remove</p>
   </div>
 </template>
 
