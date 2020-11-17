@@ -1,7 +1,6 @@
 <template>
   <div ref="container"
-       class="h-full w-full
-              bg-gray-300">
+       class="h-full w-full">
     <div class="absolute
                   top-0 bottom-0 left-0 right-0
                   flex items-center justify-center">
