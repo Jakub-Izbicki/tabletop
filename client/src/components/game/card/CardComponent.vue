@@ -75,7 +75,7 @@
             <CardBack></CardBack>
 
             <CardInfo :card-info-mode="cardInfoMode"></CardInfo>
-            <div class="card-face-down">
+            <div class="card-face-down hidden-backface">
               <CardInfo :card-info-mode="cardInfoMode"></CardInfo>
             </div>
 

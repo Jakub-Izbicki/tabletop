@@ -69,7 +69,7 @@
           <CardBack></CardBack>
 
           <CardInfo :card-info-mode="deckCardInfoModeSynced"></CardInfo>
-          <div class="card-face-down">
+          <div class="card-face-down hidden-backface">
             <CardInfo :card-info-mode="deckCardInfoModeSynced"></CardInfo>
           </div>
 
