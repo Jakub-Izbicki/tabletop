@@ -1,6 +1,7 @@
 <template>
   <div id="app"
-       class="has-text-black">
+       class="has-background-white
+              has-text-black">
     <router-view/>
   </div>
 </template>
