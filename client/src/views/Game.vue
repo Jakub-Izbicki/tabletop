@@ -16,6 +16,7 @@
     </div>
 
     <Header></Header>
+    <GameToolsSidebar></GameToolsSidebar>
 
     <!--    <div class="absolute-->
     <!--                h-full-->
@@ -39,9 +40,10 @@ import RatioContainer from "@/components/game/RatioContainer.vue";
 import {RatioConstants} from '@/domain/game/util/Ratio';
 import HandComponent from "@/components/game/hand/HandComponent.vue";
 import Header from "@/components/home/Header.vue";
+import GameToolsSidebar from "@/components/game/sidebar/GameToolsSidebar.vue";
 
 @Component({
-  components: {Header, HandComponent: HandComponent, RatioContainer, ItemSpawner}
+  components: {GameToolsSidebar, Header, HandComponent: HandComponent, RatioContainer, ItemSpawner}
 })
 export default class Game extends Vue {
 

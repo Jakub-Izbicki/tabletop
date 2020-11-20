@@ -40,9 +40,9 @@ html, body, #app {
 }
 
 img.emoji {
-  height: 0.9em;
-  width: 0.9em;
-  margin: 0.25em 0.05em 0 0.1em;
+  height: 1em;
+  width: 1em;
+  //margin: 0.25em 0.05em 0 0.1em;
   vertical-align: -0.1em;
 }
 </style>
