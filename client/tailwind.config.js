@@ -29,7 +29,7 @@ module.exports = {
       spacing: {
         '1.5em': '1.5em',
         deckBase: '0.7em',
-        deckInfo: '2.6em',
+        deckInfo: '0.8em',
         itemHover: '0.2em',
         itemDrag: '0.4em',
         deckDrag: '2.5em',

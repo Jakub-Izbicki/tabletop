@@ -56,6 +56,18 @@
                   card-flip-perspective"
            :class="{'duration-200': !isSkipAnimation}"
            :style="rotationStyle">
+        <div class="absolute
+                  pointer-events-none
+                  opacity-0
+                  w-cardItem
+                  px-deckInfo
+                  transform
+                  -translate-y-deckInfo"
+             :class="{'group-hover:opacity-100': !isDraggedCardOrDeck}">
+          <p class="text-deckInfo">
+            {{ deckSize }}
+          </p>
+        </div>
         <div class="card-flip-container
                     transition-transform"
              :class="[{'card-face-down': !isFaceUp},
@@ -139,6 +151,18 @@ export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard
 
   protected triggerOnNoHoverable = true;
 
+  get deck(): Deck | undefined {
+    return this.store.getDecks().find(deck => deck.getId() === this.deckId);
+  }
+
+  get deckSize(): number | undefined {
+    return this.deck?.getCards()?.length;
+  }
+
+  get isDraggedCardOrDeck(): boolean {
+    return this.deck?.isDragged() || this.isDragged;
+  }
+
   // eslint-disable-next-line
   protected onDeckCardDrag(movableEvent: any) {
     movableEvent.inputEvent.preventDefault();
@@ -210,7 +234,7 @@ export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard
   }
 
   private removeCardFromDeckAndCheckRemainingCards(): void {
-    const deck = this.store.getDecks().find(deck => deck.getId() === this.deckId);
+    const deck = this.deck;
 
     deck?.remove(this.id);
     this.removeDeckIdNoCardsLeft(deck);

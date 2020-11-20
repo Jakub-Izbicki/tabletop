@@ -46,18 +46,6 @@
              :class="{'shadow-hoverTarget': isMouseOver}">
         </div>
       </div>
-      <div class="absolute
-                  pointer-events-none
-                  opacity-0
-                  group-hover:opacity-100
-                  w-cardItem
-                  px-deckInfo
-                  transform
-                  -translate-y-deckInfo">
-        <p class="text-deckInfo">
-          {{ deckSize }}
-        </p>
-      </div>
       <div v-if="secondCard"
            class="absolute
                   top-0
