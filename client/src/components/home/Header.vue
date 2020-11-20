@@ -28,7 +28,7 @@
                 translate-y-subtitle
                 font-wizard
                 text-subtitle
-                text-purple-400">a card sandbox</p>
+                has-text-primary">a card sandbox</p>
     </div>
   </div>
 </template>
