@@ -29,8 +29,7 @@ module.exports = {
       spacing: {
         '1.5em': '1.5em',
         deckBase: '0.7em',
-        deckInfo: '0.8em',
-        deckInfoDeckSize: '1.3em',
+        deckInfo: '0.6em',
         itemHover: '0.2em',
         itemDrag: '0.4em',
         deckDrag: '2.5em',
@@ -47,7 +46,6 @@ module.exports = {
         card: '0em 0em 0.1em 0.25em rgb(0 0 0)',
         cardHover: '0em 0.0em 0.4em 0.1em rgb(0 0 0)',
         cardDrag: '0em 0em 0.8em 0.1em rgb(0 0 0)',
-        deckInfoDeckSize: '0em 0.1em 0.3em -0.2em rgb(0 0 0)',
       },
       cursor: {
         grab: 'grab',
@@ -62,7 +60,6 @@ module.exports = {
         subtitle: '1.5rem',
         lifecounterIcon: '1.5em',
         lifecounterHP: '1em',
-        deckInfo: '0.5em',
         cardInfo: '0.5em',
         cardInfoKeyboard: '2em',
       },
@@ -82,13 +79,11 @@ module.exports = {
         1: '100%'
       },
       padding: {
-        deckInfo: '0.2em',
         cardInfo: '0.2em'
       },
       margin: {
         titleLetter: '-1.7rem',
         cardInfoKeyboard: '-0.3em',
-        deckInfoDeckSize: '0.3em',
       },
       opacity: {
         95: '0.95'
