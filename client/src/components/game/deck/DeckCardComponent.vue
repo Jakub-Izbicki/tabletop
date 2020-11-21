@@ -57,7 +57,7 @@
            :class="{'duration-200': !isSkipAnimation}"
            :style="rotationStyle">
         <DeckInfo :deck-size="deckSize"
-                  :is-dragged-card-or-deck="isDraggedCardOrDeck">
+                  :is-moving-card-or-deck="isMovingCardOrDeck">
         </DeckInfo>
         <div class="card-flip-container
                     transition-transform"
@@ -151,8 +151,8 @@ export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard
     return this.deck?.getCards()?.length;
   }
 
-  get isDraggedCardOrDeck(): boolean {
-    return this.deck?.isDragged() || this.isDragged;
+  get isMovingCardOrDeck(): boolean {
+    return this.deck?.isDragged() || this.isDragged || this.deck?.isMovingAnimate() || this.isMovingAnimate;
   }
 
   // eslint-disable-next-line

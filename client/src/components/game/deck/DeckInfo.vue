@@ -5,7 +5,7 @@
                   w-cardItem
                   transform
                   -translate-y-deckInfo"
-       :class="{'group-hover:opacity-100': !isDraggedCardOrDeck}">
+       :class="{'group-hover:opacity-100': !isMovingCardOrDeck}">
     <p class="text-deckInfo
               has-background-light
               rounded-full
@@ -22,7 +22,7 @@
 <script>
 export default {
   name: "DeckInfo",
-  props: ['deckSize', 'isDraggedCardOrDeck']
+  props: ['deckSize', 'isMovingCardOrDeck']
 }
 </script>
 
