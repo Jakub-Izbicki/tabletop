@@ -56,18 +56,9 @@
                   card-flip-perspective"
            :class="{'duration-200': !isSkipAnimation}"
            :style="rotationStyle">
-        <div class="absolute
-                  pointer-events-none
-                  opacity-0
-                  w-cardItem
-                  px-deckInfo
-                  transform
-                  -translate-y-deckInfo"
-             :class="{'group-hover:opacity-100': !isDraggedCardOrDeck}">
-          <p class="text-deckInfo">
-            {{ deckSize }}
-          </p>
-        </div>
+        <DeckInfo :deck-size="deckSize"
+                  :is-dragged-card-or-deck="isDraggedCardOrDeck">
+        </DeckInfo>
         <div class="card-flip-container
                     transition-transform"
              :class="[{'card-face-down': !isFaceUp},
@@ -137,9 +128,10 @@ import {CardInfoMode, TranslateUnit} from "@/domain/game/GameTypes";
 import Hand from "@/domain/game/hoverable/Hand";
 import CardInfo from "@/components/game/card/CardInfo.vue";
 import CardBack from "@/components/game/card/CardBack.vue";
+import DeckInfo from "@/components/game/deck/DeckInfo.vue";
 
 @Component({
-  components: {CardBack, CardInfo}
+  components: {DeckInfo, CardBack, CardInfo}
 })
 export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard>, HoverableComponent<DeckCard>>(BaseCardComponent, HoverableComponent) {
 
