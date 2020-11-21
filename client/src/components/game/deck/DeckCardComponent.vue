@@ -57,7 +57,7 @@
            :class="{'duration-200': !isSkipAnimation}"
            :style="rotationStyle">
         <DeckInfo :deck-size="deckSize"
-                  :is-moving-card-or-deck="isMovingCardOrDeck">
+                  :is-visible="(isMouseOver || isDeckMouseOver) && !isMovingCardOrDeck">
         </DeckInfo>
         <div class="card-flip-container
                     transition-transform"
@@ -145,6 +145,10 @@ export default class DeckCardComponent extends mixins<BaseCardComponent<DeckCard
 
   get deck(): Deck | undefined {
     return this.store.getDecks().find(deck => deck.getId() === this.deckId);
+  }
+
+  get isDeckMouseOver(): boolean {
+    return !!this.deck?.isMouseOver();
   }
 
   get deckSize(): number | undefined {

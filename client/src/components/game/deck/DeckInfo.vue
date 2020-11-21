@@ -1,31 +1,23 @@
 <template>
-  <div class="absolute
-                  pointer-events-none
-                  opacity-0
-                  w-cardItem
-                  transform
-                  -translate-y-deckInfo"
-       :class="{'group-hover:opacity-100': !isMovingCardOrDeck}">
-    <p class="text-deckInfo
-              has-background-light
-              rounded-full
-              mx-deckInfoDeckSize
-              w-deckInfoDeckSize h-deckInfoDeckSize
-              shadow-deckInfoDeckSize
-              flex
-              justify-center items-center">
-      {{ deckSize }}
-    </p>
-  </div>
+  <b-tooltip :label="deckSize"
+             :always="isVisible"
+             position="is-right"
+             type="is-dark"
+             class="absolute">
+    <div class="h-deckInfo w-cardItem"></div>
+  </b-tooltip>
 </template>
 
-<script>
-export default {
-  name: "DeckInfo",
-  props: ['deckSize', 'isMovingCardOrDeck']
+<script lang="ts">
+import {Component, Prop, Vue} from 'vue-property-decorator';
+
+@Component
+export default class DeckInfo extends Vue {
+
+  @Prop({required: true})
+  private deckSize!: number;
+
+  @Prop({required: true})
+  private isVisible!: number;
 }
 </script>
-
-<style scoped>
-
-</style>
