@@ -25,7 +25,7 @@ import {Component, Prop, Vue} from 'vue-property-decorator';
 import {CardInfoMode} from "@/domain/game/GameTypes";
 
 @Component
-export default class CardInfo extends Vue {
+export default class CardRemovePrompt extends Vue {
 
   @Prop({required: true})
   private cardInfoMode!: CardInfoMode;

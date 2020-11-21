@@ -114,11 +114,11 @@ import {mixins} from "vue-class-component";
 import HoverableComponent from "@/components/game/interface/HoverableComponent";
 import Hand from "@/domain/game/hoverable/Hand";
 import {CardInfoMode} from "@/domain/game/GameTypes";
-import CardInfo from "@/components/game/card/CardInfo.vue";
+import CardRemovePrompt from "@/components/game/common/CardRemovePrompt.vue";
 import CardBack from "@/components/game/card/CardBack.vue";
 
 @Component({
-  components: {CardBack, CardInfo, DeckCardComponent}
+  components: {CardBack, CardInfo: CardRemovePrompt, DeckCardComponent}
 })
 export default class DeckComponent extends mixins<ItemComponent<Deck>, HoverableComponent<Deck>>(ItemComponent, HoverableComponent) {
 
