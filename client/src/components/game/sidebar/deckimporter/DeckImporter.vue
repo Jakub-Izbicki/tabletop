@@ -5,10 +5,9 @@
               flex flex-col
               items-center justify-center">
     <p class="w-full
-              flex items-center justify-center
-              rounded-3xl shadow-lg has-background-light has-text-primary
-              text-3xl
-              mb-5 p-3">
+              flex items-center
+              text-3xl font-thin
+              mb-10">
       Import a deck
     </p>
 
@@ -33,7 +32,7 @@
                       rounded
                       :loading="searchingCards"
                       :disabled="searchingCards || cardNamesEmpty"
-                      @click="searchingCards = true">
+                      @click="searchCards">
               Search for cards
             </b-button>
           </div>
@@ -43,9 +42,15 @@
       <div class="flex-1
                   flex flex-row justify-center
                   m-5">
-        <div class="text-lg has-text-dark
+        <div v-if="!foundCards.length"
+             class="text-lg has-text-dark
                     flex items-center justify-center
                     h-full">No cards imported yet
+        </div>
+        <div v-else
+             v-for="card in foundCards"
+             :key="card.name">
+          <img :src="card.imageUrl">
         </div>
       </div>
     </div>
@@ -54,9 +59,12 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
+import Scryfall, {FoundCard, QueriedCard} from "@/domain/game/sidebar/deckimporter/Scryfall";
 
 @Component
 export default class DeckImporter extends Vue {
+
+  private static readonly STARTS_WITH_NUMBER = /^[0-9]+ .+$/
 
   private cardNames = "";
 
@@ -74,10 +82,72 @@ Example:
 
   private searchingCards = false;
 
-  private importedCards: string[] = [];
+  private foundCards: FoundCard[] = [];
 
   get cardNamesEmpty(): boolean {
-    return !this.cardNames?.trim()
+    return !this.cardNames?.trim();
+  }
+
+  private searchCards(): void {
+    if (!this.allFormatValid()) {
+      console.warn("Invalid format!");
+    }
+
+    this.searchingCards = true;
+    const queriedCards = this.parseCards();
+
+    new Scryfall().getCardsByNames(queriedCards)
+    .then(searchedCards => {
+      console.info(searchedCards.found)
+      this.foundCards = searchedCards.found;
+      this.searchingCards = false;
+    });
+  }
+
+  private allFormatValid(): boolean {
+    const allLines = this.trimLines()
+    const validFormatLines = allLines.filter(line => line.match(DeckImporter.STARTS_WITH_NUMBER)?.length)
+
+    return allLines.length === validFormatLines.length;
+  }
+
+  private parseCards(): QueriedCard[] {
+    const queriedCards = this.trimLines()
+    .filter(line => line.match(DeckImporter.STARTS_WITH_NUMBER)?.length)
+    .map(line => {
+      const amount = Number.parseInt(line.substring(0, line.indexOf(" ")));
+      const name = line.substring(line.indexOf(" "), line.length);
+      return new QueriedCard(name.toLowerCase(), amount);
+    });
+
+    return this.mergeDuplicatedEntries(queriedCards);
+  }
+
+  private trimLines(): string[] {
+    return this.cardNames.split("\n")
+    .filter(line => line?.trim())
+    .map(line => line.trim());
+  }
+
+  private mergeDuplicatedEntries(cards: QueriedCard[]): QueriedCard[] {
+    const mergedCards: QueriedCard[] = [];
+
+    cards.forEach(card => {
+      if (mergedCards.some(visited => visited.name === card.name)) {
+        return;
+      }
+
+      let amount = 0;
+      cards.forEach(card2 => {
+        if (card.name === card2.name) {
+          amount += card2.amount;
+        }
+      });
+
+      mergedCards.push(new QueriedCard(card.name, amount));
+    });
+
+    return mergedCards;
   }
 }
 </script>
