@@ -20,7 +20,7 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import SidebarButton from "@/components/game/sidebar/SidebarButton.vue";
-import DeckImporter from "@/components/game/sidebar/DeckImporter/DeckImporter.vue";
+import DeckImporter from "@/components/game/sidebar/deckimporter/DeckImporter.vue";
 
 @Component({
   components: {DeckImporter, SidebarButton}

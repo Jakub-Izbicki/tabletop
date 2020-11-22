@@ -1,5 +1,5 @@
 <template>
-  <div class="has-background-white
+  <div class="has-background-white has-text-dark
               rounded-3xl shadow-lg
               p-8
               flex flex-col
@@ -14,8 +14,9 @@
       <div class="flex flex-col items-center justify-center
                   has-background-light shadow-lg rounded-3xl
                   p-5">
-        <b-field label="Enter card names:">
+        <b-field label="Enter cards:">
           <b-input type="textarea"
+                   :placeholder="cardNamesGuide"
                    maxlength="2000"
                    :cols="45"
                    :rows="20"
@@ -39,7 +40,7 @@
       <div class="flex-1
                   flex flex-row justify-center
                   m-5">
-        <div class="text-lg
+        <div class="text-lg has-text-dark
                     flex items-center justify-center
                     h-full">No cards imported yet
         </div>
@@ -55,6 +56,18 @@ import {Component, Vue} from 'vue-property-decorator';
 export default class DeckImporter extends Vue {
 
   private cardNames = "";
+
+  private cardNamesGuide = `To search for cards, in each line enter card amount, followed by a card name.
+
+Example:
+
+4 Bonecrusher Giant
+4 Brushfire Elemental
+4 Edgewall Innkeeper
+1 Evolving Wilds
+2 Fire Prophecy
+9 Forest
+2 Vivien, Monsters' Advocate`;
 
   private searchingCards = false;
 
