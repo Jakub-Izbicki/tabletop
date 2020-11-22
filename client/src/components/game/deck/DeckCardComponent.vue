@@ -56,7 +56,7 @@
                   card-flip-perspective"
            :class="{'duration-200': !isSkipAnimation}"
            :style="rotationStyle">
-        <DeckInfo :deck-size="deckSize"
+        <DeckInfo :deck-size="deckSize.toString()"
                   :is-visible="(isMouseOver || isDeckMouseOver) && !isMovingCardOrDeck">
         </DeckInfo>
         <div class="card-flip-container
