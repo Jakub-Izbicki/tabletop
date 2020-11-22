@@ -1,11 +1,14 @@
 <template>
   <div class="has-background-white has-text-dark
               rounded-3xl shadow-lg
-              p-8
+              p-16
               flex flex-col
               items-center justify-center">
-    <p class="text-3xl
-              mb-5">
+    <p class="w-full
+              flex items-center justify-center
+              rounded-3xl shadow-lg has-background-light has-text-primary
+              text-3xl
+              mb-5 p-3">
       Import a deck
     </p>
 
