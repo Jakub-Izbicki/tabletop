@@ -15,6 +15,9 @@ module.exports = {
       },
       borderRadius: {
         cardItem: '0.25em',
+        'xl': '0.75rem',
+        '2xl': '1rem',
+        '3xl': '1.25rem',
       },
       borderWidth: {
         cardBack: '.1em',

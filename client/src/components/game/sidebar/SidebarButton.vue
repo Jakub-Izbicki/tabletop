@@ -6,7 +6,8 @@
                position="is-right"
                type="is-dark"
                :delay="100">
-      <b-button class="pointer-events-auto
+      <b-button @click="$emit('click')"
+                class="pointer-events-auto
                      is-light
                      flex
                      h-16 w-16"
