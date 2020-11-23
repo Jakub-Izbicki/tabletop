@@ -41,16 +41,41 @@
 
       <div class="flex-1
                   flex flex-row justify-center
-                  m-5">
+                  p-5">
         <div v-if="!foundCards.length"
              class="text-lg has-text-dark
                     flex items-center justify-center
                     h-full">No cards imported yet
         </div>
-        <div v-else
-             v-for="card in foundCards"
-             :key="card.name">
-          <img :src="card.imageUrl">
+        <div v-else class="w-full h-full
+                           flex flex-col">
+          <div class="relative
+                      h-full w-full
+                      mb-5">
+            <div class="absolute
+                        top-0 bottom-0 left-0 right-0
+                        overflow-auto
+                        flex flex-col items-center">
+              <FoundCardPreview
+                  v-for="card in foundCards"
+                  :key="card.name"
+                  :image-url="card.imageUrl">
+              </FoundCardPreview>
+            </div>
+          </div>
+
+          <div class="w-full flex flex-row justify-start">
+            <div class="shadow-lg
+                      rounded-full">
+              <b-button type="is-primary"
+                        rounded
+                        :loading="searchingCards"
+                        :disabled="searchingCards || cardNamesEmpty"
+                        @click="searchCards">
+                Import {{ foundCards.length }} cards
+              </b-button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -60,8 +85,11 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import Scryfall, {FoundCard, QueriedCard} from "@/domain/game/sidebar/deckimporter/Scryfall";
+import FoundCardPreview from "@/components/game/sidebar/deckimporter/FoundCardPreview.vue";
 
-@Component
+@Component({
+  components: {FoundCardPreview}
+})
 export default class DeckImporter extends Vue {
 
   private static readonly STARTS_WITH_NUMBER = /^[0-9]+ .+$/
