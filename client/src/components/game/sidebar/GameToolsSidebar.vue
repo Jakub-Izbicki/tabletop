@@ -10,6 +10,7 @@
     <SidebarButton twemoji="🧹" tooltip="Clear the board"></SidebarButton>
 
     <b-modal v-model="deckImporterOpen"
+             :full-screen="true"
              :destroy-on-hide="false"
              class="pointer-events-auto">
       <DeckImporter></DeckImporter>

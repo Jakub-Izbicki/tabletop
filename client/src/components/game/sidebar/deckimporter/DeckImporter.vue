@@ -1,79 +1,64 @@
 <template>
-  <div class="has-background-white has-text-dark
-              rounded-3xl shadow-lg
-              p-16
-              flex flex-col
+  <div class="h-full w-full
+              flex flex-row
               items-center justify-center">
-    <p class="w-full
-              flex items-center
-              text-3xl font-thin
-              mb-10">
-      Import a deck
-    </p>
+    <div class="flex flex-col justify-center
+                h-full p-10">
+      <p class="flex items-center
+                text-3xl font-thin
+                mb-10">
+        Import a deck
+      </p>
 
-    <div class="flex flex-row
-                w-full">
-      <div class="flex flex-col items-center justify-center
-                  has-background-light shadow-lg rounded-3xl
-                  p-5">
-        <b-field label="Enter cards:">
-          <b-input type="textarea"
-                   :placeholder="cardNamesGuide"
-                   maxlength="2000"
-                   :cols="45"
-                   :rows="20"
-                   :disabled="searchingCards"
-                   v-model="cardNames"></b-input>
-        </b-field>
-        <div class="w-full flex flex-row justify-end">
-          <div class="shadow-lg
-                      rounded-full">
-            <b-button type="is-primary"
-                      rounded
-                      :loading="searchingCards"
-                      :disabled="searchingCards || cardNamesEmpty"
-                      @click="searchCards">
-              Search for cards
-            </b-button>
-          </div>
+      <b-field label="Enter cards:">
+        <b-input type="textarea"
+                 :placeholder="cardNamesGuide"
+                 maxlength="2000"
+                 :cols="50"
+                 :rows="20"
+                 custom-class="none-resize"
+                 :disabled="searchingCards"
+                 v-model="cardNames"></b-input>
+      </b-field>
+      <div class="w-full flex flex-row justify-end">
+        <div class="shadow-lg
+                    rounded-full">
+          <b-button type="is-primary"
+                    rounded
+                    :loading="searchingCards"
+                    :disabled="searchingCards || cardNamesEmpty"
+                    @click="searchCards">
+            Search for cards
+          </b-button>
         </div>
       </div>
+    </div>
 
-      <div class="flex-1
-                  flex flex-row justify-center
-                  p-5">
-        <div v-if="!foundCards.length"
-             class="text-lg has-text-dark
-                    flex items-center justify-center
-                    h-full">No cards imported yet
-        </div>
-        <div v-else class="w-full h-full
-                           flex flex-col">
+    <div class="h-full w-full
+                flex flex-col justify-center
+                p-10
+                has-background-white has-text-light
+                shadow-lg">
+      <div v-if="!foundCards.length"
+           class="text-lg has-text-dark
+                  flex items-center justify-center
+                  h-full">No cards imported yet
+      </div>
+      <div v-else class="w-full
+                         flex flex-row justify-start">
+        <div class="w-full h-full
+                    flex flex-col">
           <div class="relative
                       h-full w-full
                       mb-5">
             <div class="absolute
                         top-0 bottom-0 left-0 right-0
                         overflow-auto
-                        flex flex-col items-center">
-              <FoundCardPreview
-                  v-for="card in foundCards"
-                  :key="card.name"
-                  :image-url="card.imageUrl">
+                        flex flex-col flex-wrap items-start">
+              <FoundCardPreview v-for="card in foundCards"
+                                :key="card.name"
+                                :image-url="card.imageUrl">
               </FoundCardPreview>
-            </div>
-          </div>
-
-          <div class="w-full flex flex-row justify-start">
-            <div class="shadow-lg
-                      rounded-full">
-              <b-button type="is-primary"
-                        rounded
-                        :loading="searchingCards"
-                        :disabled="searchingCards || cardNamesEmpty"
-                        @click="searchCards">
-                Import {{ foundCards.length }} cards
-              </b-button>
             </div>
           </div>
         </div>
@@ -119,6 +104,7 @@ Example:
   private searchCards(): void {
     if (!this.allFormatValid()) {
       console.warn("Invalid format!");
+      return;
     }
 
     this.searchingCards = true;
@@ -127,7 +113,12 @@ Example:
     new Scryfall().getCardsByNames(queriedCards)
     .then(searchedCards => {
       console.info(searchedCards.found)
-      this.foundCards = searchedCards.found;
+      this.foundCards.push(...searchedCards.found)
+      this.foundCards.push(...searchedCards.found)
+      this.foundCards.push(...searchedCards.found)
+      this.foundCards.push(...searchedCards.found)
+      this.foundCards.push(...searchedCards.found)
+      this.foundCards.push(...searchedCards.found)
       this.searchingCards = false;
     });
   }
@@ -180,6 +171,8 @@ Example:
 }
 </script>
 
-<style scoped>
-
+<style>
+.none-resize {
+  resize: none;
+}
 </style>
