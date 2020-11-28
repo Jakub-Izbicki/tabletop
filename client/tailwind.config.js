@@ -7,11 +7,15 @@ module.exports = {
         cardItemHalf: `${2.5 * 0.88}em`,
         deckBase: `${5 * 0.2}em`,
         lifecounter: '1.5em',
+        'previewFoundCardTop': '5rem',
+        'previewFoundCardBot': '20rem',
+        'previewFoundCard': '25rem',
       },
       width: {
         cardItem: `${5 * 0.63}em`,
         cardItemShadow: `${5 * 0.53}em`,
         lifecounter: '1.5em',
+        'previewFoundCard': '20rem',
       },
       borderRadius: {
         cardItem: '0.25em',
@@ -82,7 +86,8 @@ module.exports = {
         1: '100%'
       },
       padding: {
-        cardInfo: '0.2em'
+        cardInfo: '0.2em',
+        deckImporterFlexbox: '21rem'
       },
       margin: {
         titleLetter: '-1.7rem',
@@ -94,7 +99,12 @@ module.exports = {
     },
   },
   variants: {
-    opacity: ['group-hover']
+    opacity: ['group-hover'],
+    // extend: {
+    //   zIndex: ['hover', 'odd']
+    // }
+    // overflow: ['hover'],
+    // height: ['last']
   },
   plugins: [],
 };

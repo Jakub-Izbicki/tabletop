@@ -22,9 +22,8 @@
       </b-field>
       <div class="w-full flex flex-row justify-end">
         <div class="shadow-lg
-                    rounded-full">
+                    rounded-lg">
           <b-button type="is-primary"
-                    rounded
                     :loading="searchingCards"
                     :disabled="searchingCards || cardNamesEmpty"
                     @click="searchCards">
@@ -42,25 +41,18 @@
       <div v-if="!foundCards.length"
            class="text-lg has-text-dark
                   flex items-center justify-center
-                  h-full">No cards imported yet
+                  h-full">
+        No cards imported yet
       </div>
-      <div v-else class="w-full
-                         flex flex-row justify-start">
-        <div class="w-full h-full
-                    flex flex-col">
-          <div class="relative
-                      h-full w-full
-                      mb-5">
-            <div class="absolute
-                        top-0 bottom-0 left-0 right-0
-                        overflow-auto
-                        flex flex-col flex-wrap items-start">
-              <FoundCardPreview v-for="card in foundCards"
-                                :key="card.name"
-                                :image-url="card.imageUrl">
-              </FoundCardPreview>
-            </div>
-          </div>
+      <div v-else class="relative w-full h-full">
+        <div class="absolute
+                    top-0 bottom-0 left-0 right-0
+                    overflow-auto pt-5 pb-deckImporterFlexbox
+                    flex flex-col flex-wrap content-start flex-shrink-0">
+          <FoundCardPreview v-for="(card, i) in foundCards"
+                            :key="i"
+                            :image-url="card.imageUrl">
+          </FoundCardPreview>
         </div>
       </div>
     </div>

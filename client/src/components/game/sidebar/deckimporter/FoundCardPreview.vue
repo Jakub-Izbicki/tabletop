@@ -1,11 +1,8 @@
 <template>
-  <div class="h-10 w-64">
-    <div class="h-4"></div>
+  <div class="h-12 w-64 mx-2">
     <img class="rounded-xl shadow-xl
-                transform
-                hover:-translate-y-2 duration-200"
+                transform hover:-translate-y-5 duration-200"
          :src="imageUrl"/>
-    <div class="h-10"></div>
   </div>
 </template>
 
@@ -19,3 +16,4 @@ export default class FoundCardPreview extends Vue {
   private imageUrl!: string
 }
 </script>
+
