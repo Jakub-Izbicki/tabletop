@@ -1,6 +1,6 @@
 <template>
   <div class="h-20 w-64 mx-2">
-    <img class="rounded-xl shadow-cardPreviewLight
+    <img class="rounded-xl shadow-xl
                 transform hover:-translate-y-5 duration-200"
          :src="imageUrl"/>
   </div>

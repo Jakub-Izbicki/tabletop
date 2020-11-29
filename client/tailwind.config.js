@@ -53,7 +53,8 @@ module.exports = {
         card: '0em 0em 0.1em 0.25em rgb(0 0 0)',
         cardHover: '0em 0.0em 0.4em 0.1em rgb(0 0 0)',
         cardDrag: '0em 0em 0.8em 0.1em rgb(0 0 0)',
-        cardPreviewLight: '0px 5px 5px 5px rgba(255, 255, 255, 0.005)'
+        // cardPreviewLight: '0px 5px 5px 5px rgba(255, 255, 255, 0.005)',
+        'xl': '0 5px 10px -3px rgba(0, 0, 0, 1)',
       },
       cursor: {
         grab: 'grab',

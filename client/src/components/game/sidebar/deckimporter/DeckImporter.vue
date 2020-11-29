@@ -6,9 +6,9 @@
 
     <div class="flex flex-col justify-center
                 p-10
-                has-background-black-ter has-text-white rounded-lg">
+                has-background-black-ter has-text-white rounded-lg shadow-xl">
       <p class="flex items-center justify-center
-                text-3xl font-thin font-bold
+                text-3xl font-thin
                 mb-10">
         Import a deck
       </p>
@@ -24,9 +24,14 @@
                  :disabled="searchingCards"
                  v-model="cardNames"></b-input>
       </b-field>
-      <div class="w-full flex flex-row justify-end">
-        <div class="shadow-lg
-                    rounded-lg">
+      <div class="w-full flex flex-row justify-between">
+        <div class="rounded-lg">
+          <b-button type="is-dark"
+                    @click="$parent.close()">
+            Back
+          </b-button>
+        </div>
+        <div class="rounded-lg">
           <b-button type="is-primary"
                     :loading="searchingCards"
                     :disabled="searchingCards || cardNamesEmpty"
