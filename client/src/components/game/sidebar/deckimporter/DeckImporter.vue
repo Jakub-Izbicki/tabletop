@@ -5,11 +5,11 @@
               has-background-dark">
 
     <div class="flex flex-col justify-center
-                p-10
+                p-5
                 has-background-black-ter has-text-white rounded-lg shadow-xl">
       <p class="flex items-center justify-center
                 text-3xl font-thin
-                mb-10">
+                mb-5">
         Import a deck
       </p>
 
@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <div class="h-full w-full px-10
+    <div class="h-full w-full px-10 relative
                 flex flex-col justify-center
                 has-text-light rounded-r-lg">
       <div v-if="searchingCards"
@@ -82,8 +82,14 @@
           </div>
         </div>
       </div>
+      <div class="absolute top-0 left-0">
+        <DeckImporterMessage v-for="(error, i) in formErrors"
+                             :key="i"
+                             title="Warning"
+                             :msg="error">
+        </DeckImporterMessage>
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -91,9 +97,10 @@
 import {Component, Vue} from 'vue-property-decorator';
 import Scryfall, {FoundCard, QueriedCard} from "@/domain/game/sidebar/deckimporter/Scryfall";
 import FoundCardPreview from "@/components/game/sidebar/deckimporter/FoundCardPreview.vue";
+import DeckImporterMessage from "@/components/game/sidebar/deckimporter/DeckImporterMessage.vue";
 
 @Component({
-  components: {FoundCardPreview}
+  components: {DeckImporterMessage, FoundCardPreview}
 })
 export default class DeckImporter extends Vue {
 
@@ -117,13 +124,16 @@ Example:
 
   private foundCards: FoundCard[] = [];
 
+  private formErrors: string[] = [];
+
   get cardNamesEmpty(): boolean {
     return !this.cardNames?.trim();
   }
 
   private searchCards(): void {
-    if (!this.allFormatValid()) {
-      console.warn("Invalid format!");
+    const invalidLines = this.getInvalidFormatLines();
+    if (invalidLines.length) {
+      this.printInvalidLinesError(invalidLines);
       return;
     }
 
@@ -137,11 +147,11 @@ Example:
     });
   }
 
-  private allFormatValid(): boolean {
+  private getInvalidFormatLines(): string[] {
     const allLines = this.trimLines()
-    const validFormatLines = allLines.filter(line => line.match(DeckImporter.STARTS_WITH_NUMBER)?.length)
+    const invalidFormatLines = allLines.filter(line => !line.match(DeckImporter.STARTS_WITH_NUMBER))
 
-    return allLines.length === validFormatLines.length;
+    return invalidFormatLines;
   }
 
   private parseCards(): QueriedCard[] {
@@ -182,11 +192,12 @@ Example:
 
     return mergedCards;
   }
+
+  private printInvalidLinesError(invalidLines: string[]): void {
+    const msg = "Detected invalid card name format for lines:\n"
+        + invalidLines.map(line => `- ${line}`).join("\n")
+        + "\nTo search for cards, in each line enter card amount, followed by a card name.";
+    this.formErrors.push(msg);
+  }
 }
 </script>
-
-<style>
-.none-resize {
-  resize: none;
-}
-</style>
