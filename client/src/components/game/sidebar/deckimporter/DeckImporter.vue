@@ -1,16 +1,19 @@
 <template>
-  <div class="h-full w-full
+  <div class="h-full w-full p-16
               flex flex-row
-              items-center justify-center">
+              items-center justify-center
+              has-background-dark">
+
     <div class="flex flex-col justify-center
-                h-full p-10">
-      <p class="flex items-center
+                p-10
+                has-background-light rounded-lg">
+      <p class="flex items-center justify-center
                 text-3xl font-thin
                 mb-10">
-        Import a deck
+        Import a deck/card
       </p>
 
-      <b-field label="Enter cards:">
+      <b-field label="Enter card names:">
         <b-input type="textarea"
                  :placeholder="cardNamesGuide"
                  maxlength="2000"
@@ -33,17 +36,24 @@
       </div>
     </div>
 
-    <div class="h-full w-full
+    <div class="h-full w-full p-10
                 flex flex-col justify-center
-                p-10
-                has-background-white has-text-light
-                shadow-lg">
-      <div v-if="!foundCards.length"
-           class="text-lg has-text-dark
+                has-text-light rounded-r-lg">
+      <div v-if="searchingCards"
+           class="flex items-center justify-center
+                  h-full w-full">
+        <div class="relative w-32 h-32">
+          <b-loading class="rounded-lg" :is-full-page="false" v-model="searchingCards"></b-loading>
+        </div>
+      </div>
+
+      <div v-else-if="!foundCards.length"
+           class="text-lg
                   flex items-center justify-center
                   h-full">
         No cards imported yet
       </div>
+
       <div v-else class="relative w-full h-full">
         <div class="absolute
                     top-0 bottom-0 left-0 right-0
@@ -56,6 +66,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -104,13 +115,7 @@ Example:
 
     new Scryfall().getCardsByNames(queriedCards)
     .then(searchedCards => {
-      console.info(searchedCards.found)
-      this.foundCards.push(...searchedCards.found)
-      this.foundCards.push(...searchedCards.found)
-      this.foundCards.push(...searchedCards.found)
-      this.foundCards.push(...searchedCards.found)
-      this.foundCards.push(...searchedCards.found)
-      this.foundCards.push(...searchedCards.found)
+      this.foundCards = searchedCards.found;
       this.searchingCards = false;
     });
   }

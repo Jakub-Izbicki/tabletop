@@ -53,6 +53,7 @@ module.exports = {
         card: '0em 0em 0.1em 0.25em rgb(0 0 0)',
         cardHover: '0em 0.0em 0.4em 0.1em rgb(0 0 0)',
         cardDrag: '0em 0em 0.8em 0.1em rgb(0 0 0)',
+        cardPreviewLight: '0px 5px 5px 5px rgba(255, 255, 255, 0.005)'
       },
       cursor: {
         grab: 'grab',
@@ -87,7 +88,7 @@ module.exports = {
       },
       padding: {
         cardInfo: '0.2em',
-        deckImporterFlexbox: '21rem'
+        deckImporterFlexbox: '17rem'
       },
       margin: {
         titleLetter: '-1.7rem',
