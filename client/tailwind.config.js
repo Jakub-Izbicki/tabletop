@@ -89,7 +89,7 @@ module.exports = {
       },
       padding: {
         cardInfo: '0.2em',
-        deckImporterFlexbox: '17rem'
+        deckImporterFlexbox: '18rem'
       },
       margin: {
         titleLetter: '-1.7rem',

@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <div class="h-full w-full p-10
+    <div class="h-full w-full px-10
                 flex flex-col justify-center
                 has-text-light rounded-r-lg">
       <div v-if="searchingCards"
@@ -63,12 +63,23 @@
       <div v-else class="relative w-full h-full">
         <div class="absolute
                     top-0 bottom-0 left-0 right-0
-                    overflow-auto pt-5 pb-deckImporterFlexbox
+                    overflow-auto pt-5 pb-deckImporterFlexbox mb-16
                     flex flex-col flex-wrap content-start flex-shrink-0">
           <FoundCardPreview v-for="(card, i) in foundCards"
                             :key="i"
                             :image-url="card.imageUrl">
           </FoundCardPreview>
+        </div>
+        <div class="absolute
+                    bottom-0 w-full
+                    flex items-center justify-center">
+          <div class="rounded-full shadow-xl">
+            <b-button type="is-primary"
+                      size="is-large"
+                      rounded>
+              Import {{ foundCards.length }} {{ foundCards.length > 1 ? 'cards' : 'card' }}
+            </b-button>
+          </div>
         </div>
       </div>
     </div>
