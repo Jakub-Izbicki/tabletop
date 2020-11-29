@@ -5,8 +5,8 @@
               has-background-dark">
 
     <div class="flex flex-col justify-center
-                p-5
-                has-background-black-ter has-text-white rounded-lg shadow-xl">
+                px-5 py-10
+                has-background-black-ter has-text-white rounded-2xl shadow-xl">
       <p class="flex items-center justify-center
                 text-3xl font-thin
                 mb-5">
