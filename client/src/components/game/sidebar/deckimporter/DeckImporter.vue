@@ -6,20 +6,21 @@
 
     <div class="flex flex-col justify-center
                 p-10
-                has-background-light rounded-lg">
+                has-background-black-ter has-text-white rounded-lg">
       <p class="flex items-center justify-center
-                text-3xl font-thin
+                text-3xl font-thin font-bold
                 mb-10">
-        Import a deck/card
+        Import a deck
       </p>
 
-      <b-field label="Enter card names:">
+      <b-field>
+        <div slot="label" class="has-text-light">Enter card names:</div>
         <b-input type="textarea"
                  :placeholder="cardNamesGuide"
                  maxlength="2000"
                  :cols="50"
-                 :rows="20"
-                 custom-class="none-resize"
+                 :rows="15"
+                 custom-class="none-resizes"
                  :disabled="searchingCards"
                  v-model="cardNames"></b-input>
       </b-field>
