@@ -3,7 +3,9 @@
     <b-notification
         class="shadow-xl has-background-black-ter"
         aria-close-label="Close notification"
-        role="alert">
+        role="alert"
+        auto-close
+        duration="10000">
       <div class="flex">
         <p v-twemoji class="text-2xl mr-2">⚠️</p>
         <p class="font-bold has-text-warning">{{ title }}</p>
